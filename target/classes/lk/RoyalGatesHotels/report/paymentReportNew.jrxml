@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="paymentReportNew" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d1ee4f38-1822-4416-a257-3b9d94cd5ff6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<queryString language="SQL">
+		<![CDATA[select * from payment]]>
+	</queryString>
+	<field name="paymentId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="paymentId"/>
+		<property name="com.jaspersoft.studio.field.label" value="paymentId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payment"/>
+	</field>
+	<field name="reservation_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="reservation_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="reservation_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payment"/>
+	</field>
+	<field name="time" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="time"/>
+		<property name="com.jaspersoft.studio.field.label" value="time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payment"/>
+	</field>
+	<field name="date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date"/>
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payment"/>
+	</field>
+	<field name="oder_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="oder_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="oder_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payment"/>
+	</field>
+	<field name="customer_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="customer_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="customer_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payment"/>
+	</field>
+	<field name="qty" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="qty"/>
+		<property name="com.jaspersoft.studio.field.label" value="qty"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payment"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="40" width="350" height="59" forecolor="#010747" uuid="0c2ff556-8b63-4db8-998e-5010e42d5c61"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="40" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Royal Gates Hotel]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="452" y="0" width="100" height="30" uuid="a31d9dcd-c5f5-4495-a239-d62636f7af5a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="2" width="133" height="30" uuid="0e7af3f1-b2fe-4338-96d7-e677466f632f"/>
+				<textElement textAlignment="Justified">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payments List]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="95" height="30" uuid="3f61dfa6-4777-490c-92d6-c27eb5fec61e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="08679378-34ad-4fad-9d71-075738e85919"/>
+				</reportElement>
+				<text><![CDATA[paymentId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="0" width="92" height="30" uuid="032187eb-1092-416e-aa4d-29fb5c7ebbf9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="55e394fa-cfd2-4756-a983-dd8eaec2599b"/>
+				</reportElement>
+				<text><![CDATA[reservation_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="0" width="92" height="30" uuid="c7211311-39da-4c6a-8220-6ef44b75040f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a9e5913f-e231-456e-8c56-1e692915151f"/>
+				</reportElement>
+				<text><![CDATA[date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="92" height="30" uuid="88d145a5-8c9e-4451-902e-7c832c9ee70a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45cb529e-6e5c-4582-aa81-e31c27eae851"/>
+				</reportElement>
+				<text><![CDATA[oder_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="0" width="92" height="30" uuid="99b4101a-1314-41f2-a10c-92988aa61592">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="984d90a7-f671-4570-9b4a-158561446ebc"/>
+				</reportElement>
+				<text><![CDATA[customer_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="0" width="92" height="30" uuid="c4edd061-f995-4a91-a853-2090d9edf215">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3b8fd6b-55e1-4c8d-bf4d-ad5ce0224f1f"/>
+				</reportElement>
+				<text><![CDATA[qty]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="95" height="30" uuid="388d9ff5-9c20-445d-9089-507f2c9657e8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="08679378-34ad-4fad-9d71-075738e85919"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{paymentId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="0" width="92" height="30" uuid="aceb4c2e-e094-478e-b76e-344deed429b4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="55e394fa-cfd2-4756-a983-dd8eaec2599b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{reservation_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="0" width="92" height="30" uuid="0c080cdb-7c6b-4225-9b4b-0fb1fd08565d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a9e5913f-e231-456e-8c56-1e692915151f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="92" height="30" uuid="3ef376b3-9489-41e3-8d2a-04caf5eae02a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45cb529e-6e5c-4582-aa81-e31c27eae851"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{oder_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="0" width="92" height="30" uuid="055d24f0-0160-49c2-b3bd-5c424ffe30d6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="984d90a7-f671-4570-9b4a-158561446ebc"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{customer_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="92" height="30" uuid="8ea9c55d-71c9-4347-8776-b2196180e6c9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3b8fd6b-55e1-4c8d-bf4d-ad5ce0224f1f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
