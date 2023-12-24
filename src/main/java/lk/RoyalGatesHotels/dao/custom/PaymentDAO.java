@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface PaymentDAO extends CrudDAO <Payment> {
 
-    public  double generateTotValue() throws SQLException ;
+    public  double generateTotValue() throws SQLException, ClassNotFoundException;
 
-    public  List<String> getGIds() throws SQLException ;
+    public  List<String> getGIds() throws SQLException, ClassNotFoundException;
 
-    public  List<String> getOIds() throws SQLException;
+    public  List<String> getOIds() throws SQLException, ClassNotFoundException;
 
-    public  List<String> getHIds() throws SQLException;
+    public  List<String> getHIds() throws SQLException, ClassNotFoundException;
 
-    public  List<String> getRds() throws SQLException;
+    public  List<String> getRds() throws SQLException, ClassNotFoundException;
 
 }

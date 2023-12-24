@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public interface MealOrderDetailsDAO extends SuperDAO {
 
-    public  boolean add(String orderId, String packageId) throws SQLException ;
-    public  boolean delete(String orderId) throws SQLException ;
-    public  String getpkg(String cmbOrderId) throws SQLException ;
+    public  boolean add(String orderId, String packageId) throws SQLException, ClassNotFoundException;
+    public  boolean delete(String orderId) throws SQLException, ClassNotFoundException;
+    public  String getpkg(String cmbOrderId) throws SQLException, ClassNotFoundException;
 
 }

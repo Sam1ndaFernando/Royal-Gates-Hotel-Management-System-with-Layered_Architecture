@@ -10,7 +10,7 @@ public interface RoomReservationDetailsDAO extends CrudDAO <RoomReservationDetai
 
     public List<RoomReservationDetailTM> getAll() throws SQLException ;
 
-    public  boolean removeR(String roomReservationId) throws SQLException ;
+    public  boolean remove(String roomReservationId) throws SQLException ;
 
     public  String getRoom(String value) throws SQLException ;
 

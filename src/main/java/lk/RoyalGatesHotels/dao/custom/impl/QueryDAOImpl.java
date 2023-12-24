@@ -1,4 +1,7 @@
 package lk.RoyalGatesHotels.dao.custom.impl;
 
-public class QueryDAOImpl {
+import lk.RoyalGatesHotels.dao.custom.QueryDAO;
+
+public class QueryDAOImpl implements QueryDAO {
+    //joint queries
 }

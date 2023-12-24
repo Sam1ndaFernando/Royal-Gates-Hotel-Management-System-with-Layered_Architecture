@@ -6,5 +6,5 @@ import lk.RoyalGatesHotels.dto.Guest;
 import java.sql.SQLException;
 
 public interface GuestDAO extends CrudDAO <Guest> {
-    public  String getName(String value) throws SQLException;
+    public  String getName(String value) throws SQLException, ClassNotFoundException;
 }

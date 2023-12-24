@@ -8,6 +8,7 @@ public class Complain {
     private String date;
     private String time;
     private String description;
+    //complaintId, date, time, guestId, mealOrderId, hallReservationId, roomReservationId, description
 
     public Complain(String roomNumber, String hallNumber, String complainId, String customerId, String date, String time, String description) {
         this.roomNumber = roomNumber;
@@ -20,6 +21,8 @@ public class Complain {
     }
     public Complain() {
     }
+
+
 
     public String getRoomNumber() {
         return roomNumber;

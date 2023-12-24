@@ -12,8 +12,6 @@ public class Payment{
     private Object reservationId;
     private Object qty;
 
-    public Payment() {
-    }
 
     public Payment(String paymentId, String hallReservationId, String time, String date, String orderId, String customerId, String roomReservationId, double amount) {
         this.paymentId = paymentId;
@@ -24,6 +22,17 @@ public class Payment{
         OrderId = orderId;
         this.customerId = customerId;
         this.amount = amount;
+    }
+
+    public Payment(String paymentId, String reservationId, String time, String date, String orderId, String customerId, int qty) {
+        this.paymentId = paymentId;
+        this.reservationId = reservationId;
+        this.time = time;
+        this.date = date;
+        this.OrderId = orderId;
+        this.customerId = customerId;
+        this.qty = qty;
+
     }
 
     public String getPaymentId() {

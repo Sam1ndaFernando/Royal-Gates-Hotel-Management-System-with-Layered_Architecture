@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MealPlansDAO extends CrudDAO <MealPackges> {
 
-    public List<MealPackges> getAll() throws SQLException ;
-    public  String getItems(String packageId) throws SQLException ;
+    public List<MealPackges> getAll() throws SQLException, ClassNotFoundException;
+    public  String getItems(String packageId) throws SQLException, ClassNotFoundException;
 
 }

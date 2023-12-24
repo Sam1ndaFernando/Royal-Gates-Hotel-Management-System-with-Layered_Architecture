@@ -3,11 +3,11 @@ package lk.RoyalGatesHotels.dao.custom;
 import java.sql.SQLException;
 
 public interface DashboardDAO {
-    public int getTotalRooms() throws SQLException;
-    public int getTotalHalls() throws SQLException;
-    public int getBookedHalls() throws SQLException;
-    public int getBookedRooms() throws SQLException;
-    public int getComplaints() throws SQLException;
-    public int getAvailableRooms() throws SQLException;
-    public int getAvailableHalls() throws SQLException;
+    public int getTotalRooms() throws SQLException, ClassNotFoundException;
+    public int getTotalHalls() throws SQLException, ClassNotFoundException;
+    public int getBookedHalls() throws SQLException, ClassNotFoundException;
+    public int getBookedRooms() throws SQLException, ClassNotFoundException;
+    public int getComplaints() throws SQLException, ClassNotFoundException;
+    public int getAvailableRooms() throws SQLException, ClassNotFoundException;
+    public int getAvailableHalls() throws SQLException, ClassNotFoundException;
 }
