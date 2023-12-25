@@ -2,7 +2,7 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.RoomReservationDetailsDAO;
-import lk.RoyalGatesHotels.dto.RoomReservation;
+import lk.RoyalGatesHotels.dto.HallMaintenance;
 import lk.RoyalGatesHotels.dto.tm.RoomReservationDetailTM;
 
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ public class RoomReservationDetailsDAOImpl implements RoomReservationDetailsDAO 
     }
 
     @Override
-    public boolean add(RoomReservationDetailTM entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO roomreservationdetail(reservation_id, room_number) VALUES(?, ?)";
         return SQLUtill.execute(sql, entity.getReservationId(),entity.getRoomNumber());
     }

@@ -5,7 +5,6 @@ import lk.RoyalGatesHotels.dao.custom.HallMaintenanceDAO;
 import lk.RoyalGatesHotels.dto.HallMaintenance;
 import lk.RoyalGatesHotels.dto.Maintenance;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -33,7 +32,7 @@ public class HallMaintenanceDAOImpl implements HallMaintenanceDAO {
     }
 
     @Override
-    public boolean add(Maintenance entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO hallmaintenance(maintenanceId, hall_number, date, start_time, end_time)Values(?,?,?,?,?)";
         return SQLUtill.execute(sql, entity.getMaintenanceId(), entity.getNumber(), entity.getDate(), entity.getStartTime(), entity.getEndTime());
     }

@@ -3,6 +3,7 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.RoomDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
+import lk.RoyalGatesHotels.dto.HallMaintenance;
 import lk.RoyalGatesHotels.dto.Room;
 
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public boolean add(Room entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO room(roomNumber, room_type, status, price) VALUES(?,?,?,?)";
         return SQLUtill.execute(sql, entity.getRoomNumber(), entity.getRoomType(), entity.getStatus(), entity.getPrice());
     }

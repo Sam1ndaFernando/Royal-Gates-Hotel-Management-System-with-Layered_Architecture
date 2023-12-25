@@ -3,6 +3,7 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.PaymentDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
+import lk.RoyalGatesHotels.dto.HallMaintenance;
 import lk.RoyalGatesHotels.dto.Payment;
 
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public boolean add(Payment entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO payment (paymentId, reservation_id, time, date, oder_id, customer_id, qty) VALUES(?,?,?,?,?,?,?)";
         return SQLUtill.execute(sql, entity.getPaymentId(), entity.getReservationId(), entity.getTime(), entity.getDate(), entity.getOrderId(), entity.getCustomerId(), entity.getQty());
     }

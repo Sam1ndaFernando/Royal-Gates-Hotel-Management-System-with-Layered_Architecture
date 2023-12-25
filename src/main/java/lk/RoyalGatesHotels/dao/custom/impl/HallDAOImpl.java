@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.HallDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
 import lk.RoyalGatesHotels.dto.Hall;
+import lk.RoyalGatesHotels.dto.HallMaintenance;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -34,7 +35,7 @@ public class HallDAOImpl implements HallDAO {
     }
 
     @Override
-    public boolean add(Hall entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO halls(hallNumber, hall_type, status, price) VALUES(?,?,?,?)";
         return SQLUtill.execute(sql, entity.getHallNumber(),entity.getHallType(),entity.getStatus(),entity.getPrice());
     }

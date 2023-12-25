@@ -3,6 +3,7 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.MealPlansDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
+import lk.RoyalGatesHotels.dto.HallMaintenance;
 import lk.RoyalGatesHotels.dto.MealPackges;
 
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class MealPlansDAOImpl implements MealPlansDAO {
     }
 
     @Override
-    public boolean add(MealPackges entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO mealpackages(pkg_id, price, description, meal_plan, type) VALUES(?,?,?,?,?)";
         return SQLUtill.execute(sql, entity.getPkg_id(),entity.getPrice(), entity.getDescription(),entity.getMeal_plan(),entity.getType());
     }

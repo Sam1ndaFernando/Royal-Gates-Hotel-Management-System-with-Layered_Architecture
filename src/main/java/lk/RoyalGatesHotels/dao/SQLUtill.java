@@ -14,8 +14,8 @@ public class SQLUtill {
         }
 
         if(sql.startsWith("SELECT") || sql.startsWith("select")) {
-            return (T) pstm.executeQuery(); // ResultSet
+            return (T) pstm.executeQuery(); // resultSet
         }
-        return (T) (Boolean)(pstm.executeUpdate() > 0); //Boolean
+        return (T) (Boolean)(pstm.executeUpdate() > 0); //  boolean
     }
 }

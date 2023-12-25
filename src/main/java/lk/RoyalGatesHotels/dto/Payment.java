@@ -19,7 +19,7 @@ public class Payment{
         this.roomReservationId = roomReservationId;
         this.time = time;
         this.date = date;
-        OrderId = orderId;
+        this.OrderId = orderId;
         this.customerId = customerId;
         this.amount = amount;
     }

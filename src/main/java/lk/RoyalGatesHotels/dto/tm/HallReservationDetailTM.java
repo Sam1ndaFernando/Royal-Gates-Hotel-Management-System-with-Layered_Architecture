@@ -19,6 +19,17 @@ public class HallReservationDetailTM {
         this.checkInDate = checkInDate;
     }
 
+    public HallReservationDetailTM(String hallNUmber, String customerId, String reservationId) {
+        this.hallNUmber = hallNUmber;
+        this.customerId = customerId;
+        this.reservationId = reservationId;
+    }
+
+    public HallReservationDetailTM(String hallNUmber, String reservationId) {
+        this.hallNUmber = hallNUmber;
+        this.reservationId = reservationId;
+    }
+
     public String getHallNUmber() {
         return hallNUmber;
     }

@@ -2,6 +2,7 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.HallReservationDAO;
+import lk.RoyalGatesHotels.dto.HallMaintenance;
 import lk.RoyalGatesHotels.dto.HallReservation;
 
 import java.sql.ResultSet;
@@ -32,7 +33,7 @@ public class HallReservationDAOImpl implements HallReservationDAO {
     }
 
     @Override
-    public boolean add(HallReservation entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO hallreservationdetail(hallNumber, customer_id, reservationId, check_out_date, check_in_date) VALUES(?,?,?,?,?)";
         return SQLUtill.execute(sql, entity.getHall_number(), entity.getCustomer_id(), entity.getReservation_id(), entity.getCheck_out_date(), entity.getCheck_in_date());
     }

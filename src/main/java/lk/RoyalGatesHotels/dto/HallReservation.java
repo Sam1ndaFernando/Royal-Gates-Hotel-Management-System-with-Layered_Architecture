@@ -10,6 +10,11 @@ public class HallReservation {
     public HallReservation() {
     }
 
+    public HallReservation(String hall_number, String reservation_id) {
+        this.hall_number = hall_number;
+        this.reservation_id = reservation_id;
+    }
+
     public HallReservation(String hall_number, String customer_id, String reservation_id, String check_out_date, String check_in_date) {
         this.hall_number = hall_number;
         this.customer_id = customer_id;

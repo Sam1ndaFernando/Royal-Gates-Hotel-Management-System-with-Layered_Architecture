@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.EmployeeDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
 import lk.RoyalGatesHotels.dto.Employee;
+import lk.RoyalGatesHotels.dto.HallMaintenance;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean add(Employee entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO employee (employeeId, name, address, join_date, nic, Email, mobile, jobRole) VALUES (?,?,?,?,?,?,?,?)";
         return SQLUtill.execute(sql, entity.getEmployeeId(), entity.getName(), entity.getAddress(), entity.getJoin_date(), entity.getNic(), entity.getEmail(), entity.getMobile(), entity.getJobRole());
     }

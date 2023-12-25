@@ -5,11 +5,11 @@ import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.ComplaintDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
 import lk.RoyalGatesHotels.dto.Complain;
+import lk.RoyalGatesHotels.dto.HallMaintenance;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class ComplaintDAOImpl implements ComplaintDAO {
     }
 
     @Override
-    public boolean add(Complain entity) throws SQLException, ClassNotFoundException {
+    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO complaints (room_number, hall_number, complaintId, customer_id, date, time, description) VALUES(?, ?, ?, ?, ?, ?, ?)";
         return SQLUtill.execute(sql, entity.getRoomNumber(), entity.getHallNumber(), entity.getComplainId(), entity.getCustomerId(), entity.getDate(), entity.getTime(), entity.getDescription());
 
@@ -63,7 +63,7 @@ public class ComplaintDAOImpl implements ComplaintDAO {
     }
 
     @Override
-    public List<String> getRIds() throws SQLException, ClassNotFoundException {
+    public String getRIds() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         String sql = "SELECT reservation_id FROM roomreservationdetail";
         List<String> RIds = new ArrayList<>();

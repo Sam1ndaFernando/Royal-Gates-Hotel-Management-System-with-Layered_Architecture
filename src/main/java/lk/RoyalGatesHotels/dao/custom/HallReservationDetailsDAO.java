@@ -1,14 +1,15 @@
 package lk.RoyalGatesHotels.dao.custom;
 
-import lk.ijse.reservate.dao.CrudDAO;
-import lk.ijse.reservate.entity.HallReservationDetails;
+import lk.RoyalGatesHotels.dao.CrudDAO;
+import lk.RoyalGatesHotels.dto.tm.HallReservationDetailTM;
+
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface HallReservationDetailsDAO extends CrudDAO<HallReservationDetails> {
+public interface HallReservationDetailsDAO extends CrudDAO<HallReservationDetailTM> {
 
-   public  List<HallReservationDetails> getAll() throws SQLException ;
+   public  List<HallReservationDetailTM> getAll() throws SQLException ;
     public  boolean removeH(String hallReservationId) throws SQLException ;
     public  String getHall(String value) throws SQLException ;
 }
