@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0aa5f89-c7da-4921-91bc-58a3ef8bc6b3" name="Changes" comment="">
+    <list default="true" id="c0aa5f89-c7da-4921-91bc-58a3ef8bc6b3" name="Changes" comment="refactoring completed for DaoImpl class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dto/HallMaintenance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/RoomMaintenanceDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/RoomMaintenanceDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/RoomReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/RoomReservationDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/RoomReservationDetailsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/RoomReservationDetailsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomMaintenanceDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomMaintenanceDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomReservationDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomReservationDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomReservationDetailsDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomReservationDetailsDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/UserDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dto/tm/RoomReservationDetailTM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dto/tm/RoomReservationDetailTM.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,11 +166,23 @@
       <workItem from="1703338269148" duration="737000" />
       <workItem from="1703419327232" duration="7364000" />
       <workItem from="1703428402266" duration="8432000" />
-      <workItem from="1703472246011" duration="4496000" />
+      <workItem from="1703472246011" duration="5353000" />
     </task>
+    <task id="LOCAL-00001" summary="refactoring completed for DaoImpl class">
+      <created>1703476803773</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1703476803773</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactoring completed for DaoImpl class" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring completed for DaoImpl class" />
   </component>
 </project>
