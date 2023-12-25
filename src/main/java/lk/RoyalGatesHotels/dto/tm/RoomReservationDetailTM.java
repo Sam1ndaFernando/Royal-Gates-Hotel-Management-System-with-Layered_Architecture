@@ -11,6 +11,11 @@ public class RoomReservationDetailTM {
     public RoomReservationDetailTM() {
     }
 
+    public RoomReservationDetailTM(String roomNumber, String reservationId) {
+        this.roomNumber = roomNumber;
+        this.reservationId = reservationId;
+    }
+
     public RoomReservationDetailTM(String roomNumber, String customerId, String reservationId, String checkOutDate, String checkInDate) {
         this.roomNumber = roomNumber;
         CustomerId = customerId;

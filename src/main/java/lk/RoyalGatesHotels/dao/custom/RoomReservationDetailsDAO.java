@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface RoomReservationDetailsDAO extends CrudDAO <RoomReservationDetailTM> {
 
-    public List<RoomReservationDetailTM> getAll() throws SQLException ;
+    public List<RoomReservationDetailTM> getAll() throws SQLException, ClassNotFoundException;
 
-    public  boolean remove(String roomReservationId) throws SQLException ;
+    public  boolean remove(String roomReservationId) throws SQLException, ClassNotFoundException;
 
-    public  String getRoom(String value) throws SQLException ;
+    public  String getRoom(String value) throws SQLException, ClassNotFoundException;
 
 }
