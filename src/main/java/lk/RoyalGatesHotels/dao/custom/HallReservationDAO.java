@@ -1,7 +1,8 @@
 package lk.RoyalGatesHotels.dao.custom;
 
 import lk.RoyalGatesHotels.dao.CrudDAO;
-import lk.RoyalGatesHotels.dto.HallReservation;
+import lk.RoyalGatesHotels.dto.HallReservationDTO;
+import lk.RoyalGatesHotels.entity.HallReservation;
 
 import java.sql.SQLException;
 
@@ -10,5 +11,4 @@ public interface HallReservationDAO extends CrudDAO <HallReservation> {
 
     public HallReservation setHFields(String hallnumber) throws SQLException, ClassNotFoundException;
 
-    // public  boolean Order(String checkIn, String checkOut, String hallReservationId, String guestId, String hallNumber) throws SQLException ;
 }

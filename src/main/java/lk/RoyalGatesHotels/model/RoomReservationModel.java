@@ -3,7 +3,7 @@ package lk.RoyalGatesHotels.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.RoomReservation;
+import lk.RoyalGatesHotels.dto.RoomReservationDTO;
 import lk.RoyalGatesHotels.util.CrudUtil;
 
 import java.sql.Connection;
@@ -20,7 +20,7 @@ public class RoomReservationModel {
         return null;
     }
 
-    public static boolean addReservation(RoomReservation roomReservation, Connection connection) throws SQLException, ClassNotFoundException {
+    public static boolean addReservation(RoomReservationDTO roomReservation, Connection connection) throws SQLException, ClassNotFoundException {
 
         try{
 

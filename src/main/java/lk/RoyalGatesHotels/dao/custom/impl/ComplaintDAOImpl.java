@@ -4,8 +4,9 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.ComplaintDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.Complain;
-import lk.RoyalGatesHotels.dto.HallMaintenance;
+import lk.RoyalGatesHotels.dto.ComplainDTO;
+import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
+import lk.RoyalGatesHotels.entity.Complain;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -39,7 +40,7 @@ public class ComplaintDAOImpl implements ComplaintDAO {
     }
 
     @Override
-    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
+    public boolean add(Complain entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO complaints (room_number, hall_number, complaintId, customer_id, date, time, description) VALUES(?, ?, ?, ?, ?, ?, ?)";
         return SQLUtill.execute(sql, entity.getRoomNumber(), entity.getHallNumber(), entity.getComplainId(), entity.getCustomerId(), entity.getDate(), entity.getTime(), entity.getDescription());
 
@@ -63,7 +64,7 @@ public class ComplaintDAOImpl implements ComplaintDAO {
     }
 
     @Override
-    public String getRIds() throws SQLException, ClassNotFoundException {
+    public List<String> getRIds() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         String sql = "SELECT reservation_id FROM roomreservationdetail";
         List<String> RIds = new ArrayList<>();
@@ -116,7 +117,7 @@ public class ComplaintDAOImpl implements ComplaintDAO {
         List<Complain> data = new ArrayList<>();
         ResultSet resultSet = SQLUtill.execute(sql);
         while (resultSet.next()) {
-            data.add(new Complain(
+            data.add(new ComplainDTO(
                     resultSet.getString("room_number"),
                     resultSet.getString("hall_number"),
                     resultSet.getString("complaintId"),
@@ -151,10 +152,10 @@ public class ComplaintDAOImpl implements ComplaintDAO {
 //        return Complain;
 
         String sql = "SELECT * FROM complain";
-        List<Complain> data = new ArrayList<>();
+        List<ComplainDTO> data = new ArrayList<>();
         ResultSet resultSet = SQLUtill.execute(sql);
         while (resultSet.next()) {
-            data.add(new Complain(
+            data.add(new ComplainDTO(
                     resultSet.getString("room_number"),
                     resultSet.getString("hall_number"),
                     resultSet.getString("complaintId"),

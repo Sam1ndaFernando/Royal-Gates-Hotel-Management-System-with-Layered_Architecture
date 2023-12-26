@@ -1,8 +1,6 @@
 package lk.RoyalGatesHotels.controller;
 
 import animatefx.animation.Pulse;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -10,8 +8,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.RoyalGatesHotels.dto.HallReservation;
-import lk.RoyalGatesHotels.dto.RoomReservation;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.Routes;

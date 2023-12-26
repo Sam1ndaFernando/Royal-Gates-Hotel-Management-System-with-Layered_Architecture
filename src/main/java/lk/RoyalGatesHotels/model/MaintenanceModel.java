@@ -1,7 +1,7 @@
 package lk.RoyalGatesHotels.model;
 
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.Maintenance;
+import lk.RoyalGatesHotels.dto.MaintenanceDTO;
 import lk.RoyalGatesHotels.util.CrudUtil;
 
 import java.sql.Connection;
@@ -27,7 +27,7 @@ public class MaintenanceModel {
         return null;
     }
 
-    public static boolean addRoomMaintenance(Maintenance maintenance) throws SQLException, ClassNotFoundException {
+    public static boolean addRoomMaintenance(MaintenanceDTO maintenance) throws SQLException, ClassNotFoundException {
 
         try{
             DBConnection.getInstance().getConnection().setAutoCommit(false);
@@ -55,7 +55,7 @@ public class MaintenanceModel {
 
     }
 
-    public static boolean addHallMaintenance(Maintenance maintenance) throws SQLException, ClassNotFoundException {
+    public static boolean addHallMaintenance(MaintenanceDTO maintenance) throws SQLException, ClassNotFoundException {
         boolean isAdd = CrudUtil.execute("INSERT INTO hallMaintenance VALUES(?,?,?,?,?)",
                 maintenance.getMaintenanceId(),
                 maintenance.getNumber(),
@@ -66,7 +66,7 @@ public class MaintenanceModel {
         return isAdd;
     }
 
-    public static boolean updateRoomMaintenance(Maintenance maintenance, Connection connection) throws SQLException, ClassNotFoundException {
+    public static boolean updateRoomMaintenance(MaintenanceDTO maintenance, Connection connection) throws SQLException, ClassNotFoundException {
 
         try{
             DBConnection.getInstance().getConnection().setAutoCommit(false);
@@ -94,7 +94,7 @@ public class MaintenanceModel {
 
     }
 
-    public static boolean updateHallMaintenance(Maintenance maintenance) throws SQLException, ClassNotFoundException {
+    public static boolean updateHallMaintenance(MaintenanceDTO maintenance) throws SQLException, ClassNotFoundException {
         boolean isUpdate = CrudUtil.execute("UPDATE hallMaintenance SET hall_number=?, date=?, start_time=?, end_time=? WHERE maintenanceId=?",
                 maintenance.getNumber(),
                 maintenance.getDate(),

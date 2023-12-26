@@ -1,6 +1,6 @@
 package lk.RoyalGatesHotels.model;
 
-import lk.RoyalGatesHotels.dto.Complain;
+import lk.RoyalGatesHotels.dto.ComplainDTO;
 import lk.RoyalGatesHotels.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class ComplainModel {
     }
 
 
-    public static boolean addComplain(Complain complain) throws SQLException, ClassNotFoundException {
+    public static boolean addComplain(ComplainDTO complain) throws SQLException, ClassNotFoundException {
         boolean isAdded = CrudUtil.execute("INSERT INTO complain (room_number, hall_number, customer_id, date, time, description, complaintId) VALUES (?, ?, ?, ?, ?, ?, ?)",
                 complain.getRoomNumber(),
                 complain.getHallNumber(),
@@ -29,7 +29,7 @@ public class ComplainModel {
         return isAdded;
     }
 
-    public static boolean updateComplain(Complain complain) throws SQLException, ClassNotFoundException {
+    public static boolean updateComplain(ComplainDTO complain) throws SQLException, ClassNotFoundException {
         boolean isUpdate = CrudUtil.execute("UPDATE complain SET room_number=?, hall_number=?, customer_id=?, date=?, time=?, description=? WHERE complaintId=?",
                 complain.getRoomNumber(),
                 complain.getHallNumber(),

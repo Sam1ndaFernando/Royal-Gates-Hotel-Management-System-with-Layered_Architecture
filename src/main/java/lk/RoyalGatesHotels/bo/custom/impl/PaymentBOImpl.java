@@ -3,7 +3,7 @@ package lk.RoyalGatesHotels.bo.custom.impl;
 import lk.RoyalGatesHotels.bo.custom.PaymentBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.PaymentDAO;
-import lk.RoyalGatesHotels.dto.Payment;
+import lk.RoyalGatesHotels.dto.PaymentDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -53,13 +53,13 @@ public class PaymentBOImpl implements PaymentBO {
     }
 
     @Override
-    public boolean add(Payment dto) throws SQLException, ClassNotFoundException {
-        return paymentDAO.add(new Payment(dto.getPaymentId(), (String) dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(), (Integer) dto.getQty()));
+    public boolean add(PaymentDTO dto) throws SQLException, ClassNotFoundException {
+        return paymentDAO.add(new PaymentDTO(dto.getPaymentId(), (String) dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(), (Integer) dto.getQty()));
     }
 
     @Override
-    public boolean update(Payment dto) throws SQLException, ClassNotFoundException {
-        return paymentDAO.update(new Payment(dto.getPaymentId(), (String) dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(), (Integer) dto.getQty()));
+    public boolean update(PaymentDTO dto) throws SQLException, ClassNotFoundException {
+        return paymentDAO.update(new PaymentDTO(dto.getPaymentId(), (String) dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(), (Integer) dto.getQty()));
     }
 
     @Override
@@ -73,8 +73,8 @@ public class PaymentBOImpl implements PaymentBO {
     }
 
     @Override
-    public Payment setFields(String id) throws SQLException, ClassNotFoundException {
-        Payment payment = paymentDAO.setFields(id);
-        return new Payment(payment.getPaymentId(), (String) payment.getReservationId(),payment.getTime(),payment.getDate(),payment.getOrderId(),payment.getCustomerId(), (Integer) payment.getQty());
+    public PaymentDTO setFields(String id) throws SQLException, ClassNotFoundException {
+        PaymentDTO payment = paymentDAO.setFields(id);
+        return new PaymentDTO(payment.getPaymentId(), (String) payment.getReservationId(),payment.getTime(),payment.getDate(),payment.getOrderId(),payment.getCustomerId(), (Integer) payment.getQty());
     }
 }

@@ -1,7 +1,7 @@
 package lk.RoyalGatesHotels.bo.custom.impl;
 
 import lk.RoyalGatesHotels.bo.custom.UserBO;
-import lk.RoyalGatesHotels.dto.Users;
+import lk.RoyalGatesHotels.dto.UsersDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -38,12 +38,12 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public boolean add(Users dto) throws SQLException, ClassNotFoundException {
+    public boolean add(UsersDTO dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(Users dto) throws SQLException, ClassNotFoundException {
+    public boolean update(UsersDTO dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -58,7 +58,7 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public Users setFields(String id) throws SQLException, ClassNotFoundException {
+    public UsersDTO setFields(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 }

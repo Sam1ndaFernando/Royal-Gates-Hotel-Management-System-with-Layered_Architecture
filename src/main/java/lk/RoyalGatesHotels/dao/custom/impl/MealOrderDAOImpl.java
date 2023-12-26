@@ -2,8 +2,9 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.MealOrderDAO;
-import lk.RoyalGatesHotels.dto.HallMaintenance;
-import lk.RoyalGatesHotels.dto.MealOders;
+import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
+import lk.RoyalGatesHotels.dto.MealOdersDTO;
+import lk.RoyalGatesHotels.entity.MealOders;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +33,7 @@ public class MealOrderDAOImpl implements MealOrderDAO {
     }
 
     @Override
-    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
+    public boolean add(MealOders entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO meal_oders(oder_id, customer_id, date, qty, pkg_id)VALUES(?,?,?,?,?)";
         return SQLUtill.execute(sql, entity.getOrderId(),entity.getCustomerId(),entity.getPkgId(),entity.getQty(),entity.getDate());
     }

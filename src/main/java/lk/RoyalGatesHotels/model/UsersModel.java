@@ -3,13 +3,13 @@ import lk.RoyalGatesHotels.util.CrudUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lk.RoyalGatesHotels.dto.Users;
+import lk.RoyalGatesHotels.dto.UsersDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UsersModel{
-    public static boolean addUsers(Users users) throws SQLException, ClassNotFoundException {
+    public static boolean addUsers(UsersDTO users) throws SQLException, ClassNotFoundException {
         boolean isAdd = CrudUtil.execute("INSERT INTO user VALUES (?,?,?,?,?)",
                 users.getEmpId(),
                 users.getName(),
@@ -21,7 +21,7 @@ public class UsersModel{
         return isAdd;
     }
 
-    public static boolean updateUsers(Users users) throws SQLException, ClassNotFoundException {
+    public static boolean updateUsers(UsersDTO users) throws SQLException, ClassNotFoundException {
 
         boolean isUpdate = CrudUtil.execute("UPDATE user SET username=?, password=? WHERE EmployeeId=?",
                 users.getUsername(),

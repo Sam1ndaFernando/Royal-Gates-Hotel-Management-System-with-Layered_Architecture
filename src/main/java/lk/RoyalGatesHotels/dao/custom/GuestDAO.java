@@ -1,7 +1,7 @@
 package lk.RoyalGatesHotels.dao.custom;
 
 import lk.RoyalGatesHotels.dao.CrudDAO;
-import lk.RoyalGatesHotels.dto.Guest;
+import lk.RoyalGatesHotels.entity.Guest;
 
 import java.sql.SQLException;
 

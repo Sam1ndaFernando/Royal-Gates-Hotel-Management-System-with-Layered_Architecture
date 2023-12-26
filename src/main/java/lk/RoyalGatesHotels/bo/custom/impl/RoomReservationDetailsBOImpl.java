@@ -1,14 +1,14 @@
 package lk.RoyalGatesHotels.bo.custom.impl;
 
 import lk.RoyalGatesHotels.bo.custom.RoomReservationDetailsBO;
-import lk.RoyalGatesHotels.dto.RoomReservation;
+import lk.RoyalGatesHotels.dto.RoomReservationDTO;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class RoomReservationDetailsBOImpl implements RoomReservationDetailsBO {
     @Override
-    public List<RoomReservation> getAll() throws SQLException {
+    public List<RoomReservationDTO> getAll() throws SQLException {
         return null;
     }
 
@@ -33,12 +33,12 @@ public class RoomReservationDetailsBOImpl implements RoomReservationDetailsBO {
     }
 
     @Override
-    public boolean add(RoomReservation dto) throws SQLException, ClassNotFoundException {
+    public boolean add(RoomReservationDTO dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(RoomReservation dto) throws SQLException, ClassNotFoundException {
+    public boolean update(RoomReservationDTO dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -53,7 +53,7 @@ public class RoomReservationDetailsBOImpl implements RoomReservationDetailsBO {
     }
 
     @Override
-    public RoomReservation setFields(String id) throws SQLException, ClassNotFoundException {
+    public RoomReservationDTO setFields(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 }

@@ -53,7 +53,7 @@ public class EmployeeBOImpl implements EmployeeBO {
 
     @Override
     public Employee setFields(String id) throws SQLException, ClassNotFoundException {
-        Employee emp = employeeDAO.setFields(id);
+        lk.RoyalGatesHotels.entity.Employee emp = employeeDAO.setFields(id);
         return new Employee(emp.getEmployeeId(),emp.getName(),emp.getAddress(),emp.getJoin_date(),emp.getNic(),emp.getEmail(),emp.getMobile(),emp.getJobRole());
     }
 }

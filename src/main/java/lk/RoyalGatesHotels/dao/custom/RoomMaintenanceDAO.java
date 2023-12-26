@@ -2,11 +2,9 @@ package lk.RoyalGatesHotels.dao.custom;
 
 
 import lk.RoyalGatesHotels.dao.CrudDAO;
-import lk.RoyalGatesHotels.dto.Maintenance;
+import lk.RoyalGatesHotels.dto.MaintenanceDTO;
+import lk.RoyalGatesHotels.entity.RoomMaintenance;
 
-import java.sql.SQLException;
-
-public interface RoomMaintenanceDAO extends CrudDAO</*Roommaintenance*/Maintenance> {
-
+public interface RoomMaintenanceDAO extends CrudDAO<RoomMaintenance> {
 
 }

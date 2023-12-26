@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.model.EmployeeModel;
 import lk.RoyalGatesHotels.model.UsersModel;
-import lk.RoyalGatesHotels.dto.Users;
+import lk.RoyalGatesHotels.dto.UsersDTO;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.Routes;
@@ -93,7 +93,7 @@ public class adminUserController implements Initializable {
 
 
     public void btnAdd(ActionEvent actionEvent) {
-        Users users = new Users(
+        UsersDTO users = new UsersDTO(
                 String.valueOf(comBxEmployeeId.getValue()),
                 txtName.getText(),
                 txtJobRole.getText(),
@@ -115,7 +115,7 @@ public class adminUserController implements Initializable {
         }
     }
     public void btnUpdate(ActionEvent actionEvent) {
-        Users users = new Users(
+        UsersDTO users = new UsersDTO(
                 txtName.getText(),
                 txtJobRole.getText(),
                 txtUsername.getText(),

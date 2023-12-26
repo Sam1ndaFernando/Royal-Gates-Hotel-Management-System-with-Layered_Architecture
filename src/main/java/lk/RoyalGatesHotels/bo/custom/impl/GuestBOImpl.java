@@ -3,7 +3,7 @@ package lk.RoyalGatesHotels.bo.custom.impl;
 import lk.RoyalGatesHotels.bo.custom.GuestBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.GuestDAO;
-import lk.RoyalGatesHotels.dto.Guest;
+import lk.RoyalGatesHotels.dto.GuestDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -32,14 +32,14 @@ public class GuestBOImpl implements GuestBO {
     }
 
     @Override
-    public boolean add(Guest dto) throws SQLException, ClassNotFoundException {
-        return guestDAO.add(new Guest(dto.getCustomerId(),dto.getCustomer_name(),dto.getDate(),dto.getNic(),dto.getAddress(),dto.getMobile(),dto.getEmail(),dto.getProvince()));
+    public boolean add(GuestDTO dto) throws SQLException, ClassNotFoundException {
+        return guestDAO.add(new GuestDTO(dto.getCustomerId(),dto.getCustomer_name(),dto.getDate(),dto.getNic(),dto.getAddress(),dto.getMobile(),dto.getEmail(),dto.getProvince()));
 
     }
 
     @Override
-    public boolean update(Guest dto) throws SQLException, ClassNotFoundException {
-        return guestDAO.update(new Guest(dto.getCustomerId(),dto.getCustomer_name(),dto.getDate(),dto.getNic(),dto.getAddress(),dto.getMobile(),dto.getEmail(),dto.getProvince()));
+    public boolean update(GuestDTO dto) throws SQLException, ClassNotFoundException {
+        return guestDAO.update(new GuestDTO(dto.getCustomerId(),dto.getCustomer_name(),dto.getDate(),dto.getNic(),dto.getAddress(),dto.getMobile(),dto.getEmail(),dto.getProvince()));
     }
 
     @Override
@@ -53,8 +53,8 @@ public class GuestBOImpl implements GuestBO {
     }
 
     @Override
-    public Guest setFields(String id) throws SQLException, ClassNotFoundException {
-        Guest guest = guestDAO.setFields(id);
-        return new Guest(guest.getCustomerId(),guest.getCustomer_name(),guest.getDate(),guest.getNic(),guest.getAddress(),guest.getMobile(),guest.getEmail(),guest.getProvince());
+    public GuestDTO setFields(String id) throws SQLException, ClassNotFoundException {
+        GuestDTO guest = guestDAO.setFields(id);
+        return new GuestDTO(guest.getCustomerId(),guest.getCustomer_name(),guest.getDate(),guest.getNic(),guest.getAddress(),guest.getMobile(),guest.getEmail(),guest.getProvince());
     }
 }

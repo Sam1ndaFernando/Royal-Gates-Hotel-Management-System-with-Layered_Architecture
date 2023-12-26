@@ -2,7 +2,7 @@ package lk.RoyalGatesHotels.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lk.RoyalGatesHotels.dto.MealOders;
+import lk.RoyalGatesHotels.dto.MealOdersDTO;
 import lk.RoyalGatesHotels.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ public class MealOdersModel {
             return null;
         }
 
-    public static boolean addOders(MealOders mealOders) throws SQLException, ClassNotFoundException {
+    public static boolean addOders(MealOdersDTO mealOders) throws SQLException, ClassNotFoundException {
         boolean isAdd = CrudUtil.execute("INSERT INTO meal_oders VALUES (?,?,?,?,?)",
                 mealOders.getOrderId(),
                 mealOders.getCustomerId(),
@@ -33,7 +33,7 @@ public class MealOdersModel {
         return result;
     }
 
-    public static boolean updateOrder(MealOders mealOders) throws SQLException, ClassNotFoundException {
+    public static boolean updateOrder(MealOdersDTO mealOders) throws SQLException, ClassNotFoundException {
         boolean isUpdate = CrudUtil.execute("UPDATE meal_oders SET customer_id=?, date=?, qty=?, pkg_id=? WHERE oder_id=?",
                 mealOders.getCustomerId(),
                 mealOders.getDate(),

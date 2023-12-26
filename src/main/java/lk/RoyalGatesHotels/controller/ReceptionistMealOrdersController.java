@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.model.GuestModel;
 import lk.RoyalGatesHotels.model.MealOdersModel;
 import lk.RoyalGatesHotels.model.MealPackgesModel;
-import lk.RoyalGatesHotels.dto.MealOders;
+import lk.RoyalGatesHotels.dto.MealOdersDTO;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.Routes;
@@ -125,7 +125,7 @@ public class ReceptionistMealOrdersController implements Initializable {
     }
 
     public void btnOrderNow(ActionEvent actionEvent) {
-        MealOders mealOders = new MealOders(
+        MealOdersDTO mealOders = new MealOdersDTO(
                 txtOrderId.getText(),
                 String.valueOf(comBxGuestId.getValue()),
                 String.valueOf(DatepickerDate.getValue()),
@@ -163,7 +163,7 @@ public class ReceptionistMealOrdersController implements Initializable {
             pkgId = comBxPackageId.getPromptText();
         }
 
-        MealOders mealOders = new MealOders(
+        MealOdersDTO mealOders = new MealOdersDTO(
                 txtOrderId.getText(),
                 guestId,
                 String.valueOf(DatepickerDate.getValue()),

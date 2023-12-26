@@ -5,10 +5,9 @@ import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.MealOrderDAO;
 import lk.RoyalGatesHotels.dao.custom.MealOrderDetailsDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.MealOders;
+import lk.RoyalGatesHotels.dto.MealOdersDTO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,9 +16,9 @@ public class MealOrderBOImpl implements MealOrderBO {
     MealOrderDetailsDAO mealOrderDetailsDAO = (MealOrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.MEALORDERDETAILS);
 
     @Override
-    public MealOders getFields(String id) throws SQLException, ClassNotFoundException {
-        MealOders mealOrder = mealOrderDAO.getFields(id);
-        return new MealOders(mealOrder.getOrderId(), mealOrder.getCustomerId(), mealOrder.getDate(), mealOrder.getQty(), mealOrder.getPkgId());
+    public MealOdersDTO getFields(String id) throws SQLException, ClassNotFoundException {
+        MealOdersDTO mealOrder = mealOrderDAO.getFields(id);
+        return new MealOdersDTO(mealOrder.getOrderId(), mealOrder.getCustomerId(), mealOrder.getDate(), mealOrder.getQty(), mealOrder.getPkgId());
     }
 
     @Override
@@ -33,7 +32,7 @@ public class MealOrderBOImpl implements MealOrderBO {
         try{
             con= DBConnection.getInstance().getConnection();
             con.setAutoCommit(false);
-            boolean isSaved = mealOrderDAO.add(new MealOders(orderId,guestId,date,qty,packageId));
+            boolean isSaved = mealOrderDAO.add(new MealOdersDTO(orderId,guestId,date,qty,packageId));
             if(isSaved){
                 boolean isAdded= mealOrderDetailsDAO.add(orderId, packageId);
                 if (isAdded){
@@ -68,13 +67,13 @@ public class MealOrderBOImpl implements MealOrderBO {
     }
 
     @Override
-    public boolean add(MealOders dto) throws SQLException, ClassNotFoundException {
-        return mealOrderDAO.add(new MealOders(dto.getOrderId(),dto.getCustomerId(),dto.getDate(),dto.getQty(),dto.getPkgId()));
+    public boolean add(MealOdersDTO dto) throws SQLException, ClassNotFoundException {
+        return mealOrderDAO.add(new MealOdersDTO(dto.getOrderId(),dto.getCustomerId(),dto.getDate(),dto.getQty(),dto.getPkgId()));
     }
 
     @Override
-    public boolean update(MealOders dto) throws SQLException, ClassNotFoundException {
-        return mealOrderDAO.update(new MealOders(dto.getOrderId(),dto.getCustomerId(),dto.getDate(),dto.getQty(),dto.getPkgId()));
+    public boolean update(MealOdersDTO dto) throws SQLException, ClassNotFoundException {
+        return mealOrderDAO.update(new MealOdersDTO(dto.getOrderId(),dto.getCustomerId(),dto.getDate(),dto.getQty(),dto.getPkgId()));
     }
 
     @Override
@@ -88,9 +87,9 @@ public class MealOrderBOImpl implements MealOrderBO {
     }
 
     @Override
-    public MealOders setFields(String id) throws SQLException, ClassNotFoundException {
-        MealOders mealOrder = mealOrderDAO.setFields(id);
-        return new MealOders(mealOrder.getOrderId(),mealOrder.getCustomerId(),mealOrder.getDate(),mealOrder.getQty(),mealOrder.getPkgId());
+    public MealOdersDTO setFields(String id) throws SQLException, ClassNotFoundException {
+        MealOdersDTO mealOrder = mealOrderDAO.setFields(id);
+        return new MealOdersDTO(mealOrder.getOrderId(),mealOrder.getCustomerId(),mealOrder.getDate(),mealOrder.getQty(),mealOrder.getPkgId());
 
     }
 }

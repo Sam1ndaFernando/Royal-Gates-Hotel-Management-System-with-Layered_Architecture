@@ -12,8 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.model.*;
-import lk.RoyalGatesHotels.dto.HallReservation;
-import lk.RoyalGatesHotels.dto.RoomReservation;
+import lk.RoyalGatesHotels.dto.HallReservationDTO;
+import lk.RoyalGatesHotels.dto.RoomReservationDTO;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.Routes;
@@ -165,7 +165,7 @@ public class ReceptionistReservationsController implements Initializable {
 
         try {
 
-        RoomReservation roomReservation = new RoomReservation(
+        RoomReservationDTO roomReservation = new RoomReservationDTO(
                 String.valueOf(comBxRoomNumber.getValue()),
                 String.valueOf(comBxGuestId.getValue()),
                 txtRoomReservationId.getText(),
@@ -196,7 +196,7 @@ public class ReceptionistReservationsController implements Initializable {
 
     public void btnHallReserve(ActionEvent actionEvent) {
 
-        HallReservation hallReservation = new HallReservation(
+        HallReservationDTO hallReservation = new HallReservationDTO(
                 String.valueOf(comBxHallNumber.getValue()),
                 String.valueOf(comBxGuestId.getValue()),
                 txtHallReservationId.getText(),

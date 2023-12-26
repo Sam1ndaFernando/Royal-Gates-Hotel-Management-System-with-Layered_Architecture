@@ -3,8 +3,7 @@ package lk.RoyalGatesHotels.bo.custom.impl;
 import lk.RoyalGatesHotels.bo.custom.MealPlansBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.MealPlansDAO;
-import lk.RoyalGatesHotels.dto.MealOders;
-import lk.RoyalGatesHotels.dto.MealPackges;
+import lk.RoyalGatesHotels.dto.MealPackgesDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,12 +14,12 @@ public class MealPlansBOImpl implements MealPlansBO {
 
 
     @Override
-    public List<MealPackges> getAll() throws SQLException, ClassNotFoundException {
-        List<MealPackges> data = new ArrayList<>();
-        List<MealPackges> allEntityData = mealPlansDAO.getAll();
+    public List<MealPackgesDTO> getAll() throws SQLException, ClassNotFoundException {
+        List<MealPackgesDTO> data = new ArrayList<>();
+        List<MealPackgesDTO> allEntityData = mealPlansDAO.getAll();
 
-        for (MealPackges mealplans : allEntityData) {
-            data.add(new MealPackges(mealplans.getPkg_id(),mealplans.getPrice(),mealplans.getDescription(),mealplans.getMeal_plan(),mealplans.getType()));
+        for (MealPackgesDTO mealplans : allEntityData) {
+            data.add(new MealPackgesDTO(mealplans.getPkg_id(),mealplans.getPrice(),mealplans.getDescription(),mealplans.getMeal_plan(),mealplans.getType()));
         }
         return data;
     }
@@ -47,13 +46,13 @@ public class MealPlansBOImpl implements MealPlansBO {
     }
 
     @Override
-    public boolean add(MealPackges dto) throws SQLException, ClassNotFoundException {
-        return mealPlansDAO.add(new MealPackges(dto.getPkg_id(),dto.getPrice(),dto.getDescription(),dto.getMeal_plan(),dto.getType()));
+    public boolean add(MealPackgesDTO dto) throws SQLException, ClassNotFoundException {
+        return mealPlansDAO.add(new MealPackgesDTO(dto.getPkg_id(),dto.getPrice(),dto.getDescription(),dto.getMeal_plan(),dto.getType()));
     }
 
     @Override
-    public boolean update(MealPackges dto) throws SQLException, ClassNotFoundException {
-        return mealPlansDAO.update(new MealPackges(dto.getPkg_id(),dto.getPrice(),dto.getDescription(),dto.getMeal_plan(),dto.getType()));
+    public boolean update(MealPackgesDTO dto) throws SQLException, ClassNotFoundException {
+        return mealPlansDAO.update(new MealPackgesDTO(dto.getPkg_id(),dto.getPrice(),dto.getDescription(),dto.getMeal_plan(),dto.getType()));
 
     }
 
@@ -68,8 +67,8 @@ public class MealPlansBOImpl implements MealPlansBO {
     }
 
     @Override
-    public MealPackges setFields(String id) throws SQLException, ClassNotFoundException {
-        MealPackges mealPackges = mealPlansDAO.setFields(id);
-        return new MealPackges(mealPackges.getPkg_id(),mealPackges.getPrice(),mealPackges.getDescription(),mealPackges.getMeal_plan(),mealPackges.getType());
+    public MealPackgesDTO setFields(String id) throws SQLException, ClassNotFoundException {
+        MealPackgesDTO mealPackges = mealPlansDAO.setFields(id);
+        return new MealPackgesDTO(mealPackges.getPkg_id(),mealPackges.getPrice(),mealPackges.getDescription(),mealPackges.getMeal_plan(),mealPackges.getType());
     }
 }

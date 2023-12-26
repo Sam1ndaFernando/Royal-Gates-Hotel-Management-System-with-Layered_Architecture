@@ -1,44 +1,55 @@
 package lk.RoyalGatesHotels.bo.custom.impl;
 
 import lk.RoyalGatesHotels.bo.custom.RoomBO;
-import lk.RoyalGatesHotels.dto.Room;
+import lk.RoyalGatesHotels.dao.DAOFactory;
+import lk.RoyalGatesHotels.dao.custom.RoomDAO;
+import lk.RoyalGatesHotels.dto.RoomDTO;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class RoomBOImpl implements RoomBO {
+    RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ROOM);
+
     @Override
     public String getNextId() throws SQLException, ClassNotFoundException {
-        return null;
+        return roomDAO.getNextId();
     }
 
     @Override
     public String splitId(String id) throws SQLException, ClassNotFoundException {
-        return null;
+        if(id != null) {
+            int lastNum = Integer.parseInt(id.substring(1));
+            int newNum = lastNum + 1;
+            String newId = String.format("R%04d", newNum);
+            return newId;
+        }
+        return "R0001";
     }
 
     @Override
-    public boolean add(Room dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean add(RoomDTO dto) throws SQLException, ClassNotFoundException {
+        return roomDAO.add(new RoomDTO(dto.getRoomNumber(),dto.getRoomType(),dto.getStatus(),dto.getPrice()));
     }
 
     @Override
-    public boolean update(Room dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(RoomDTO dto) throws SQLException, ClassNotFoundException {
+        return roomDAO.update(new RoomDTO(dto.getRoomNumber(),dto.getRoomType(),dto.getStatus(),dto.getPrice()));
     }
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return roomDAO.delete(id);
     }
 
     @Override
     public List<String> getIds() throws SQLException, ClassNotFoundException {
-        return null;
+        return roomDAO.getIds();
     }
 
     @Override
-    public Room setFields(String id) throws SQLException, ClassNotFoundException {
-        return null;
+    public RoomDTO setFields(String id) throws SQLException, ClassNotFoundException {
+        RoomDTO room = roomDAO.setFields(id);
+        return new RoomDTO(room.getRoomNumber(),room.getRoomType(),room.getStatus(),room.getPrice());
     }
 }

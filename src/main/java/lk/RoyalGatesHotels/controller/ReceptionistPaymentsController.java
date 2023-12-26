@@ -13,7 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.model.*;
-import lk.RoyalGatesHotels.dto.Payment;
+import lk.RoyalGatesHotels.dto.PaymentDTO;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.Routes;
@@ -192,7 +192,7 @@ public class ReceptionistPaymentsController implements Initializable {
 
     public void btnAddPayment(ActionEvent actionEvent) {
 
-        Payment payment = new Payment(
+        PaymentDTO payment = new PaymentDTO(
                 txtPaymentId.getText(),
                 String.valueOf(comBxHallReservationId.getValue()),
                 String.valueOf(timePikrTime.getValue()),

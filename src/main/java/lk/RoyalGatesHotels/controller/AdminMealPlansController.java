@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.model.MealPackgesModel;
-import lk.RoyalGatesHotels.dto.MealPackges;
+import lk.RoyalGatesHotels.dto.MealPackgesDTO;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.RegExPattern;
@@ -64,7 +64,7 @@ public class AdminMealPlansController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            MealPackges mealPackges = new MealPackges(
+            MealPackgesDTO mealPackges = new MealPackgesDTO(
                     txtPackageId.getText(),
                     Double.parseDouble(txtPrice.getText()),
                     txtAreaDescription.getText(),
@@ -94,7 +94,7 @@ public class AdminMealPlansController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            MealPackges mealPackges = new MealPackges(
+            MealPackgesDTO mealPackges = new MealPackgesDTO(
                     txtPackageId.getText(),
                     Double.parseDouble(txtPrice.getText()),
                     txtAreaDescription.getText(),

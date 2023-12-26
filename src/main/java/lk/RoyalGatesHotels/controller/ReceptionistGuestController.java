@@ -8,9 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import lk.RoyalGatesHotels.model.EmployeeModel;
 import lk.RoyalGatesHotels.model.GuestModel;
-import lk.RoyalGatesHotels.dto.Guest;
+import lk.RoyalGatesHotels.dto.GuestDTO;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.RegExPattern;
@@ -114,7 +113,7 @@ public class ReceptionistGuestController implements Initializable {
                 if (isContactNoMatched) {
                     if (isEmailMatched) {
 
-                        Guest guest = new Guest(
+                        GuestDTO guest = new GuestDTO(
                                 txtGuestID.getText(),
                                 txtGuestName.getText(),
                                 String.valueOf(DatepickerDate.getValue()),
@@ -158,7 +157,7 @@ public class ReceptionistGuestController implements Initializable {
                 if(isContactNoMatched){
                     if(isEmailMatched){
 
-                        Guest guest = new Guest(
+                        GuestDTO guest = new GuestDTO(
                                 txtGuestID.getText(),
                                 txtGuestName.getText(),
                                 String.valueOf(DatepickerDate.getValue()),

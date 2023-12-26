@@ -3,12 +3,14 @@ package lk.RoyalGatesHotels.dao.custom;
 import lk.RoyalGatesHotels.dto.tm.RoomReservationDetailTM;
 import java.sql.SQLException;
 import lk.RoyalGatesHotels.dao.CrudDAO;
+import lk.RoyalGatesHotels.entity.RoomReservationDetails;
+
 import java.util.List;
 
 
-public interface RoomReservationDetailsDAO extends CrudDAO <RoomReservationDetailTM> {
+public interface RoomReservationDetailsDAO extends CrudDAO <RoomReservationDetails> {
 
-    public List<RoomReservationDetailTM> getAll() throws SQLException, ClassNotFoundException;
+    public List<RoomReservationDetails> getAll() throws SQLException, ClassNotFoundException;
 
     public  boolean remove(String roomReservationId) throws SQLException, ClassNotFoundException;
 

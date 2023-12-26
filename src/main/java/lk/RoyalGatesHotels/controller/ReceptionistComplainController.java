@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.model.ComplainModel;
-import lk.RoyalGatesHotels.dto.Complain;
+import lk.RoyalGatesHotels.dto.ComplainDTO;
 import lk.RoyalGatesHotels.model.HallsModel;
 import lk.RoyalGatesHotels.model.RoomsModel;
 import lk.RoyalGatesHotels.util.DateTime;
@@ -129,7 +129,7 @@ public class ReceptionistComplainController implements Initializable {
 
 
     public void btnAdd(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        Complain complain = new Complain(
+        ComplainDTO complain = new ComplainDTO(
                 String.valueOf(comBxRoomNumber.getValue()),
                 String.valueOf(comBxHallNumber.getValue()),
                 txtComplainId.getText(),
@@ -153,7 +153,7 @@ public class ReceptionistComplainController implements Initializable {
 
     }
     public void btnUpdate(ActionEvent actionEvent) {
-        Complain complain = new Complain(
+        ComplainDTO complain = new ComplainDTO(
                 String.valueOf(comBxRoomNumber.getValue()),
                 String.valueOf(comBxHallNumber.getValue()),
                 txtComplainId.getText(),

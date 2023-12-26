@@ -3,8 +3,9 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.PaymentDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.HallMaintenance;
-import lk.RoyalGatesHotels.dto.Payment;
+import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
+import lk.RoyalGatesHotels.dto.PaymentDTO;
+import lk.RoyalGatesHotels.entity.Payment;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
+    public boolean add(Payment entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO payment (paymentId, reservation_id, time, date, oder_id, customer_id, qty) VALUES(?,?,?,?,?,?,?)";
         return SQLUtill.execute(sql, entity.getPaymentId(), entity.getReservationId(), entity.getTime(), entity.getDate(), entity.getOrderId(), entity.getCustomerId(), entity.getQty());
     }
@@ -68,7 +69,7 @@ public class PaymentDAOImpl implements PaymentDAO {
             String date = resultSet.getString("date");
             String orderId = resultSet.getString("oder_id");
             String customerId = resultSet.getString("customer_id");
-            int qty = resultSet.getInt("qty");
+            String qty = resultSet.getString("qty");
 
             return new Payment(paymentId, reservationId, time, date, orderId, customerId, qty);
         }

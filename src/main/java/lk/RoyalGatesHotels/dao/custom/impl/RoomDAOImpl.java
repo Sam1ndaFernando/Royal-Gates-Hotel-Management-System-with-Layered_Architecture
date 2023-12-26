@@ -3,8 +3,9 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.RoomDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.HallMaintenance;
-import lk.RoyalGatesHotels.dto.Room;
+import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
+import lk.RoyalGatesHotels.dto.RoomDTO;
+import lk.RoyalGatesHotels.entity.Room;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,15 +36,15 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
+    public boolean add(Room entity) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO room(roomNumber, room_type, status, price) VALUES(?,?,?,?)";
-        return SQLUtill.execute(sql, entity.getRoomNumber(), entity.getRoomType(), entity.getStatus(), entity.getPrice());
+        return SQLUtill.execute(sql, entity.getRoom_number(), entity.getRoomType(), entity.getStatus(), entity.getPrice());
     }
 
     @Override
     public boolean update(Room entity) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE room SET room_type=?, status=?, price=? WHERE roomNumber=?";
-        return SQLUtill.execute(sql, entity.getRoomType(), entity.getStatus(), entity.getPrice(), entity.getRoomNumber());
+        return SQLUtill.execute(sql, entity.getRoomType(), entity.getStatus(), entity.getPrice(), entity.getRoom_number());
     }
 
     @Override

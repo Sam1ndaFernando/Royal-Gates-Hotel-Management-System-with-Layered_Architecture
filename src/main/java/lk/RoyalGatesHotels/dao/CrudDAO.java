@@ -1,7 +1,5 @@
 package lk.RoyalGatesHotels.dao;
 
-import lk.RoyalGatesHotels.dto.HallMaintenance;
-
 import java.sql.SQLException;
 import java.util.List;
 

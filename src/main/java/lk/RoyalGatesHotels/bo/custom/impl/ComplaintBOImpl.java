@@ -3,7 +3,8 @@ package lk.RoyalGatesHotels.bo.custom.impl;
 import lk.RoyalGatesHotels.bo.custom.ComplaintBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.ComplaintDAO;
-import lk.RoyalGatesHotels.dto.Complain;
+import lk.RoyalGatesHotels.dto.ComplainDTO;
+import lk.RoyalGatesHotels.entity.Complain;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 public class ComplaintBOImpl implements ComplaintBO {
     ComplaintDAO complaintDAO = (ComplaintDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.COMPLAINT);
     @Override
-    public String getRIds() throws SQLException, ClassNotFoundException {
+    public List<String> getRIds() throws SQLException, ClassNotFoundException {
         return complaintDAO.getRIds();
     }
 
@@ -32,24 +33,24 @@ public class ComplaintBOImpl implements ComplaintBO {
     }
 
     @Override
-    public List<Complain> getAll() throws SQLException, ClassNotFoundException {
+    public List<ComplainDTO> getAll() throws SQLException, ClassNotFoundException {
         List<Complain> allEntityData = complaintDAO.getAll();
-        List<Complain> data = new ArrayList<>();
+        List<ComplainDTO> data = new ArrayList<>();
         for (Complain complaint : allEntityData) {
-            data.add(new Complain(complaint.getRoomNumber(),complaint.getHallNumber(),complaint.getComplainId(),complaint.getCustomerId(),complaint.getDate(),complaint.getTime(),complaint.getDescription()));
+            data.add(new ComplainDTO(complaint.getRoomNumber(),complaint.getHallNumber(),complaint.getComplainId(),complaint.getCustomerId(),complaint.getDate(),complaint.getTime(),complaint.getDescription()));
         }
         return data;
     }
 
     @Override
-    public boolean add(Complain dto) throws SQLException, ClassNotFoundException {
-        return complaintDAO.add(new Complain(dto.getRoomNumber(),dto.getHallNumber(),dto.getComplainId(),dto.getCustomerId(),dto.getDate(),dto.getTime(),dto.getDescription()));
+    public boolean add(ComplainDTO dto) throws SQLException, ClassNotFoundException {
+        return complaintDAO.add(new ComplainDTO(dto.getRoomNumber(),dto.getHallNumber(),dto.getComplainId(),dto.getCustomerId(),dto.getDate(),dto.getTime(),dto.getDescription()));
 
     }
 
     @Override
-    public boolean update(Complain dto) throws SQLException, ClassNotFoundException {
-        return complaintDAO.update(new Complain(dto.getRoomNumber(),dto.getHallNumber(),dto.getComplainId(),dto.getCustomerId(),dto.getDate(),dto.getTime(),dto.getDescription()));
+    public boolean update(ComplainDTO dto) throws SQLException, ClassNotFoundException {
+        return complaintDAO.update(new ComplainDTO(dto.getRoomNumber(),dto.getHallNumber(),dto.getComplainId(),dto.getCustomerId(),dto.getDate(),dto.getTime(),dto.getDescription()));
 
     }
 
@@ -59,9 +60,9 @@ public class ComplaintBOImpl implements ComplaintBO {
     }
 
     @Override
-    public Complain setFields(String id) throws SQLException, ClassNotFoundException {
+    public ComplainDTO setFields(String id) throws SQLException, ClassNotFoundException {
         Complain complain = complaintDAO.setFields(id);
-        return new Complain(complain.getRoomNumber(),complain.getHallNumber(),complain.getComplainId(),complain.getCustomerId(),complain.getDate(),complain.getTime(),complain.getDescription());
+        return new ComplainDTO(complain.getRoomNumber(),complain.getHallNumber(),complain.getComplainId(),complain.getCustomerId(),complain.getDate(),complain.getTime(),complain.getDescription());
     }
 
     @Override

@@ -25,7 +25,7 @@ public class MealOrderDetailsDAOImpl implements MealOrderDetailsDAO {
         String sql = "SELECT * FROM meal_oders WHERE oder_id=?";
         ResultSet resultSet = SQLUtill.execute(sql, cmbOrderId);
         if (resultSet.next()){
-            pkgId= resultSet.getString("PackageId");
+            pkgId= resultSet.getString("pkg_id");
             return pkgId;
         }
         return null;

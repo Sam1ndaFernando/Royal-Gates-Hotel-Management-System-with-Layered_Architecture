@@ -1,7 +1,7 @@
 package lk.RoyalGatesHotels.bo.custom;
 
 import lk.RoyalGatesHotels.bo.SuperBO;
-import lk.RoyalGatesHotels.dto.Users;
+import lk.RoyalGatesHotels.dto.UsersDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -18,13 +18,13 @@ public interface UserBO extends SuperBO {
 
     public  String splitId(String id) throws SQLException, ClassNotFoundException;
 
-    public boolean add(Users dto) throws SQLException, ClassNotFoundException;
+    public boolean add(UsersDTO dto) throws SQLException, ClassNotFoundException;
 
-    public boolean update(Users dto) throws SQLException, ClassNotFoundException;
+    public boolean update(UsersDTO dto) throws SQLException, ClassNotFoundException;
 
     public  boolean delete(String id) throws SQLException, ClassNotFoundException;
 
     public List<String> getIds() throws SQLException, ClassNotFoundException;
 
-    public Users setFields(String id) throws SQLException, ClassNotFoundException ;
+    public UsersDTO setFields(String id) throws SQLException, ClassNotFoundException ;
 }

@@ -1,6 +1,6 @@
 package lk.RoyalGatesHotels.model;
 
-import lk.RoyalGatesHotels.dto.Payment;
+import lk.RoyalGatesHotels.dto.PaymentDTO;
 import lk.RoyalGatesHotels.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class PaymentModel {
         return null;
     }
 
-    public static boolean addPayment(Payment payment) throws SQLException, ClassNotFoundException {
+    public static boolean addPayment(PaymentDTO payment) throws SQLException, ClassNotFoundException {
         boolean isAdd = CrudUtil.execute("INSERT INTO payment VALUES (?,?,?,?,?,?,?)",
                 payment.getPaymentId(),
                 payment.getReservationId(),

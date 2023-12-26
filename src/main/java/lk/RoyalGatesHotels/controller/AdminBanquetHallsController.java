@@ -3,17 +3,13 @@ package lk.RoyalGatesHotels.controller;
 import animatefx.animation.Pulse;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import lk.RoyalGatesHotels.dto.Hall;
-import lk.RoyalGatesHotels.dto.Room;
+import lk.RoyalGatesHotels.dto.HallDTO;
 import lk.RoyalGatesHotels.model.HallsModel;
-import lk.RoyalGatesHotels.model.RoomsModel;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.RegExPattern;
@@ -110,7 +106,7 @@ public class AdminBanquetHallsController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            Hall hall = new Hall(
+            HallDTO hall = new HallDTO(
                     txtHallNumber.getText(),
                     txtHallType.getText(),
                     "Available",
@@ -140,7 +136,7 @@ public class AdminBanquetHallsController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            Hall hall = new Hall(
+            HallDTO hall = new HallDTO(
                     txtHallNumber.getText(),
                     txtHallType.getText(),
                     String.valueOf(cmbAvailability.getValue()),

@@ -2,7 +2,7 @@ package lk.RoyalGatesHotels.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lk.RoyalGatesHotels.dto.MealPackges;
+import lk.RoyalGatesHotels.dto.MealPackgesDTO;
 import lk.RoyalGatesHotels.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -19,7 +19,7 @@ public class MealPackgesModel {
     }
 
 
-    public static boolean addPackage(MealPackges mealPackges) throws SQLException, ClassNotFoundException {
+    public static boolean addPackage(MealPackgesDTO mealPackges) throws SQLException, ClassNotFoundException {
         boolean isAdd = CrudUtil.execute("INSERT INTO mealpackages (pkg_id, price, description, meal_plan, type) VALUES (?,?,?,?,?)",
                 mealPackges.getPkg_id(),
                 mealPackges.getPrice(),
@@ -30,7 +30,7 @@ public class MealPackgesModel {
         return isAdd;
     }
 
-    public static boolean updatePackage(MealPackges mealPackges) throws SQLException, ClassNotFoundException {
+    public static boolean updatePackage(MealPackgesDTO mealPackges) throws SQLException, ClassNotFoundException {
         boolean isUpdate = CrudUtil.execute("UPDATE mealpackages SET price=?, description=?, meal_plan=?, type=? WHERE pkg_id=?",
                 mealPackges.getPrice(),
                 mealPackges.getDescription(),

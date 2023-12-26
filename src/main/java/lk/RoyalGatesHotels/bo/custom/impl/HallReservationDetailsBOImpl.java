@@ -3,7 +3,7 @@ package lk.RoyalGatesHotels.bo.custom.impl;
 import lk.RoyalGatesHotels.bo.custom.HallReservationDetailsBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.HallReservationDetailsDAO;
-import lk.RoyalGatesHotels.dto.HallReservation;
+import lk.RoyalGatesHotels.dto.HallReservationDTO;
 import lk.RoyalGatesHotels.dto.tm.HallReservationDetailTM;
 
 import java.sql.SQLException;
@@ -44,12 +44,12 @@ public class HallReservationDetailsBOImpl implements HallReservationDetailsBO {
     }
 
     @Override
-    public boolean add(HallReservation dto) throws SQLException, ClassNotFoundException {
+    public boolean add(HallReservationDTO dto) throws SQLException, ClassNotFoundException {
         return dao.add(new HallReservationDetailTM(dto.getHall_number(),dto.getReservation_id()));
     }
 
     @Override
-    public boolean update(HallReservation dto) throws SQLException, ClassNotFoundException {
+    public boolean update(HallReservationDTO dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -64,8 +64,8 @@ public class HallReservationDetailsBOImpl implements HallReservationDetailsBO {
     }
 
     @Override
-    public HallReservation setFields(String id) throws SQLException, ClassNotFoundException {
+    public HallReservationDTO setFields(String id) throws SQLException, ClassNotFoundException {
         HallReservationDetailTM hallReservationDetails = dao.setFields(id);
-        return new HallReservation(hallReservationDetails.getHallNUmber(),hallReservationDetails.getReservationId());
+        return new HallReservationDTO(hallReservationDetails.getHallNUmber(),hallReservationDetails.getReservationId());
     }
 }

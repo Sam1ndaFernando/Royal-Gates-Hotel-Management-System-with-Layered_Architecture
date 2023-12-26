@@ -3,7 +3,7 @@ package lk.RoyalGatesHotels.bo.custom.impl;
 import lk.RoyalGatesHotels.bo.custom.HallBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.HallDAO;
-import lk.RoyalGatesHotels.dto.Hall;
+import lk.RoyalGatesHotels.dto.HallDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -27,13 +27,13 @@ public class HallBOImpl implements HallBO {
     }
 
     @Override
-    public boolean add(Hall dto) throws SQLException, ClassNotFoundException {
-        return hallDAO.add(new Hall(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
+    public boolean add(HallDTO dto) throws SQLException, ClassNotFoundException {
+        return hallDAO.add(new HallDTO(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
     }
 
     @Override
-    public boolean update(Hall dto) throws SQLException, ClassNotFoundException {
-        return hallDAO.update(new Hall(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
+    public boolean update(HallDTO dto) throws SQLException, ClassNotFoundException {
+        return hallDAO.update(new HallDTO(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
     }
 
     @Override
@@ -47,8 +47,8 @@ public class HallBOImpl implements HallBO {
     }
 
     @Override
-    public Hall setFields(String id) throws SQLException, ClassNotFoundException {
-        Hall hall = hallDAO.setFields(id);
-        return new Hall(hall.getHallNumber(),hall.getHallType(),hall.getStatus(),hall.getPrice());
+    public HallDTO setFields(String id) throws SQLException, ClassNotFoundException {
+        HallDTO hall = hallDAO.setFields(id);
+        return new HallDTO(hall.getHallNumber(),hall.getHallType(),hall.getStatus(),hall.getPrice());
     }
 }

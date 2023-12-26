@@ -1,7 +1,8 @@
 package lk.RoyalGatesHotels.dao.custom;
 
 import lk.RoyalGatesHotels.dao.CrudDAO;
-import lk.RoyalGatesHotels.dto.MealPackges;
+import lk.RoyalGatesHotels.dto.MealPackgesDTO;
+import lk.RoyalGatesHotels.entity.MealPackges;
 
 import java.sql.SQLException;
 import java.util.List;

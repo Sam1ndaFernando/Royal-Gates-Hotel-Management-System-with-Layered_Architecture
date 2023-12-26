@@ -10,13 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import lk.RoyalGatesHotels.dto.Room;
+import lk.RoyalGatesHotels.dto.RoomDTO;
 import lk.RoyalGatesHotels.model.RoomsModel;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.RegExPattern;
 import lk.RoyalGatesHotels.util.Routes;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
@@ -104,7 +103,7 @@ public class AdminRoomsController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            Room room = new Room(
+            RoomDTO room = new RoomDTO(
                     txtRoomNumber.getText(),
                     txtRoomType.getText(),
                     "Available",
@@ -134,7 +133,7 @@ public class AdminRoomsController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            Room room = new Room(
+            RoomDTO room = new RoomDTO(
                     txtRoomNumber.getText(),
                     txtRoomType.getText(),
                     String.valueOf(cmbAvailability.getValue()),

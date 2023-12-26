@@ -2,8 +2,9 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.RoomMaintenanceDAO;
-import lk.RoyalGatesHotels.dto.HallMaintenance;
-import lk.RoyalGatesHotels.dto.Maintenance;
+import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
+import lk.RoyalGatesHotels.dto.MaintenanceDTO;
+import lk.RoyalGatesHotels.entity.RoomMaintenance;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,15 +33,15 @@ public class RoomMaintenanceDAOImpl implements RoomMaintenanceDAO {
     }
 
     @Override
-    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
+    public boolean add(RoomMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO roommaintenance(maintenanceId, room_number, date, start_time, end_time)Values(?,?,?,?,?)";
-        return SQLUtill.execute(sql, entity.getMaintenanceId(), entity.getNumber(), entity.getDate(), entity.getStartTime(), entity.getEndTime());
+        return SQLUtill.execute(sql, entity.getMaintenanceId(), entity.getRoom_number(), entity.getDate(), entity.getStartTime(), entity.getEndTime());
     }
 
     @Override
-    public boolean update(Maintenance entity) throws SQLException, ClassNotFoundException {
+    public boolean update(RoomMaintenance entity) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE roommaintenance SET room_number=?, date=?, start_time=?, end_time=? WHERE maintenanceId=?";
-        return SQLUtill.execute(sql, entity.getNumber(), entity.getDate(), entity.getStartTime(), entity.getEndTime(), entity.getMaintenanceId());
+        return SQLUtill.execute(sql, entity.getRoom_number(), entity.getDate(), entity.getStartTime(), entity.getEndTime(), entity.getMaintenanceId());
     }
 
     @Override
@@ -55,7 +56,7 @@ public class RoomMaintenanceDAOImpl implements RoomMaintenanceDAO {
     }
 
     @Override
-    public Maintenance setFields(String id) throws SQLException, ClassNotFoundException {
+    public RoomMaintenance setFields(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM roommaintenance WHERE RoomMaintenanceId = ?";
         ResultSet resultSet = SQLUtill.execute(sql, id);
         if (resultSet.next()) {
@@ -64,7 +65,7 @@ public class RoomMaintenanceDAOImpl implements RoomMaintenanceDAO {
             String date = resultSet.getString("date");
             String startTime = resultSet.getString("start_time");
             String endTime = resultSet.getString("end_time");
-            return new Maintenance(maintenanceId, roomNumber, date, startTime, endTime);
+            return new RoomMaintenance(maintenanceId, roomNumber, date, startTime, endTime);
         }
         return null;
     }

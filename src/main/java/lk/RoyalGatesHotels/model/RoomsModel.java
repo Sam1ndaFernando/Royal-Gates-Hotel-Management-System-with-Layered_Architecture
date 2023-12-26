@@ -2,7 +2,7 @@ package lk.RoyalGatesHotels.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lk.RoyalGatesHotels.dto.Room;
+import lk.RoyalGatesHotels.dto.RoomDTO;
 import lk.RoyalGatesHotels.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ public class RoomsModel {
 
         }
 
-    public static boolean addRoom(Room room) throws SQLException, ClassNotFoundException {
+    public static boolean addRoom(RoomDTO room) throws SQLException, ClassNotFoundException {
         boolean isAdd = CrudUtil.execute("INSERT INTO room VALUES (?,?,?,?)",
                 room.getRoomNumber(),
                 room.getRoomType(),
@@ -29,7 +29,7 @@ public class RoomsModel {
 
     }
 
-    public static boolean updateRoom(Room room) throws SQLException, ClassNotFoundException {
+    public static boolean updateRoom(RoomDTO room) throws SQLException, ClassNotFoundException {
         boolean isUpdate = CrudUtil.execute("UPDATE room SET room_type=?, status=?, price=? WHERE roomNumber=?",
                 room.getRoomType(),
                 room.getStatus(),

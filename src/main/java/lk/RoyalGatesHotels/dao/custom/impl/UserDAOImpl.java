@@ -3,8 +3,9 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.UserDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.HallMaintenance;
-import lk.RoyalGatesHotels.dto.Users;
+import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
+import lk.RoyalGatesHotels.dto.UsersDTO;
+import lk.RoyalGatesHotels.entity.Users;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean add(HallMaintenance entity) throws SQLException, ClassNotFoundException {
+    public boolean add(Users entity) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO user(Employee_id, name, job_role, username, password) VALUES(?, ?, ?, ?, ?)";
         return SQLUtill.execute(sql, entity.getEmpId(), entity.getName(), entity.getJobRole(), entity.getUsername(), entity.getPassword());
     }

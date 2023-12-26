@@ -1,7 +1,7 @@
 package lk.RoyalGatesHotels.bo.custom;
 
 import lk.RoyalGatesHotels.bo.SuperBO;
-import lk.RoyalGatesHotels.dto.Payment;
+import lk.RoyalGatesHotels.dto.PaymentDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,13 +20,13 @@ public interface PaymentBO extends SuperBO {
 
     public  String splitId(String id) throws SQLException, ClassNotFoundException;
 
-    public boolean add(Payment dto) throws SQLException, ClassNotFoundException;
+    public boolean add(PaymentDTO dto) throws SQLException, ClassNotFoundException;
 
-    public boolean update(Payment dto) throws SQLException, ClassNotFoundException;
+    public boolean update(PaymentDTO dto) throws SQLException, ClassNotFoundException;
 
     public  boolean delete(String id) throws SQLException, ClassNotFoundException;
 
     public List<String> getIds() throws SQLException, ClassNotFoundException;
 
-    public Payment setFields(String id) throws SQLException, ClassNotFoundException ;
+    public PaymentDTO setFields(String id) throws SQLException, ClassNotFoundException ;
 }

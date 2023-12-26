@@ -3,8 +3,7 @@ package lk.RoyalGatesHotels.bo.custom.impl;
 import lk.RoyalGatesHotels.bo.custom.HallMaintenanceBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.HallMaintenanceDAO;
-import lk.RoyalGatesHotels.dto.HallMaintenance;
-import lk.RoyalGatesHotels.dto.Maintenance;
+import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -28,14 +27,14 @@ public class HallMaintenanceBOImpl implements HallMaintenanceBO {
     }
 
     @Override
-    public boolean add(HallMaintenance dto) throws SQLException, ClassNotFoundException {
-        return hallMaintenanceDAO.add(new HallMaintenance(dto.getMaintenanceId(),dto.getHallNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
+    public boolean add(HallMaintenanceDTO dto) throws SQLException, ClassNotFoundException {
+        return hallMaintenanceDAO.add(new HallMaintenanceDTO(dto.getMaintenanceId(),dto.getHallNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
 
     }
 
     @Override
-    public boolean update(HallMaintenance dto) throws SQLException, ClassNotFoundException {
-        return hallMaintenanceDAO.update(new HallMaintenance(dto.getMaintenanceId(),dto.getHallNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
+    public boolean update(HallMaintenanceDTO dto) throws SQLException, ClassNotFoundException {
+        return hallMaintenanceDAO.update(new HallMaintenanceDTO(dto.getMaintenanceId(),dto.getHallNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
 
     }
 
@@ -50,8 +49,8 @@ public class HallMaintenanceBOImpl implements HallMaintenanceBO {
     }
 
     @Override
-    public HallMaintenance setFields(String id) throws SQLException, ClassNotFoundException {
-        HallMaintenance hallMaintenance = hallMaintenanceDAO.setFields(id);
-        return new HallMaintenance(hallMaintenance.getMaintenanceId(),hallMaintenance.getHallNumber(),hallMaintenance.getDate(),hallMaintenance.getStartTime(),hallMaintenance.getEndTime());
+    public HallMaintenanceDTO setFields(String id) throws SQLException, ClassNotFoundException {
+        HallMaintenanceDTO hallMaintenance = hallMaintenanceDAO.setFields(id);
+        return new HallMaintenanceDTO(hallMaintenance.getMaintenanceId(),hallMaintenance.getHallNumber(),hallMaintenance.getDate(),hallMaintenance.getStartTime(),hallMaintenance.getEndTime());
     }
 }

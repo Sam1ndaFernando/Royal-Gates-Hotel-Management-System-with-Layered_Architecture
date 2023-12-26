@@ -3,7 +3,7 @@ package lk.RoyalGatesHotels.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.HallReservation;
+import lk.RoyalGatesHotels.dto.HallReservationDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +21,7 @@ public class HallReservationModel {
 
     }
 
-    public static boolean addReservation(HallReservation hallReservation) throws SQLException, ClassNotFoundException {
+    public static boolean addReservation(HallReservationDTO hallReservation) throws SQLException, ClassNotFoundException {
         try{
             DBConnection.getInstance().getConnection().setAutoCommit(false);
             boolean isAdd = CrudUtil.execute("INSERT INTO hallReservationDetail VALUES (?,?,?,?,?)",

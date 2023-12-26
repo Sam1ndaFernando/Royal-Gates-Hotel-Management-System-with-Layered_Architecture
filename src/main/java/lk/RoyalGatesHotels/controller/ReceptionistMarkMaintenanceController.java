@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.model.HallsModel;
 import lk.RoyalGatesHotels.model.MaintenanceModel;
-import lk.RoyalGatesHotels.dto.Maintenance;
+import lk.RoyalGatesHotels.dto.MaintenanceDTO;
 import lk.RoyalGatesHotels.model.RoomsModel;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
@@ -156,7 +156,7 @@ public class ReceptionistMarkMaintenanceController implements Initializable {
             number=String.valueOf(comBxRoomNumber.getValue());
         }
 
-        Maintenance maintenance = new Maintenance(
+        MaintenanceDTO maintenance = new MaintenanceDTO(
                 txtMaintenanceId.getText(),
                 number,
                 String.valueOf(datepickerDate.getValue()),
@@ -198,7 +198,7 @@ public class ReceptionistMarkMaintenanceController implements Initializable {
             number=String.valueOf(comBxRoomNumber.getValue());
         }
 
-        Maintenance maintenance = new Maintenance(
+        MaintenanceDTO maintenance = new MaintenanceDTO(
                 txtMaintenanceId.getText(),
                 number,
                 String.valueOf(datepickerDate.getValue()),
