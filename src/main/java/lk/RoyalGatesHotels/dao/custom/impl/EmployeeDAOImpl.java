@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.EmployeeDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
 import lk.RoyalGatesHotels.dto.EmployeeDTO;
+import lk.RoyalGatesHotels.entity.Employee;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public EmployeeDTO setFields(String id) throws SQLException, ClassNotFoundException {
+    public Employee setFields(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM employee WHERE employeeId=?";
         ResultSet resultSet = SQLUtill.execute(sql, id);
         if(resultSet.next()) {
@@ -74,7 +75,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             String joinDate = String.valueOf(resultSet.getDate("join_date"));
             String jobRole = resultSet.getString("jobRole");
             String email = resultSet.getString("Email");
-            return new EmployeeDTO(employeeId, nic, name, address, mobile, joinDate, jobRole, email);
+            return new Employee(employeeId, nic, name, address, mobile, joinDate, jobRole, email);
         }
         return null;
     }

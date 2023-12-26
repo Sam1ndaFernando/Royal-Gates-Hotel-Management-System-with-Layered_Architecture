@@ -11,6 +11,7 @@ import java.util.List;
 
 public class HallMaintenanceBOImpl implements HallMaintenanceBO {
     HallMaintenanceDAO hallMaintenanceDAO = (HallMaintenanceDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.HALLMAINTENANCE);
+
     @Override
     public String getNextId() throws SQLException, ClassNotFoundException {
         return hallMaintenanceDAO.getNextId();

@@ -38,7 +38,7 @@ public class HallReservationBOImpl implements HallReservationBO {
             con.setAutoCommit(false);
             boolean isSaved = hallReservationDAO.add(new HallReservation(hallNumber,guestId,hallReservationId,checkOut,checkIn));
             if (isSaved) {
-                boolean isAdded = hallReservationDetailsDAO.add(new HallReservationDetails(hallReservationId, hallNumber));
+                boolean isAdded = hallReservationDetailsDAO.add(new HallReservationDetails(hallNumber,guestId,hallReservationId,checkOut,checkIn));
                 if (isAdded) {
                     con.commit();
                     return true;

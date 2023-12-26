@@ -72,8 +72,8 @@ public class HallReservationDetailsDAOImpl implements HallReservationDetailsDAO 
                     resultSet.getString("hallNumber"),
                     resultSet.getString("customer_id"),
                     resultSet.getString("reservationId"),
-                    resultSet.getDate("check_out_date"),
-                    resultSet.getDate("check_in_date")
+                    resultSet.getString("check_out_date"),
+                    resultSet.getString("check_in_date")
             ));
         }
         return data;
