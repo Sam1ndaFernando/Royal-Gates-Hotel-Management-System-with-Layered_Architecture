@@ -1,6 +1,6 @@
 package lk.RoyalGatesHotels.model;
 
-import lk.RoyalGatesHotels.dto.Employee;
+import lk.RoyalGatesHotels.dto.EmployeeDTO;
 import lk.RoyalGatesHotels.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class EmployeeModel {
         return null;
     }
 
-    public static boolean addEmployee(Employee employee) throws SQLException, ClassNotFoundException {
+    public static boolean addEmployee(EmployeeDTO employee) throws SQLException, ClassNotFoundException {
         boolean isAdd = CrudUtil.execute("INSERT INTO employee VALUES (?,?,?,?,?,?,?,?)",
                 employee.getEmployeeId(),
                 employee.getName(),
@@ -30,7 +30,7 @@ public class EmployeeModel {
         return isAdd;
     }
 
-    public static boolean updateEmployee(Employee employee) throws SQLException, ClassNotFoundException {
+    public static boolean updateEmployee(EmployeeDTO employee) throws SQLException, ClassNotFoundException {
         boolean isUpdate = CrudUtil.execute("UPDATE employee SET name=?, address=?, nic=?, Email=?, mobile=?, jobRole=? WHERE employeeId=?",
                 employee.getName(),
                 employee.getAddress(),

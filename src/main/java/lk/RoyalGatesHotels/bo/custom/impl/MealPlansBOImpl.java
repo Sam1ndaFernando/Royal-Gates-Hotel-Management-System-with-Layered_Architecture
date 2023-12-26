@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.bo.custom.MealPlansBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.MealPlansDAO;
 import lk.RoyalGatesHotels.dto.MealPackgesDTO;
+import lk.RoyalGatesHotels.entity.MealPackges;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,10 +17,10 @@ public class MealPlansBOImpl implements MealPlansBO {
     @Override
     public List<MealPackgesDTO> getAll() throws SQLException, ClassNotFoundException {
         List<MealPackgesDTO> data = new ArrayList<>();
-        List<MealPackgesDTO> allEntityData = mealPlansDAO.getAll();
+        List<MealPackges> allEntityData = mealPlansDAO.getAll();
 
-        for (MealPackgesDTO mealplans : allEntityData) {
-            data.add(new MealPackgesDTO(mealplans.getPkg_id(),mealplans.getPrice(),mealplans.getDescription(),mealplans.getMeal_plan(),mealplans.getType()));
+        for (MealPackges mealPackges : allEntityData) {
+            data.add(new MealPackgesDTO(mealPackges.getPkg_id(),mealPackges.getPrice(),mealPackges.getDescription(),mealPackges.getMeal_plan(),mealPackges.getType()));
         }
         return data;
     }
@@ -47,12 +48,12 @@ public class MealPlansBOImpl implements MealPlansBO {
 
     @Override
     public boolean add(MealPackgesDTO dto) throws SQLException, ClassNotFoundException {
-        return mealPlansDAO.add(new MealPackgesDTO(dto.getPkg_id(),dto.getPrice(),dto.getDescription(),dto.getMeal_plan(),dto.getType()));
+        return mealPlansDAO.add(new MealPackges(dto.getPkg_id(),dto.getPrice(),dto.getDescription(),dto.getMeal_plan(),dto.getType()));
     }
 
     @Override
     public boolean update(MealPackgesDTO dto) throws SQLException, ClassNotFoundException {
-        return mealPlansDAO.update(new MealPackgesDTO(dto.getPkg_id(),dto.getPrice(),dto.getDescription(),dto.getMeal_plan(),dto.getType()));
+        return mealPlansDAO.update(new MealPackges(dto.getPkg_id(),dto.getPrice(),dto.getDescription(),dto.getMeal_plan(),dto.getType()));
 
     }
 
@@ -68,7 +69,7 @@ public class MealPlansBOImpl implements MealPlansBO {
 
     @Override
     public MealPackgesDTO setFields(String id) throws SQLException, ClassNotFoundException {
-        MealPackgesDTO mealPackges = mealPlansDAO.setFields(id);
+        MealPackges mealPackges = mealPlansDAO.setFields(id);
         return new MealPackgesDTO(mealPackges.getPkg_id(),mealPackges.getPrice(),mealPackges.getDescription(),mealPackges.getMeal_plan(),mealPackges.getType());
     }
 }

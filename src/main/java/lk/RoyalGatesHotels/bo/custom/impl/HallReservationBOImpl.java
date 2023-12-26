@@ -7,6 +7,8 @@ import lk.RoyalGatesHotels.dao.custom.HallReservationDetailsDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
 import lk.RoyalGatesHotels.dto.HallReservationDTO;
 import lk.RoyalGatesHotels.dto.tm.HallReservationDetailTM;
+import lk.RoyalGatesHotels.entity.HallReservation;
+import lk.RoyalGatesHotels.entity.HallReservationDetails;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,6 +17,8 @@ import java.util.List;
 public class HallReservationBOImpl implements HallReservationBO {
     HallReservationDAO hallReservationDAO = (HallReservationDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.HALLRESERVATION);
     HallReservationDetailsDAO hallReservationDetailsDAO = (HallReservationDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.HALLRESERVATIONDETAILS);
+
+
     @Override
     public boolean isValid(String hallNumber) throws SQLException, ClassNotFoundException {
         return hallReservationDAO.isValid(hallNumber);
@@ -22,7 +26,7 @@ public class HallReservationBOImpl implements HallReservationBO {
 
     @Override
     public HallReservationDTO setHFields(String hallnumber) throws SQLException, ClassNotFoundException {
-        HallReservationDTO hallReservation = hallReservationDAO.setHFields(hallnumber);
+        HallReservation hallReservation = hallReservationDAO.setHFields(hallnumber);
         return new HallReservationDTO(hallReservation.getHall_number(),hallReservation.getCustomer_id(),hallReservation.getReservation_id(),hallReservation.getCheck_out_date(),hallReservation.getCheck_in_date());
     }
 
@@ -32,9 +36,9 @@ public class HallReservationBOImpl implements HallReservationBO {
         try {
             con = DBConnection.getInstance().getConnection();
             con.setAutoCommit(false);
-            boolean isSaved = hallReservationDAO.add(new HallReservationDTO(hallNumber,guestId,hallReservationId,checkOut,checkIn));
+            boolean isSaved = hallReservationDAO.add(new HallReservation(hallNumber,guestId,hallReservationId,checkOut,checkIn));
             if (isSaved) {
-                boolean isAdded = hallReservationDetailsDAO.add(new HallReservationDetailTM(hallReservationId, guestId, hallNumber));
+                boolean isAdded = hallReservationDetailsDAO.add(new HallReservationDetails(hallReservationId, hallNumber));
                 if (isAdded) {
                     con.commit();
                     return true;
@@ -74,13 +78,12 @@ public class HallReservationBOImpl implements HallReservationBO {
 
     @Override
     public boolean add(HallReservationDTO dto) throws SQLException, ClassNotFoundException {
-        return hallReservationDAO.add(new HallReservationDTO(dto.getHall_number(),dto.getCustomer_id(),dto.getReservation_id(),dto.getCheck_out_date(),dto.getCheck_in_date()));
+        return hallReservationDAO.add(new HallReservation(dto.getHall_number(),dto.getCustomer_id(),dto.getReservation_id(),dto.getCheck_out_date(),dto.getCheck_in_date()));
     }
 
     @Override
     public boolean update(HallReservationDTO dto) throws SQLException, ClassNotFoundException {
-        return hallReservationDAO.update(new HallReservationDTO(dto.getHall_number(),dto.getCustomer_id(),dto.getReservation_id(),dto.getCheck_out_date(),dto.getCheck_in_date()));
-
+        return hallReservationDAO.update(new HallReservation(dto.getHall_number(),dto.getCustomer_id(),dto.getReservation_id(),dto.getCheck_out_date(),dto.getCheck_in_date()));
     }
 
     @Override
@@ -95,7 +98,7 @@ public class HallReservationBOImpl implements HallReservationBO {
 
     @Override
     public HallReservationDTO setFields(String id) throws SQLException, ClassNotFoundException {
-        HallReservationDTO hallReservation = hallReservationDAO.setFields(id);
+        HallReservation hallReservation = hallReservationDAO.setFields(id);
         return new HallReservationDTO(hallReservation.getHall_number(),hallReservation.getCustomer_id(),hallReservation.getReservation_id(),hallReservation.getCheck_out_date(),hallReservation.getCheck_in_date());
     }
 }

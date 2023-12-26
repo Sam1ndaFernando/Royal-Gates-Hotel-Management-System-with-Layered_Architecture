@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @ToString
 @AllArgsConstructor
-public class Employee {
+public class EmployeeDTO {
     private String employeeId;
     private String name;
     private String address;

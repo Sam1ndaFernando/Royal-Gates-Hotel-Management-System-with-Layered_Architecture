@@ -2,15 +2,15 @@ package lk.RoyalGatesHotels.bo.custom;
 
 import lk.RoyalGatesHotels.bo.SuperBO;
 import lk.RoyalGatesHotels.dto.HallReservationDTO;
-import lk.RoyalGatesHotels.dto.tm.HallReservationDetailTM;
+import lk.RoyalGatesHotels.dto.HallReservationDetailsDTO;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface HallReservationDetailsBO extends SuperBO {
-    public List<HallReservationDetailTM> getAll() throws SQLException;
-    public  boolean removeH(String hallReservationId) throws SQLException ;
-    public  String getHall(String id) throws SQLException ;
+    public List<HallReservationDetailsDTO> getAll() throws SQLException, ClassNotFoundException;
+    public  boolean removeH(String hallReservationId) throws SQLException, ClassNotFoundException;
+    public  String getHall(String id) throws SQLException, ClassNotFoundException;
     public String getNextId() throws SQLException, ClassNotFoundException;
 
     public  String splitId(String currentId) throws SQLException, ClassNotFoundException;

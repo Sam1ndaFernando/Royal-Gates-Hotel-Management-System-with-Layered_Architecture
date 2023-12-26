@@ -6,6 +6,7 @@ import lk.RoyalGatesHotels.dao.custom.MealOrderDAO;
 import lk.RoyalGatesHotels.dao.custom.MealOrderDetailsDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
 import lk.RoyalGatesHotels.dto.MealOdersDTO;
+import lk.RoyalGatesHotels.entity.MealOders;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,9 +16,10 @@ public class MealOrderBOImpl implements MealOrderBO {
     MealOrderDAO mealOrderDAO = (MealOrderDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.MEALORDER);
     MealOrderDetailsDAO mealOrderDetailsDAO = (MealOrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.MEALORDERDETAILS);
 
+
     @Override
     public MealOdersDTO getFields(String id) throws SQLException, ClassNotFoundException {
-        MealOdersDTO mealOrder = mealOrderDAO.getFields(id);
+        MealOders mealOrder = mealOrderDAO.getFields(id);
         return new MealOdersDTO(mealOrder.getOrderId(), mealOrder.getCustomerId(), mealOrder.getDate(), mealOrder.getQty(), mealOrder.getPkgId());
     }
 
@@ -32,7 +34,7 @@ public class MealOrderBOImpl implements MealOrderBO {
         try{
             con= DBConnection.getInstance().getConnection();
             con.setAutoCommit(false);
-            boolean isSaved = mealOrderDAO.add(new MealOdersDTO(orderId,guestId,date,qty,packageId));
+            boolean isSaved = mealOrderDAO.add(new MealOders(orderId,guestId,date,qty,packageId));
             if(isSaved){
                 boolean isAdded= mealOrderDetailsDAO.add(orderId, packageId);
                 if (isAdded){
@@ -68,12 +70,12 @@ public class MealOrderBOImpl implements MealOrderBO {
 
     @Override
     public boolean add(MealOdersDTO dto) throws SQLException, ClassNotFoundException {
-        return mealOrderDAO.add(new MealOdersDTO(dto.getOrderId(),dto.getCustomerId(),dto.getDate(),dto.getQty(),dto.getPkgId()));
+        return mealOrderDAO.add(new MealOders(dto.getOrderId(),dto.getCustomerId(),dto.getDate(),dto.getQty(),dto.getPkgId()));
     }
 
     @Override
     public boolean update(MealOdersDTO dto) throws SQLException, ClassNotFoundException {
-        return mealOrderDAO.update(new MealOdersDTO(dto.getOrderId(),dto.getCustomerId(),dto.getDate(),dto.getQty(),dto.getPkgId()));
+        return mealOrderDAO.update(new MealOders(dto.getOrderId(),dto.getCustomerId(),dto.getDate(),dto.getQty(),dto.getPkgId()));
     }
 
     @Override
@@ -88,7 +90,7 @@ public class MealOrderBOImpl implements MealOrderBO {
 
     @Override
     public MealOdersDTO setFields(String id) throws SQLException, ClassNotFoundException {
-        MealOdersDTO mealOrder = mealOrderDAO.setFields(id);
+        MealOders mealOrder = mealOrderDAO.setFields(id);
         return new MealOdersDTO(mealOrder.getOrderId(),mealOrder.getCustomerId(),mealOrder.getDate(),mealOrder.getQty(),mealOrder.getPkgId());
 
     }

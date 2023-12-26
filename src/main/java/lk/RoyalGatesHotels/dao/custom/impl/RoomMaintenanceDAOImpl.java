@@ -70,4 +70,9 @@ public class RoomMaintenanceDAOImpl implements RoomMaintenanceDAO {
         return null;
     }
 
+    @Override
+    public boolean updateRoom(String maintenanceId, String roomNumber, String date, String startTime, String endTime) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE roommaintenance SET room_number = ?, date = ?, start_time = ?, end_time = ? WHERE maintenanceId = ?";
+        return SQLUtill.execute(sql, roomNumber, date, startTime, endTime, maintenanceId);
+    }
 }

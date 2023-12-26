@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.bo.custom.PaymentBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.PaymentDAO;
 import lk.RoyalGatesHotels.dto.PaymentDTO;
+import lk.RoyalGatesHotels.entity.Payment;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -54,12 +55,12 @@ public class PaymentBOImpl implements PaymentBO {
 
     @Override
     public boolean add(PaymentDTO dto) throws SQLException, ClassNotFoundException {
-        return paymentDAO.add(new PaymentDTO(dto.getPaymentId(), (String) dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(), (Integer) dto.getQty()));
+        return paymentDAO.add(new Payment(dto.getPaymentId(),dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(),dto.getQty()));
     }
 
     @Override
     public boolean update(PaymentDTO dto) throws SQLException, ClassNotFoundException {
-        return paymentDAO.update(new PaymentDTO(dto.getPaymentId(), (String) dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(), (Integer) dto.getQty()));
+        return paymentDAO.update(new Payment(dto.getPaymentId(),dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(),dto.getQty()));
     }
 
     @Override
@@ -74,7 +75,7 @@ public class PaymentBOImpl implements PaymentBO {
 
     @Override
     public PaymentDTO setFields(String id) throws SQLException, ClassNotFoundException {
-        PaymentDTO payment = paymentDAO.setFields(id);
-        return new PaymentDTO(payment.getPaymentId(), (String) payment.getReservationId(),payment.getTime(),payment.getDate(),payment.getOrderId(),payment.getCustomerId(), (Integer) payment.getQty());
+        Payment payment = paymentDAO.setFields(id);
+        return new PaymentDTO(payment.getPaymentId(),payment.getReservationId(),payment.getTime(),payment.getDate(),payment.getOrderId(),payment.getCustomerId(),payment.getQty());
     }
 }

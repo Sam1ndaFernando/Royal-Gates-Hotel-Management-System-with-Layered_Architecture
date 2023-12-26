@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.bo.custom.HallMaintenanceBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.HallMaintenanceDAO;
 import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
+import lk.RoyalGatesHotels.entity.HallMaintenance;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -28,13 +29,13 @@ public class HallMaintenanceBOImpl implements HallMaintenanceBO {
 
     @Override
     public boolean add(HallMaintenanceDTO dto) throws SQLException, ClassNotFoundException {
-        return hallMaintenanceDAO.add(new HallMaintenanceDTO(dto.getMaintenanceId(),dto.getHallNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
+        return hallMaintenanceDAO.add(new HallMaintenance(dto.getMaintenanceId(),dto.getHallNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
 
     }
 
     @Override
     public boolean update(HallMaintenanceDTO dto) throws SQLException, ClassNotFoundException {
-        return hallMaintenanceDAO.update(new HallMaintenanceDTO(dto.getMaintenanceId(),dto.getHallNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
+        return hallMaintenanceDAO.update(new HallMaintenance(dto.getMaintenanceId(),dto.getHallNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
 
     }
 
@@ -50,7 +51,7 @@ public class HallMaintenanceBOImpl implements HallMaintenanceBO {
 
     @Override
     public HallMaintenanceDTO setFields(String id) throws SQLException, ClassNotFoundException {
-        HallMaintenanceDTO hallMaintenance = hallMaintenanceDAO.setFields(id);
+        HallMaintenance hallMaintenance = hallMaintenanceDAO.setFields(id);
         return new HallMaintenanceDTO(hallMaintenance.getMaintenanceId(),hallMaintenance.getHallNumber(),hallMaintenance.getDate(),hallMaintenance.getStartTime(),hallMaintenance.getEndTime());
     }
 }

@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.model.EmployeeModel;
-import lk.RoyalGatesHotels.dto.Employee;
+import lk.RoyalGatesHotels.dto.EmployeeDTO;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.RegExPattern;
@@ -121,7 +121,7 @@ public class AdminEmployeeController implements Initializable {
                 if(isContactNoMatched){
                     if(isEmailMatched){
 
-                        Employee employee = new Employee(
+                        EmployeeDTO employee = new EmployeeDTO(
                                 txtEmployeeId.getText(),
                                 txtFullName.getText(),
                                 txtAddress.getText(),
@@ -178,7 +178,7 @@ public class AdminEmployeeController implements Initializable {
                 if(isContactNoMatched){
                     if(isEmailMatched){
 
-                        Employee employee = new Employee(
+                        EmployeeDTO employee = new EmployeeDTO(
                                 txtEmployeeId.getText(),
                                 txtFullName.getText(),
                                 txtAddress.getText(),

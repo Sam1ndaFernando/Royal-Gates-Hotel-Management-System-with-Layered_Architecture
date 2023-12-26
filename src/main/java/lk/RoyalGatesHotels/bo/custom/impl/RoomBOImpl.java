@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.bo.custom.RoomBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.RoomDAO;
 import lk.RoyalGatesHotels.dto.RoomDTO;
+import lk.RoyalGatesHotels.entity.Room;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -29,12 +30,12 @@ public class RoomBOImpl implements RoomBO {
 
     @Override
     public boolean add(RoomDTO dto) throws SQLException, ClassNotFoundException {
-        return roomDAO.add(new RoomDTO(dto.getRoomNumber(),dto.getRoomType(),dto.getStatus(),dto.getPrice()));
+        return roomDAO.add(new Room(dto.getRoom_number(),dto.getRoomType(),dto.getStatus(),dto.getPrice()));
     }
 
     @Override
     public boolean update(RoomDTO dto) throws SQLException, ClassNotFoundException {
-        return roomDAO.update(new RoomDTO(dto.getRoomNumber(),dto.getRoomType(),dto.getStatus(),dto.getPrice()));
+        return roomDAO.update(new Room(dto.getRoom_number(),dto.getRoomType(),dto.getStatus(),dto.getPrice()));
     }
 
     @Override
@@ -49,7 +50,7 @@ public class RoomBOImpl implements RoomBO {
 
     @Override
     public RoomDTO setFields(String id) throws SQLException, ClassNotFoundException {
-        RoomDTO room = roomDAO.setFields(id);
-        return new RoomDTO(room.getRoomNumber(),room.getRoomType(),room.getStatus(),room.getPrice());
+        Room room = roomDAO.setFields(id);
+        return new RoomDTO(room.getRoom_number(),room.getRoomType(),room.getStatus(),room.getPrice());
     }
 }

@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.bo.custom.HallBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.HallDAO;
 import lk.RoyalGatesHotels.dto.HallDTO;
+import lk.RoyalGatesHotels.entity.Hall;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -28,12 +29,12 @@ public class HallBOImpl implements HallBO {
 
     @Override
     public boolean add(HallDTO dto) throws SQLException, ClassNotFoundException {
-        return hallDAO.add(new HallDTO(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
+        return hallDAO.add(new Hall(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
     }
 
     @Override
     public boolean update(HallDTO dto) throws SQLException, ClassNotFoundException {
-        return hallDAO.update(new HallDTO(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
+        return hallDAO.update(new Hall(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
     }
 
     @Override
@@ -48,7 +49,7 @@ public class HallBOImpl implements HallBO {
 
     @Override
     public HallDTO setFields(String id) throws SQLException, ClassNotFoundException {
-        HallDTO hall = hallDAO.setFields(id);
+        Hall hall = hallDAO.setFields(id);
         return new HallDTO(hall.getHallNumber(),hall.getHallType(),hall.getStatus(),hall.getPrice());
     }
 }

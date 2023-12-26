@@ -12,7 +12,7 @@ public interface RoomReservationDetailsDAO extends CrudDAO <RoomReservationDetai
 
     public List<RoomReservationDetails> getAll() throws SQLException, ClassNotFoundException;
 
-    public  boolean remove(String roomReservationId) throws SQLException, ClassNotFoundException;
+    public  boolean removeR(String roomReservationId) throws SQLException, ClassNotFoundException;
 
     public  String getRoom(String value) throws SQLException, ClassNotFoundException;
 

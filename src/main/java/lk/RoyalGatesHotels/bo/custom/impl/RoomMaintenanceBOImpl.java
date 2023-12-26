@@ -4,6 +4,7 @@ import lk.RoyalGatesHotels.bo.custom.RoomMaintenanceBO;
 import lk.RoyalGatesHotels.dao.DAOFactory;
 import lk.RoyalGatesHotels.dao.custom.RoomMaintenanceDAO;
 import lk.RoyalGatesHotels.dto.MaintenanceDTO;
+import lk.RoyalGatesHotels.dto.RoomMaintenanceDTO;
 import lk.RoyalGatesHotels.entity.RoomMaintenance;
 
 import java.sql.SQLException;
@@ -13,8 +14,8 @@ public class RoomMaintenanceBOImpl implements RoomMaintenanceBO {
     RoomMaintenanceDAO roomMaintenanceDAO = (RoomMaintenanceDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ROOMMAINTENANCE);
 
     @Override
-    public boolean updateRoom(String maintenanceId, String roomNumber, String date, String startTime, String endTime) throws SQLException {
-        return  roomMaintenanceDAO.update(maintenanceId,roomNumber,date,startTime,endTime);
+    public boolean updateRoom(String maintenanceId, String roomNumber, String date, String startTime, String endTime) throws SQLException, ClassNotFoundException {
+        return roomMaintenanceDAO.updateRoom(roomNumber,date,startTime,endTime,maintenanceId);
     }
 
     @Override
@@ -34,13 +35,13 @@ public class RoomMaintenanceBOImpl implements RoomMaintenanceBO {
     }
 
     @Override
-    public boolean add(MaintenanceDTO dto) throws SQLException, ClassNotFoundException {
-        return roomMaintenanceDAO.add(new roommaintenance(dto.getMaintenanceId(),dto.getNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
+    public boolean add(RoomMaintenanceDTO dto) throws SQLException, ClassNotFoundException {
+        return roomMaintenanceDAO.add(new RoomMaintenance(dto.getMaintenanceId(),dto.getRoom_number(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
     }
 
     @Override
-    public boolean update(MaintenanceDTO dto) throws SQLException, ClassNotFoundException {
-        return roomMaintenanceDAO.update(new roommaintenance(dto.getMaintenanceId(),dto.getNumber(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
+    public boolean update(RoomMaintenanceDTO dto) throws SQLException, ClassNotFoundException {
+        return roomMaintenanceDAO.update(new RoomMaintenance(dto.getMaintenanceId(),dto.getRoom_number(),dto.getDate(),dto.getStartTime(),dto.getEndTime()));
     }
 
     @Override
@@ -53,8 +54,8 @@ public class RoomMaintenanceBOImpl implements RoomMaintenanceBO {
         return null;
     }
     @Override
-    public MaintenanceDTO setFields(String id) throws SQLException, ClassNotFoundException {
+    public RoomMaintenanceDTO setFields(String id) throws SQLException, ClassNotFoundException {
         RoomMaintenance roommaintenance = roomMaintenanceDAO.setFields(id);
-        return new MaintenanceDTO(roommaintenance.getMaintenanceId(),roommaintenance.getNumber(),roommaintenance.getDate(),roommaintenance.getStartTime(),roommaintenance.getEndTime());
+        return new RoomMaintenanceDTO(roommaintenance.getMaintenanceId(),roommaintenance.getRoom_number(),roommaintenance.getDate(),roommaintenance.getStartTime(),roommaintenance.getEndTime());
     }
 }

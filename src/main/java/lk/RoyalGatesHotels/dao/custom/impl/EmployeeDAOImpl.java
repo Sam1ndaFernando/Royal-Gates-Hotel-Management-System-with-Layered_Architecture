@@ -3,7 +3,7 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.EmployeeDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.Employee;
+import lk.RoyalGatesHotels.dto.EmployeeDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,13 +32,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean add(Employee entity) throws SQLException, ClassNotFoundException {
+    public boolean add(EmployeeDTO entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO employee (employeeId, name, address, join_date, nic, Email, mobile, jobRole) VALUES (?,?,?,?,?,?,?,?)";
         return SQLUtill.execute(sql, entity.getEmployeeId(), entity.getName(), entity.getAddress(), entity.getJoin_date(), entity.getNic(), entity.getEmail(), entity.getMobile(), entity.getJobRole());
     }
 
     @Override
-    public boolean update(Employee entity) throws SQLException, ClassNotFoundException {
+    public boolean update(EmployeeDTO entity) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE employee SET name=?, address=?, join_date=?, nic =?, Email=?, mobile=?, jobRole=? WHERE employeeId=?";
         return SQLUtill.execute(sql, entity.getName(), entity.getAddress(), entity.getJoin_date(), entity.getNic(), entity.getEmail(), entity.getMobile(), entity.getJobRole(), entity.getEmployeeId());
     }
@@ -62,7 +62,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public Employee setFields(String id) throws SQLException, ClassNotFoundException {
+    public EmployeeDTO setFields(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM employee WHERE employeeId=?";
         ResultSet resultSet = SQLUtill.execute(sql, id);
         if(resultSet.next()) {
@@ -74,7 +74,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             String joinDate = String.valueOf(resultSet.getDate("join_date"));
             String jobRole = resultSet.getString("jobRole");
             String email = resultSet.getString("Email");
-            return new Employee(employeeId, nic, name, address, mobile, joinDate, jobRole, email);
+            return new EmployeeDTO(employeeId, nic, name, address, mobile, joinDate, jobRole, email);
         }
         return null;
     }
