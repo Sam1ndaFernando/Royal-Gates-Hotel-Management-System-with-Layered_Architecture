@@ -14,25 +14,25 @@ public class BOFactory {
         COMPLAINT, DASHBOARD, EMPLOYEE, GUEST, HALL, HALLMAINTENANCE, HALLRESERVATION, HALLRESERVATIONDETAILS, MEALORDER, MEALORDERDETAILS, MEALPLANS, PAYMENT, ROOM, ROOMMAINTENANCE, ROOMRESERVATION, ROOMRESERVATIONDETAILS, USER
     }
 
-    public SuperBO getBO(BOTypes types){
+    public <T extends SuperBO>T getBO(BOTypes types){
         switch (types){
-            case COMPLAINT:              return new ComplaintBOImpl();
-            case DASHBOARD:              return new DashboardBOImpl();
-            case EMPLOYEE:               return new EmployeeBOImpl();
-            case GUEST:                  return new GuestBOImpl();
-            case HALL:                   return new HallBOImpl();
-            case HALLMAINTENANCE:        return new HallMaintenanceBOImpl();
-            case HALLRESERVATION:        return new HallReservationBOImpl();
-            case HALLRESERVATIONDETAILS: return new HallReservationDetailsBOImpl();
-            case MEALORDER:              return new MealOrderBOImpl();
-            case MEALORDERDETAILS:       return new MealOrderDetailsBOImpl();
-            case MEALPLANS:              return new MealPlansBOImpl();
-            case PAYMENT:                return new PaymentBOImpl();
-            case ROOM:                   return new RoomBOImpl();
-            case ROOMMAINTENANCE:        return new RoomMaintenanceBOImpl();
-            case ROOMRESERVATION:        return new RoomReservationBOImpl();
-            case ROOMRESERVATIONDETAILS: return new RoomReservationDetailsBOImpl();
-            case USER:                   return new UserBOImpl();
+            case COMPLAINT:              return (T)  new ComplaintBOImpl();
+            case DASHBOARD:              return (T)  new DashboardBOImpl();
+            case EMPLOYEE:               return  (T) new EmployeeBOImpl();
+            case GUEST:                  return (T)  new GuestBOImpl();
+            case HALL:                   return (T)  new HallBOImpl();
+            case HALLMAINTENANCE:        return (T)  new HallMaintenanceBOImpl();
+            case HALLRESERVATION:        return (T)  new HallReservationBOImpl();
+            case HALLRESERVATIONDETAILS: return  (T) new HallReservationDetailsBOImpl();
+            case MEALORDER:              return (T)  new MealOrderBOImpl();
+            case MEALORDERDETAILS:       return (T)  new MealOrderDetailsBOImpl();
+            case MEALPLANS:              return (T)  new MealPlansBOImpl();
+            case PAYMENT:                return (T)  new PaymentBOImpl();
+            case ROOM:                   return  (T) new RoomBOImpl();
+            case ROOMMAINTENANCE:        return (T)  new RoomMaintenanceBOImpl();
+            case ROOMRESERVATION:        return (T)  new RoomReservationBOImpl();
+            case ROOMRESERVATIONDETAILS: return (T)  new RoomReservationDetailsBOImpl();
+            case USER:                   return (T)  new UserBOImpl();
             default:                     return null;
         }
     }

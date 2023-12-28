@@ -8,6 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.GuestBO;
+import lk.RoyalGatesHotels.bo.custom.UserBO;
 import lk.RoyalGatesHotels.model.GuestModel;
 import lk.RoyalGatesHotels.dto.GuestDTO;
 import lk.RoyalGatesHotels.util.DateTime;
@@ -35,14 +38,14 @@ public class ReceptionistGuestController implements Initializable {
     public JFXTextField txtAddress;
     public JFXTextField txtGuestID;
 
+    GuestBO guestBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.GUEST);
+    UserBO userBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         new Pulse(guestReportContext).play();
-
         setGuestId();
-
         lblDate.setText(DateTime.setDate(String.valueOf(LocalDate.now())));
         DateTime.localTime(lblTime);
 
@@ -50,7 +53,7 @@ public class ReceptionistGuestController implements Initializable {
 
     public void setGuestId() {
         try {
-            String lastGuestId = GuestModel.getLastGuestId();
+           /* String lastGuestId = GuestModel.getLastGuestId();
             if (lastGuestId == null) {
                 txtGuestID.setText("C0001");
             } else {
@@ -59,7 +62,11 @@ public class ReceptionistGuestController implements Initializable {
                 lastDigits++;
                 String newGuestId = String.format("C%04d", lastDigits);
                 txtGuestID.setText(newGuestId);
-            }
+            }*/
+
+            String nextId = guestBO.getNextId();
+            txtGuestID.setText(nextId);
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error getting last guest ID: " + e.getMessage()).show();
@@ -113,7 +120,7 @@ public class ReceptionistGuestController implements Initializable {
                 if (isContactNoMatched) {
                     if (isEmailMatched) {
 
-                        GuestDTO guest = new GuestDTO(
+                        /*GuestDTO guest = new GuestDTO(
                                 txtGuestID.getText(),
                                 txtGuestName.getText(),
                                 String.valueOf(DatepickerDate.getValue()),
@@ -122,10 +129,22 @@ public class ReceptionistGuestController implements Initializable {
                                 txtMobile.getText(),
                                 txtEmail.getText(),
                                 txtProvince.getText()
-                        );
+                        );*/
+
+                        String GuestID = txtGuestID.getText();
+                        String GuestName = txtGuestName.getText();
+                        String Date = String.valueOf(DatepickerDate.getValue());
+                        String NIC = txtNIC.getText();
+                        String Address = txtAddress.getText();
+                        String Mobile = txtMobile.getText();
+                        String Email = txtEmail.getText();
+                        String Province = txtProvince.getText();
 
                         try {
-                            boolean isAdd = GuestModel.addGuest(guest);
+                            /*boolean isAdd = GuestModel.addGuest(guest);*/
+
+                            boolean isAdd = guestBO.add(new GuestDTO(GuestID, GuestName, Date, NIC, Address, Mobile, Email, Province));
+
                             if(isAdd){
                                 new Alert(Alert.AlertType.CONFIRMATION,"Guest Added Successfully!").show();
                                 Navigation.navigate(Routes.RECEPTIONGUEST,guestReportContext);
@@ -157,7 +176,7 @@ public class ReceptionistGuestController implements Initializable {
                 if(isContactNoMatched){
                     if(isEmailMatched){
 
-                        GuestDTO guest = new GuestDTO(
+                        /*GuestDTO guest = new GuestDTO(
                                 txtGuestID.getText(),
                                 txtGuestName.getText(),
                                 String.valueOf(DatepickerDate.getValue()),
@@ -166,10 +185,22 @@ public class ReceptionistGuestController implements Initializable {
                                 txtMobile.getText(),
                                 txtEmail.getText(),
                                 txtProvince.getText()
-                        );
+                        );*/
+
+                        String GuestID = txtGuestID.getText();
+                        String GuestName = txtGuestName.getText();
+                        String Date = String.valueOf(DatepickerDate.getValue());
+                        String NIC = txtNIC.getText();
+                        String Address = txtAddress.getText();
+                        String Mobile = txtMobile.getText();
+                        String Email = txtEmail.getText();
+                        String Province = txtProvince.getText();
 
                         try {
-                            boolean isUpdate = GuestModel.updateGuest(guest);
+                            /*boolean isUpdate = GuestModel.updateGuest(guest);*/
+
+                            boolean isUpdate = guestBO.update(new GuestDTO(GuestID, GuestName, Date, NIC, Address, Mobile, Email, Province));
+
                             if(isUpdate){
                                 new Alert(Alert.AlertType.CONFIRMATION,"Updated Successfully!").show();
                                 Navigation.navigate(Routes.RECEPTIONGUEST,guestReportContext);
@@ -202,17 +233,33 @@ public class ReceptionistGuestController implements Initializable {
 
 
     public void txtGuestIDOnAction(ActionEvent actionEvent) {
+        String GuestId = txtGuestID.getText();
+
         try {
-            ResultSet result = GuestModel.searchGuest(txtGuestID.getText());
-            if(result.next()){
-                txtGuestName.setText(result.getString("customer_name"));
+            /*ResultSet result = GuestModel.searchGuest(txtGuestID.getText());*/
+            GuestDTO guest = guestBO.setFields(GuestId);
+
+            if(guest != null){
+
+                /*txtGuestName.setText(result.getString("customer_name"));
                 txtNIC.setText(result.getString("nic"));
                 txtAddress.setText(result.getString("address"));
                 txtMobile.setText(result.getString("Mobile"));
                 txtEmail.setText(result.getString("Email"));
                 txtProvince.setText(result.getString("Province"));
-                DatepickerDate.setValue(LocalDate.parse(result.getString("date")));
+                DatepickerDate.setValue(LocalDate.parse(result.getString("date")));*/
 
+                txtGuestID.setText(guest.getCustomerId());
+                txtGuestName.setText(guest.getCustomer_name());
+                DatepickerDate.setValue(LocalDate.parse(guest.getDate()));
+                txtNIC.setText(guest.getNic());
+                txtAddress.setText(guest.getAddress());
+                txtMobile.setText(guest.getMobile());
+                txtEmail.setText(guest.getEmail());
+                txtProvince.setText(guest.getProvince());
+
+            } else {
+                new Alert(Alert.AlertType.WARNING, "no Guest found :(").show();
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

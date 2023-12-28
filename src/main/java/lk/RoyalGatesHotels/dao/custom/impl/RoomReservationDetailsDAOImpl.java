@@ -51,9 +51,12 @@ public class RoomReservationDetailsDAOImpl implements RoomReservationDetailsDAO 
         String sql = "SELECT * FROM roomreservationdetail WHERE reservation_id=?";
         try (ResultSet resultSet = SQLUtill.execute(sql, id)) {
             if (resultSet.next()) {
+                String roomNumber = resultSet.getString("reservation_id");
+                String guestId = resultSet.getString("customer_id");
                 String reservationId = resultSet.getString("reservation_id");
-                String roomNumber = resultSet.getString("room_number");
-                return new RoomReservationDetails(reservationId, roomNumber);
+                String checkOut = resultSet.getString("check_out_date");
+                String checkIn = resultSet.getString("check_in_date");
+                RoomReservationDetails reservationDetail = new RoomReservationDetails(roomNumber, guestId, reservationId, checkOut, checkIn);
             }
         }
         return null;
@@ -65,9 +68,12 @@ public class RoomReservationDetailsDAOImpl implements RoomReservationDetailsDAO 
         List<RoomReservationDetails> data = new ArrayList<>();
         try (ResultSet resultSet = SQLUtill.execute(sql)) {
             while (resultSet.next()) {
+                String roomNumber = resultSet.getString("reservation_id");
+                String guestId = resultSet.getString("customer_id");
                 String reservationId = resultSet.getString("reservation_id");
-                String roomNumber = resultSet.getString("room_number");
-                RoomReservationDetails reservationDetail = new RoomReservationDetails(reservationId, roomNumber);
+                String checkOut = resultSet.getString("check_out_date");
+                String checkIn = resultSet.getString("check_in_date");
+                RoomReservationDetails reservationDetail = new RoomReservationDetails(roomNumber, guestId, reservationId, checkOut, checkIn);
                 data.add(reservationDetail);
             }
         }

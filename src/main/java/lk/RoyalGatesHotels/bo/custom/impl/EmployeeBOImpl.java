@@ -7,6 +7,7 @@ import lk.RoyalGatesHotels.dto.EmployeeDTO;
 import lk.RoyalGatesHotels.entity.Employee;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeBOImpl implements EmployeeBO {
@@ -59,4 +60,25 @@ public class EmployeeBOImpl implements EmployeeBO {
         return new EmployeeDTO(emp.getEmployeeId(),emp.getName(),emp.getAddress(),emp.getJoin_date(),emp.getNic(),emp.getEmail(),emp.getMobile(),emp.getJobRole());
 
     }
+
+    @Override
+    public List<EmployeeDTO> getAllEmployees() throws SQLException, ClassNotFoundException {
+        List<Employee> employeeList = employeeDAO.getAll();
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        for (Employee e : employeeList) {
+            employeeDTOList.add(
+                    new EmployeeDTO(
+                            e.getEmployeeId(),
+                            e.getName(),
+                            e.getAddress(),
+                            e.getJoin_date(),
+                            e.getNic(),
+                            e.getEmail(),
+                            e.getMobile(),
+                            e.getJobRole())
+            );
+        }
+        return employeeDTOList;
+    }
+
 }

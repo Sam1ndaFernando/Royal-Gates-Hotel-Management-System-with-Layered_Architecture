@@ -11,7 +11,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.HallBO;
+import lk.RoyalGatesHotels.bo.custom.RoomBO;
 import lk.RoyalGatesHotels.db.DBConnection;
+import lk.RoyalGatesHotels.dto.EmployeeDTO;
+import lk.RoyalGatesHotels.dto.RoomDTO;
+import lk.RoyalGatesHotels.dto.tm.EmployeeTM;
 import lk.RoyalGatesHotels.dto.tm.RoomTM;
 import lk.RoyalGatesHotels.model.RoomsModel;
 import lk.RoyalGatesHotels.util.DateTime;
@@ -26,6 +32,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminRoomReportController implements Initializable {
@@ -38,6 +45,8 @@ public class AdminRoomReportController implements Initializable {
     public TableColumn colRoomType;
     public TableColumn colPrice;
     public TableColumn colStatus;
+
+    private RoomBO roomBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ROOM);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,7 +65,7 @@ public class AdminRoomReportController implements Initializable {
     }
 
     private void loadRoomsData() {
-        ObservableList<RoomTM> data = FXCollections.observableArrayList();
+       /* ObservableList<RoomTM> data = FXCollections.observableArrayList();
         try {
             ResultSet result = RoomsModel.getRoomData();
             while (result.next()){
@@ -68,9 +77,24 @@ public class AdminRoomReportController implements Initializable {
                                 result.getString("price")
                         ));
             }
+            tblRoomReport.setItems(data);*/
+
+        try {
+            List<RoomDTO> rooms = roomBO.getAllRooms();
+            ObservableList<RoomTM> data = FXCollections.observableArrayList();
+
+            for (RoomDTO roomDTO : rooms) {
+                data.add(new RoomTM(
+                        roomDTO.getRoom_number(),
+                        roomDTO.getRoomType(),
+                        roomDTO.getStatus(),
+                        String.valueOf(roomDTO.getPrice())
+                ));
+            }
             tblRoomReport.setItems(data);
+
         } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR,e+"").show();
+            new Alert(Alert.AlertType.ERROR, e.toString()).show();
         }
     }
 

@@ -23,4 +23,5 @@ public interface MealPlansBO extends SuperBO {
     public List<String> getIds() throws SQLException, ClassNotFoundException;
 
     public MealPackgesDTO setFields(String id) throws SQLException, ClassNotFoundException ;
+
 }

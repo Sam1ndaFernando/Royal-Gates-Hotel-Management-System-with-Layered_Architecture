@@ -1,5 +1,12 @@
 package lk.RoyalGatesHotels.dto.tm;
 
+import lombok.*;
+
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
 public class HallReservationDetailTM {
     private String hallNUmber;
     private String customerId;
@@ -7,66 +14,4 @@ public class HallReservationDetailTM {
     private String checkOutDate;
     private String checkInDate;
 
-
-    public HallReservationDetailTM() {
-    }
-
-    public HallReservationDetailTM(String hallNUmber, String customerId, String reservationId, String checkOutDate, String checkInDate) {
-        this.hallNUmber = hallNUmber;
-        this.customerId = customerId;
-        this.reservationId = reservationId;
-        this.checkOutDate = checkOutDate;
-        this.checkInDate = checkInDate;
-    }
-
-    public HallReservationDetailTM(String hallNUmber, String customerId, String reservationId) {
-        this.hallNUmber = hallNUmber;
-        this.customerId = customerId;
-        this.reservationId = reservationId;
-    }
-
-    public HallReservationDetailTM(String hallNUmber, String reservationId) {
-        this.hallNUmber = hallNUmber;
-        this.reservationId = reservationId;
-    }
-
-    public String getHallNUmber() {
-        return hallNUmber;
-    }
-
-    public void setHallNUmber(String hallNUmber) {
-        this.hallNUmber = hallNUmber;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getReservationId() {
-        return reservationId;
-    }
-
-    public void setReservationId(String reservationId) {
-        this.reservationId = reservationId;
-    }
-
-    public String getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setCheckOutDate(String checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
-    public String getCheckInDate() {
-        return checkInDate;
-    }
-
-    public void setCheckInDate(String checkInDate) {
-        this.checkInDate = checkInDate;
-    }
 }

@@ -20,7 +20,7 @@ public class RoomsModel {
 
     public static boolean addRoom(RoomDTO room) throws SQLException, ClassNotFoundException {
         boolean isAdd = CrudUtil.execute("INSERT INTO room VALUES (?,?,?,?)",
-                room.getRoomNumber(),
+                room.getRoom_number(),
                 room.getRoomType(),
                 room.getStatus(),
                 room.getPrice()
@@ -34,7 +34,7 @@ public class RoomsModel {
                 room.getRoomType(),
                 room.getStatus(),
                 room.getPrice(),
-                room.getRoomNumber()
+                room.getRoom_number()
         );
         return isUpdate;
     }

@@ -11,6 +11,6 @@ public class HallDTO {
     private String hallType;
     private String hallNumber;
     private String status;
-    private Double price;
+    private double price;
 
 }

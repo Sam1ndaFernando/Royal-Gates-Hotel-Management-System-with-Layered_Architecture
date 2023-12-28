@@ -62,7 +62,7 @@ public class RoomReservationModel {
     public static String getReservationDetails(String reservationId) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = CrudUtil.execute("SELECT * FROM roomReservationDetail WHERE reservation_id=?", reservationId);
         if(resultSet.next()){
-            return resultSet.getString("roomNumber");
+            return resultSet.getString("room_number");
         }
         return null;
     }

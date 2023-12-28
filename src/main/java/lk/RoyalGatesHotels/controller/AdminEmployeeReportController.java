@@ -11,7 +11,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.EmployeeBO;
 import lk.RoyalGatesHotels.db.DBConnection;
+import lk.RoyalGatesHotels.dto.EmployeeDTO;
+import lk.RoyalGatesHotels.dto.HallDTO;
+import lk.RoyalGatesHotels.dto.tm.HallTM;
 import lk.RoyalGatesHotels.model.EmployeeModel;
 import lk.RoyalGatesHotels.dto.tm.EmployeeTM;
 import lk.RoyalGatesHotels.util.DateTime;
@@ -28,14 +33,14 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AdminEmployeeReportController implements Initializable {
     public AnchorPane employeeReportContext;
     public Label lblTime;
     public Label lblDate;
-
-
     public TableView tblEmployee;
     public TableColumn colEmployeeId;
     public TableColumn colName;
@@ -45,6 +50,8 @@ public class AdminEmployeeReportController implements Initializable {
     public TableColumn colEmail;
     public TableColumn colJoinDate;
     public TableColumn colJobRole;
+
+    private EmployeeBO employeeBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.EMPLOYEE);
 
 
     @Override
@@ -65,16 +72,12 @@ public class AdminEmployeeReportController implements Initializable {
 
         loadEmployeeData();
 
-
-
     }
-
-    private void loadEmployeeData() {
-        ObservableList<EmployeeTM> data = FXCollections.observableArrayList();
+    private void loadEmployeeData()  {
+       /* ObservableList<EmployeeTM> data = FXCollections.observableArrayList();
         try {
             ResultSet result = EmployeeModel.getEmployeeData();
             while (result.next()){
-
                 data.add(
                         new EmployeeTM(
                                 result.getString("employeeId"),
@@ -88,9 +91,28 @@ public class AdminEmployeeReportController implements Initializable {
                         ));
 
             }
+            tblEmployee.setItems(data);*/
+
+        try {
+            List<EmployeeDTO> employees = employeeBO.getAllEmployees();
+            ObservableList<EmployeeTM> data = FXCollections.observableArrayList();
+
+            for (EmployeeDTO employeeDTO : employees) {
+                data.add(new EmployeeTM(
+                        employeeDTO.getEmployeeId(),
+                        employeeDTO.getName(),
+                        employeeDTO.getAddress(),
+                        employeeDTO.getJoin_date(),
+                        employeeDTO.getNic(),
+                        employeeDTO.getEmail(),
+                        employeeDTO.getMobile(),
+                        employeeDTO.getJobRole()
+                ));
+            }
+
             tblEmployee.setItems(data);
         } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR,e+"").show();
+            new Alert(Alert.AlertType.ERROR, e.toString()).show();
         }
     }
 

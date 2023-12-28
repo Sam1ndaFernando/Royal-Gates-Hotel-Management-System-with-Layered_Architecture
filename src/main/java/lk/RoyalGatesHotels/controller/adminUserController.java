@@ -3,12 +3,18 @@ package lk.RoyalGatesHotels.controller;
 import animatefx.animation.Pulse;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.EmployeeBO;
+import lk.RoyalGatesHotels.bo.custom.UserBO;
+import lk.RoyalGatesHotels.dto.EmployeeDTO;
+import lk.RoyalGatesHotels.dto.MealPackgesDTO;
 import lk.RoyalGatesHotels.model.EmployeeModel;
 import lk.RoyalGatesHotels.model.UsersModel;
 import lk.RoyalGatesHotels.dto.UsersDTO;
@@ -21,6 +27,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class adminUserController implements Initializable {
@@ -32,6 +39,8 @@ public class adminUserController implements Initializable {
     public JFXTextField txtJobRole;
     public JFXTextField txtPassword;
     public JFXComboBox comBxEmployeeId;
+    private UserBO userBO =  BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+    private EmployeeBO employeeBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.EMPLOYEE);
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         new Pulse(ManagepsswrdContext).play();
@@ -43,9 +52,19 @@ public class adminUserController implements Initializable {
     }
 
     public void setEmployeeIds(){
+
         try {
-            ObservableList<String> ids = UsersModel.loadEmployeeIds();
+
+           /* ObservableList<String> ids = UsersModel.loadEmployeeIds();
+            comBxEmployeeId.setItems(ids);*/
+
+            List<EmployeeDTO> all = employeeBO.getAllEmployees();
+            ObservableList<String> ids = FXCollections.observableArrayList();
+            for (EmployeeDTO element : all) {
+                ids.add(element.getEmployeeId());
+            }
             comBxEmployeeId.setItems(ids);
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -93,16 +112,25 @@ public class adminUserController implements Initializable {
 
 
     public void btnAdd(ActionEvent actionEvent) {
-        UsersDTO users = new UsersDTO(
+        /*UsersDTO users = new UsersDTO(
                 String.valueOf(comBxEmployeeId.getValue()),
                 txtName.getText(),
                 txtJobRole.getText(),
                 txtUsername.getText(),
                 txtPassword.getText()
-        );
+        );*/
+
+        String UsrId = String.valueOf(comBxEmployeeId.getValue());
+        String UsrName = txtName.getText();
+        String UsrRole = txtJobRole.getText();
+        String UsrUsername = txtUsername.getText();
+        String UsrPassword = txtPassword.getText();
 
         try {
-            boolean isAdd = UsersModel.addUsers(users);
+            /*boolean isAdd = UsersModel.addUsers(users);*/
+
+            boolean isAdd = userBO.add(new UsersDTO(UsrId, UsrName, UsrRole, UsrUsername, UsrPassword));
+
             if(isAdd){
                 new Alert(Alert.AlertType.CONFIRMATION,"Guest Added Successfully!").show();
                 clearAll();
@@ -115,22 +143,25 @@ public class adminUserController implements Initializable {
         }
     }
     public void btnUpdate(ActionEvent actionEvent) {
-        UsersDTO users = new UsersDTO(
+       /* UsersDTO users = new UsersDTO(
                 txtName.getText(),
                 txtJobRole.getText(),
                 txtUsername.getText(),
                 txtPassword.getText(),
                 String.valueOf(comBxEmployeeId.getValue())
-        );
+        );*/
 
-//        System.out.println(txtName.getText());
-//        System.out.println(txtJobRole.getText());
-//        System.out.println(txtUsername.getText());
-//        System.out.println(txtPassword.getText());
-//        System.out.println(String.valueOf(comBxEmployeeId.getValue()));
+        String UsrId = String.valueOf(comBxEmployeeId.getValue());
+        String UsrName = txtName.getText();
+        String UsrRole = txtJobRole.getText();
+        String UsrUsername = txtUsername.getText();
+        String UsrPassword = txtPassword.getText();
 
         try {
-            boolean isUpdate = UsersModel.updateUsers(users);
+            /*boolean isUpdate = UsersModel.updateUsers(users);*/
+
+            boolean isUpdate = userBO.update(new UsersDTO(UsrId, UsrName, UsrRole, UsrUsername, UsrPassword));
+
             if(isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"User Updated Successfully!").show();
                 clearAll();
@@ -160,9 +191,9 @@ public class adminUserController implements Initializable {
 
 
 
-    public void EmployeeIdOnAction(ActionEvent actionEvent) {
+    public void EmployeeIdOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
-        try {
+        /*try {
             ResultSet result = UsersModel.searchEmployee(String.valueOf(comBxEmployeeId.getValue()));
             if(result.next()){
                 txtName.setText(result.getString("name"));
@@ -175,7 +206,17 @@ public class adminUserController implements Initializable {
                     txtName.setText(resultSet.getString("name"));
                     txtJobRole.setText(resultSet.getString("jobRole"));
                 }
+            }*/
+
+        try {
+            List<EmployeeDTO> allEmployees = employeeBO.getAllEmployees();
+            ObservableList<String> employeeIds = FXCollections.observableArrayList();
+
+            for (EmployeeDTO employee : allEmployees) {
+                employeeIds.add(employee.getEmployeeId());
             }
+            comBxEmployeeId.setItems(employeeIds);
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

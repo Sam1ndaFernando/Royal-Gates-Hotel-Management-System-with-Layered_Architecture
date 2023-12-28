@@ -8,12 +8,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.MealPlansBO;
 import lk.RoyalGatesHotels.model.MealPackgesModel;
 import lk.RoyalGatesHotels.dto.MealPackgesDTO;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.RegExPattern;
 import lk.RoyalGatesHotels.util.Routes;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +35,9 @@ public class AdminMealPlansController implements Initializable {
     public JFXTextField txtMealPlans;
     public JFXTextField txtMealType;
 
+    MealPlansBO mealPlansBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEALPLANS);
+
+    @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         new Pulse(adminMealplansContext).play();
@@ -42,9 +48,9 @@ public class AdminMealPlansController implements Initializable {
         setMealPackage();
     }
 
-    private void setMealPackage() {
+    private void setMealPackage() throws SQLException, ClassNotFoundException {
         try {
-            String lastMealPkgId= MealPackgesModel.getLastMealPkgId();
+            /*String lastMealPkgId= MealPackgesModel.getLastMealPkgId();
             if(lastMealPkgId==null){
                 txtPackageId.setText("M0001");
             }else{
@@ -52,35 +58,49 @@ public class AdminMealPlansController implements Initializable {
                 int lastDigits=Integer.parseInt(split[1]);
                 lastDigits++;
                 String newMealPkgId=String.format("M%04d", lastDigits);
-                txtPackageId.setText(newMealPkgId);
-            }
+                txtPackageId.setText(newMealPkgId);*/
+
+            String nextId = mealPlansBO.getNextId();
+            txtPackageId.setText(nextId);
+
         } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR,e+"").show();
         }
 
     }
 
-    public void btnAddMeal(ActionEvent actionEvent) {
+    public void btnAddMeal(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, IOException {
+
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            MealPackgesDTO mealPackges = new MealPackgesDTO(
+
+            /*MealPackgesDTO mealPackges = new MealPackgesDTO(
                     txtPackageId.getText(),
                     Double.parseDouble(txtPrice.getText()),
                     txtAreaDescription.getText(),
                     txtMealPlans.getText(),
                     txtMealType.getText()
-            );
+            );*/
+
+            String pkgId = txtPackageId.getText();
+            double price = Double.parseDouble(txtPrice.getText());
+            String description = txtAreaDescription.getText();
+            String mealPlan = txtMealPlans.getText();
+            String mealType = txtMealType.getText();
 
             try {
-                boolean isAdd = MealPackgesModel.addPackage(mealPackges);
+
+               /* boolean isAdd = MealPackgesModel.addPackage(mealPackges);*/
+
+                boolean isAdd = mealPlansBO.add(new MealPackgesDTO(pkgId,price,description,mealPlan,mealType));
+
                 if(isAdd){
                     new Alert(Alert.AlertType.CONFIRMATION,"Meal Package Added Successfully!").show();
                     clearAll();
                 }else{
                     new Alert(Alert.AlertType.ERROR,"Meal Package Not Added!").show();
                 }
-
             } catch (SQLException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -94,16 +114,25 @@ public class AdminMealPlansController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            MealPackgesDTO mealPackges = new MealPackgesDTO(
+            /*MealPackgesDTO mealPackges = new MealPackgesDTO(
                     txtPackageId.getText(),
                     Double.parseDouble(txtPrice.getText()),
                     txtAreaDescription.getText(),
                     txtMealPlans.getText(),
                     txtMealType.getText()
-            );
+            );*/
+
+            String pkgId = txtPackageId.getText();
+            double price = Double.parseDouble(txtPrice.getText());
+            String description = txtAreaDescription.getText();
+            String mealPlan = txtMealPlans.getText();
+            String mealType = txtMealType.getText();
 
             try {
-                boolean isUpdate = MealPackgesModel.updatePackage(mealPackges);
+                /*boolean isUpdate = MealPackgesModel.updatePackage(mealPackges);*/
+
+                boolean isUpdate = mealPlansBO.update(new MealPackgesDTO(pkgId,price,description,mealPlan,mealType));
+
                 if(isUpdate){
                     new Alert(Alert.AlertType.CONFIRMATION,"Meal Updated Successfully!").show();
                     clearAll();
@@ -173,17 +202,25 @@ public class AdminMealPlansController implements Initializable {
 
 
     public void PackageIdOnAction(ActionEvent actionEvent) {
+        String PackageId    =txtPackageId.getText();
         try {
-            ResultSet result = MealPackgesModel.searchMealPlan(txtPackageId.getText());
-            if (result.next()) {
-                txtPrice.setText(result.getString("price"));
-                txtAreaDescription.setText(result.getString("description"));
-                txtMealPlans.setText(result.getString("meal_plan"));
-                txtMealType.setText(result.getString("type"));
+            /*ResultSet result = MealPackgesModel.searchMealPlan(txtPackageId.getText());*/
+
+            MealPackgesDTO mealPackges= mealPlansBO.setFields(PackageId);
+
+            if (mealPackges != null) {
+
+                txtPackageId.setText(mealPackges.getPkg_id());
+                txtPrice.setText(String.valueOf(mealPackges.getPrice()));
+                txtAreaDescription.setText(mealPackges.getDescription());
+                txtMealPlans.setText(mealPackges.getMeal_plan());
+                txtMealType.setText(mealPackges.getType());
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Meal Package does not exist!").show();
                 clearAll();
             }
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

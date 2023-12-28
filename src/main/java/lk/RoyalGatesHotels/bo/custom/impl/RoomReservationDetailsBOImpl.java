@@ -28,7 +28,7 @@ public class RoomReservationDetailsBOImpl implements RoomReservationDetailsBO {
 
     @Override
     public boolean removeR(String roomReservationId) throws SQLException, ClassNotFoundException {
-        return roomReservationDAO.removeR(roomReservationId);
+        return roomReservationDAO.remove(roomReservationId);
     }
 
     @Override

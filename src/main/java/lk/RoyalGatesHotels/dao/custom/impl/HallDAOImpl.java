@@ -5,6 +5,7 @@ import lk.RoyalGatesHotels.dao.custom.HallDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
 import lk.RoyalGatesHotels.dto.HallDTO;
 import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
+import lk.RoyalGatesHotels.entity.Employee;
 import lk.RoyalGatesHotels.entity.Hall;
 
 import java.sql.Connection;
@@ -29,8 +30,7 @@ public class HallDAOImpl implements HallDAO {
         if(currentId != null) {
             int lastNum = Integer.parseInt(currentId.substring(1));
             int newNum = lastNum + 1;
-            String newId = String.format("H%04d", newNum);
-            return newId;
+            return String.format("H%04d", newNum);
         }
         return "H0001";
     }
@@ -76,5 +76,18 @@ public class HallDAOImpl implements HallDAO {
             return new Hall(hallNumber, hallType, status, price);
         }
         return  null;
+    }
+    public List<Hall> getAll() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtill.execute("SELECT * FROM halls");
+        List<Hall> list = new ArrayList<>();
+        while (rst.next()) {
+            list.add(new Hall(
+                    rst.getString("hallNumber"),
+                    rst.getString("hall_type"),
+                    rst.getString("status"),
+                    rst.getDouble("price")
+            ));
+        }
+        return list;
     }
 }

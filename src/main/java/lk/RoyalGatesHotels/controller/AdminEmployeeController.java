@@ -8,6 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.EmployeeBO;
+import lk.RoyalGatesHotels.dto.HallDTO;
 import lk.RoyalGatesHotels.model.EmployeeModel;
 import lk.RoyalGatesHotels.dto.EmployeeDTO;
 import lk.RoyalGatesHotels.util.DateTime;
@@ -34,7 +37,7 @@ public class AdminEmployeeController implements Initializable {
     public JFXDatePicker datepickerDate;
     public JFXTextField txtJobRole;
     public JFXTextField txtEmail;
-
+    EmployeeBO employeeBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.EMPLOYEE);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,7 +45,6 @@ public class AdminEmployeeController implements Initializable {
 
         setEmployeeId();
         datepickerDate.setValue(LocalDate.now());
-
 
         lblDate.setText(DateTime.setDate(String.valueOf(LocalDate.now())));
         DateTime.localTime(lblTime);
@@ -53,7 +55,7 @@ public class AdminEmployeeController implements Initializable {
     private void setEmployeeId() {
 
         try {
-            String lastEmployeeId= EmployeeModel.getLastEmployeeId();
+            /*String lastEmployeeId= EmployeeModel.getLastEmployeeId();
             if(lastEmployeeId==null){
                 txtEmployeeId.setText("E0001");
             }else{
@@ -62,7 +64,11 @@ public class AdminEmployeeController implements Initializable {
                 lastDigits++;
                 String newEmployeeId=String.format("E%04d", lastDigits);
                 txtEmployeeId.setText(newEmployeeId);
-            }
+            }*/
+
+            String nextEmpId = employeeBO.getNextId();
+            txtEmployeeId.setText(nextEmpId);
+
         } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR,e+"").show();
         }
@@ -121,7 +127,16 @@ public class AdminEmployeeController implements Initializable {
                 if(isContactNoMatched){
                     if(isEmailMatched){
 
-                        EmployeeDTO employee = new EmployeeDTO(
+                        String EmpId = txtEmployeeId.getText();
+                        String Name = txtFullName.getText();
+                        String Address = txtAddress.getText();
+                        String date = String.valueOf(datepickerDate.getValue());
+                        String Nic = txtNic.getText();
+                        String Email = txtEmail.getText();
+                        String Mobile = txtMobile.getText();
+                        String JobRole = txtJobRole.getText();
+
+                        /*EmployeeDTO employee = new EmployeeDTO(
                                 txtEmployeeId.getText(),
                                 txtFullName.getText(),
                                 txtAddress.getText(),
@@ -130,10 +145,14 @@ public class AdminEmployeeController implements Initializable {
                                 txtEmail.getText(),
                                 txtMobile.getText(),
                                 txtJobRole.getText()
-                        );
+                        );*/
 
                         try {
-                            boolean isAdd = EmployeeModel.addEmployee(employee);
+
+                            /*boolean isAdd = EmployeeModel.addEmployee(employee);*/
+
+                            boolean isAdd = employeeBO.add(new EmployeeDTO(EmpId, Name, Address, date, Nic, Email, Mobile, JobRole));
+
                             if(isAdd){
                                 new Alert(Alert.AlertType.CONFIRMATION,"Employee Added Successfully!").show();
                                 clearAll();
@@ -178,7 +197,7 @@ public class AdminEmployeeController implements Initializable {
                 if(isContactNoMatched){
                     if(isEmailMatched){
 
-                        EmployeeDTO employee = new EmployeeDTO(
+                        /*EmployeeDTO employee = new EmployeeDTO(
                                 txtEmployeeId.getText(),
                                 txtFullName.getText(),
                                 txtAddress.getText(),
@@ -187,10 +206,22 @@ public class AdminEmployeeController implements Initializable {
                                 txtEmail.getText(),
                                 txtMobile.getText(),
                                 txtJobRole.getText()
-                        );
+                        );*/
+
+                        String EmpId = txtEmployeeId.getText();
+                        String Name = txtFullName.getText();
+                        String Address = txtAddress.getText();
+                        String date = String.valueOf(datepickerDate.getValue());
+                        String Nic = txtNic.getText();
+                        String Email = txtEmail.getText();
+                        String Mobile = txtMobile.getText();
+                        String JobRole = txtJobRole.getText();
 
                         try {
-                            boolean isUpdate = EmployeeModel.updateEmployee(employee);
+                            /*boolean isUpdate = EmployeeModel.updateEmployee(employee);*/
+
+                            boolean isUpdate = employeeBO.update(new EmployeeDTO(EmpId, Name, Address, date, Nic, Email, Mobile, JobRole));
+
                             if(isUpdate){
                                 new Alert(Alert.AlertType.CONFIRMATION,"Updated Successfully!").show();
                             }else{
@@ -213,25 +244,31 @@ public class AdminEmployeeController implements Initializable {
     }
 
     public void txtEmployeeIdOnAction(ActionEvent actionEvent) {
-
         try {
-            ResultSet result = EmployeeModel.searchEmployee(txtEmployeeId.getText());
-            if(result.next()){
-                txtAddress.setText(result.getString("address"));
-                datepickerDate.setValue(LocalDate.parse(result.getString("join_date")));
-                txtFullName.setText(result.getString("name"));
-                txtMobile.setText(result.getString("mobile"));
-                txtJobRole.setText(result.getString("jobRole"));
-                txtNic.setText(result.getString("nic"));
-                txtEmail.setText(result.getString("Email"));
+            String employeeId = txtEmployeeId.getText();
+
+            try {
+                EmployeeDTO employee = employeeBO.setFields(employeeId);
+
+                if (employee != null) {
+                    txtEmployeeId.setText(employee.getEmployeeId());
+                    txtFullName.setText(employee.getName());
+                    txtAddress.setText(employee.getAddress());
+                    datepickerDate.setValue(LocalDate.parse(employee.getJoin_date()));
+                    txtNic.setText(employee.getNic());
+                    txtEmail.setText(employee.getEmail());
+                    txtMobile.setText(employee.getMobile());
+                    txtJobRole.setText(employee.getJobRole());
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Employee Not Found!").show();
+                }
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Oops! Something went wrong :(").show();
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Oops! Something unexpected went wrong :(").show();
         }
-
-
     }
-
-
-
 }

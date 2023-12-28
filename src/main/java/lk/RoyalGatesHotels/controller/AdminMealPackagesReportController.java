@@ -11,7 +11,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.MealPlansBO;
 import lk.RoyalGatesHotels.db.DBConnection;
+import lk.RoyalGatesHotels.dto.HallDTO;
+import lk.RoyalGatesHotels.dto.MealPackgesDTO;
+import lk.RoyalGatesHotels.dto.tm.HallTM;
 import lk.RoyalGatesHotels.model.MealPackgesModel;
 import lk.RoyalGatesHotels.dto.tm.MealPackgesTM;
 import lk.RoyalGatesHotels.util.DateTime;
@@ -26,6 +31,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminMealPackagesReportController implements Initializable {
@@ -40,6 +46,8 @@ public class AdminMealPackagesReportController implements Initializable {
     public TableColumn colPrice;
     public TableView TblMealPkg;
 
+    MealPlansBO mealPlansBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEALPLANS);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         new Pulse(MealPackageContext).play();
@@ -50,7 +58,7 @@ public class AdminMealPackagesReportController implements Initializable {
         colPackageId.setCellValueFactory(new PropertyValueFactory<>("pkg_id"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        colMealPlan.setCellValueFactory(new PropertyValueFactory<>("meal_Plan"));
+        colMealPlan.setCellValueFactory(new PropertyValueFactory<>("meal_plan"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
 
         loadMealPackagesData();
@@ -58,7 +66,7 @@ public class AdminMealPackagesReportController implements Initializable {
     }
 
     private void loadMealPackagesData() {
-        ObservableList<MealPackgesTM> data = FXCollections.observableArrayList();
+        /*ObservableList<MealPackgesTM> data = FXCollections.observableArrayList();
         try {
             ResultSet result = MealPackgesModel.getMealPackgeData();
             while (result.next()){
@@ -73,9 +81,24 @@ public class AdminMealPackagesReportController implements Initializable {
                         ));
 
             }
+            TblMealPkg.setItems(data);*/
+
+        try {
+            List<MealPackgesDTO> mealPackgesDTOs = mealPlansBO.getAll();
+            ObservableList<MealPackgesTM> data = FXCollections.observableArrayList();
+
+            for (MealPackgesDTO mealPackgesDTO : mealPackgesDTOs) {
+                data.add(new MealPackgesTM(
+                        mealPackgesDTO.getPkg_id(),
+                        mealPackgesDTO.getPrice(),
+                        mealPackgesDTO.getDescription(),
+                        mealPackgesDTO.getMeal_plan(),
+                        mealPackgesDTO.getType()
+                ));
+            }
             TblMealPkg.setItems(data);
         } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR,e+"").show();
+            new Alert(Alert.AlertType.ERROR, e.toString()).show();
         }
     }
     public void btnDashboard(ActionEvent actionEvent) throws IOException {

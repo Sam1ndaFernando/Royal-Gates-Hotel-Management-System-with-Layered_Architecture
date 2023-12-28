@@ -21,4 +21,6 @@ public interface EmployeeBO extends SuperBO {
     public List<String> getIds() throws SQLException, ClassNotFoundException;
 
     public EmployeeDTO setFields(String id) throws SQLException, ClassNotFoundException ;
+
+    List<EmployeeDTO> getAllEmployees() throws SQLException, ClassNotFoundException;
 }

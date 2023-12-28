@@ -7,6 +7,7 @@ import lk.RoyalGatesHotels.dto.RoomDTO;
 import lk.RoyalGatesHotels.entity.Room;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomBOImpl implements RoomBO {
@@ -52,5 +53,18 @@ public class RoomBOImpl implements RoomBO {
     public RoomDTO setFields(String id) throws SQLException, ClassNotFoundException {
         Room room = roomDAO.setFields(id);
         return new RoomDTO(room.getRoom_number(),room.getRoomType(),room.getStatus(),room.getPrice());
+    }
+
+    @Override
+    public List<RoomDTO> getAllRooms() throws SQLException, ClassNotFoundException {
+
+        List<Room>rooms = roomDAO.getAll();
+        List<RoomDTO>roomDTOs = new ArrayList<>();
+
+        for (Room room : rooms) {
+            RoomDTO roomDTO = new RoomDTO(room.getRoom_number(), room.getRoomType(), room.getStatus(), room.getPrice());
+            roomDTOs.add(roomDTO);
+        }
+        return roomDTOs;
     }
 }

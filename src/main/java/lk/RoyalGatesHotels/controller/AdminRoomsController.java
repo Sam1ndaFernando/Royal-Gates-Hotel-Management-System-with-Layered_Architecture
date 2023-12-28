@@ -10,12 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.RoomBO;
+import lk.RoyalGatesHotels.dto.MealPackgesDTO;
 import lk.RoyalGatesHotels.dto.RoomDTO;
 import lk.RoyalGatesHotels.model.RoomsModel;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.RegExPattern;
 import lk.RoyalGatesHotels.util.Routes;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +37,9 @@ public class AdminRoomsController implements Initializable {
     public JFXTextField txtPrice;
 
     public JFXComboBox cmbAvailability;
+   private RoomBO roomBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ROOM);
 
+    @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         new Pulse(adminRoomsContext).play();
@@ -51,9 +57,10 @@ public class AdminRoomsController implements Initializable {
     }
 
 
-    private void setAdminRoom() {
+    private void setAdminRoom() throws SQLException, ClassNotFoundException {
+
         try {
-            String lastAdminRoomId= RoomsModel.getLastAdminRoomId();
+            /*String lastAdminRoomId= RoomsModel.getLastAdminRoomId();
             if(lastAdminRoomId==null){
                 txtRoomNumber.setText("R0001");
             }else{
@@ -62,7 +69,11 @@ public class AdminRoomsController implements Initializable {
                 lastDigits++;
                 String newAdminRoomId=String.format("R%04d", lastDigits);
                 txtRoomNumber.setText(newAdminRoomId);
-            }
+            }*/
+
+        String nextRoomNumber = roomBO.getNextId();
+        txtRoomNumber.setText(nextRoomNumber);
+
         } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR,e+"").show();
         }
@@ -103,15 +114,22 @@ public class AdminRoomsController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            RoomDTO room = new RoomDTO(
+            /*RoomDTO room = new RoomDTO(
                     txtRoomNumber.getText(),
                     txtRoomType.getText(),
                     "Available",
                     Double.parseDouble(txtPrice.getText())
-            );
+            );*/
+
+            String RoomNumber = txtRoomNumber.getText();
+            String RoomType = txtRoomType.getText();
+            String Availability = String.valueOf(cmbAvailability.getValue());
+            double Price = Double.parseDouble(txtPrice.getText());
 
             try {
-                boolean isAdd = RoomsModel.addRoom(room);
+//                boolean isAdd = RoomsModel.addRoom(room);
+                boolean isAdd = roomBO.add(new RoomDTO(RoomNumber, RoomType, Availability, Price));
+
                 if(isAdd){
                     new Alert(Alert.AlertType.CONFIRMATION,"Room Added Successfully!").show();
                     clearAll();
@@ -133,15 +151,24 @@ public class AdminRoomsController implements Initializable {
         boolean isPriceMatched = RegExPattern.getPricePattern().matcher(txtPrice.getText()).matches();
 
         if(isPriceMatched){
-            RoomDTO room = new RoomDTO(
+            /*RoomDTO room = new RoomDTO(
                     txtRoomNumber.getText(),
                     txtRoomType.getText(),
                     String.valueOf(cmbAvailability.getValue()),
                     Double.parseDouble(txtPrice.getText())
-            );
+            );*/
+
+
+            String RoomNumber = txtRoomNumber.getText();
+            String RoomType = txtRoomType.getText();
+            String Availability = String.valueOf(cmbAvailability.getValue());
+            double Price = Double.parseDouble(txtPrice.getText());
 
             try {
-                boolean isUpdate = RoomsModel.updateRoom(room);
+                /*boolean isUpdate = RoomsModel.updateRoom(room);*/
+
+                boolean isUpdate = roomBO.update(new RoomDTO(RoomNumber, RoomType, Availability, Price));
+
                 if(isUpdate){
                     new Alert(Alert.AlertType.CONFIRMATION,"Room Updated Successfully!").show();
                     clearAll();
@@ -177,12 +204,22 @@ public class AdminRoomsController implements Initializable {
 
 
     public void RoomNumberOnAction(ActionEvent actionEvent) {
+        String RoomNumber    =txtRoomNumber.getText();
         try {
-            ResultSet result = RoomsModel.searchRoom(txtRoomNumber.getText());
-            if(result.next()){
-                txtRoomType.setText(result.getString("room_type"));
-                txtPrice.setText(result.getString("price"));
-                cmbAvailability.setPromptText(result.getString("status"));
+
+            /*ResultSet result = MealPackgesModel.searchMealPlan(txtPackageId.getText());*/
+
+            RoomDTO roomDTO = roomBO.setFields(RoomNumber);
+
+            if (roomDTO != null) {
+                txtRoomNumber.setText(roomDTO.getRoom_number());
+                txtRoomType.setText(roomDTO.getRoomType());
+                cmbAvailability.getSelectionModel().select(roomDTO.getStatus());
+                txtPrice.setText(String.valueOf(roomDTO.getPrice()));
+
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Room does not exist!").show();
+                clearAll();
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

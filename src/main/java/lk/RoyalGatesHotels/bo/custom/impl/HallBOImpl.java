@@ -7,10 +7,12 @@ import lk.RoyalGatesHotels.dto.HallDTO;
 import lk.RoyalGatesHotels.entity.Hall;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HallBOImpl implements HallBO {
     HallDAO hallDAO = (HallDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.HALL);
+
     @Override
     public String getNextId() throws SQLException, ClassNotFoundException {
         return hallDAO.getNextId();
@@ -18,7 +20,7 @@ public class HallBOImpl implements HallBO {
 
     @Override
     public String splitId(String id) throws SQLException, ClassNotFoundException {
-        if(id != null) {
+        if (id != null) {
             int lastNum = Integer.parseInt(id.substring(1));
             int newNum = lastNum + 1;
             String newId = String.format("H%04d", newNum);
@@ -29,12 +31,12 @@ public class HallBOImpl implements HallBO {
 
     @Override
     public boolean add(HallDTO dto) throws SQLException, ClassNotFoundException {
-        return hallDAO.add(new Hall(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
+        return hallDAO.add(new Hall(dto.getHallNumber(), dto.getHallType(), dto.getStatus(), dto.getPrice()));
     }
 
     @Override
     public boolean update(HallDTO dto) throws SQLException, ClassNotFoundException {
-        return hallDAO.update(new Hall(dto.getHallNumber(),dto.getHallType(),dto.getStatus(),dto.getPrice()));
+        return hallDAO.update(new Hall(dto.getHallNumber(), dto.getHallType(), dto.getStatus(), dto.getPrice()));
     }
 
     @Override
@@ -50,6 +52,19 @@ public class HallBOImpl implements HallBO {
     @Override
     public HallDTO setFields(String id) throws SQLException, ClassNotFoundException {
         Hall hall = hallDAO.setFields(id);
-        return new HallDTO(hall.getHallNumber(),hall.getHallType(),hall.getStatus(),hall.getPrice());
+        return new HallDTO(hall.getHallNumber(), hall.getHallType(), hall.getStatus(), hall.getPrice());
+    }
+
+    @Override
+    public List<HallDTO> getAllHalls() throws SQLException, ClassNotFoundException {
+
+        List<Hall> halls = hallDAO.getAll();
+        List<HallDTO> hallDTOs = new ArrayList<>();
+
+        for (Hall hall : halls) {
+            HallDTO hallDTO = new HallDTO(hall.getHallNumber(), hall.getHallType(), hall.getStatus(), hall.getPrice());
+            hallDTOs.add(hallDTO);
+        }
+        return hallDTOs;
     }
 }

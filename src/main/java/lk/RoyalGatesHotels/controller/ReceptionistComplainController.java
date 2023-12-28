@@ -2,12 +2,15 @@ package lk.RoyalGatesHotels.controller;
 
 import animatefx.animation.Pulse;
 import com.jfoenix.controls.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.ComplaintBO;
 import lk.RoyalGatesHotels.model.ComplainModel;
 import lk.RoyalGatesHotels.dto.ComplainDTO;
 import lk.RoyalGatesHotels.model.HallsModel;
@@ -22,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReceptionistComplainController implements Initializable {
@@ -35,6 +39,7 @@ public class ReceptionistComplainController implements Initializable {
     public JFXTimePicker timePikrTime;
     public JFXTextArea txtAreaDescription;
     public JFXTextField txtGuestId;
+    ComplaintBO complaintBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.COMPLAINT);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,8 +56,16 @@ public class ReceptionistComplainController implements Initializable {
 
     private void setHallNumbers() {
         try {
-            ObservableList<String> option = HallsModel.loadHallNumbers();
-            comBxHallNumber.setItems(option);
+            /*ObservableList<String> option = HallsModel.loadHallNumbers();
+            comBxHallNumber.setItems(option);*/
+
+            List<String> HIds = complaintBO.getHIds();
+            ObservableList<String> obList = FXCollections.observableArrayList();
+            for(String HallIds : HIds){
+                obList.add(HallIds);
+            }
+            comBxHallNumber.setItems(obList);
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -60,8 +73,15 @@ public class ReceptionistComplainController implements Initializable {
 
     private void setRoomNumbers() {
         try {
-            ObservableList<String> options = RoomsModel.loadRoomNumbers();
-            comBxRoomNumber.setItems(options);
+            /*ObservableList<String> options = RoomsModel.loadRoomNumbers();
+            comBxRoomNumber.setItems(options);*/
+
+            List<String> RIds = complaintBO.getRIds();
+            ObservableList<String> obList = FXCollections.observableArrayList();
+            for(String RoomIds : RIds){
+                obList.add(RoomIds);
+            }
+            comBxRoomNumber.setItems(obList);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -71,7 +91,7 @@ public class ReceptionistComplainController implements Initializable {
 
     private void setComplainId() {
         try {
-            String lastComplainId= ComplainModel.getLastComplainId();
+            /*String lastComplainId= ComplainModel.getLastComplainId();
             if(lastComplainId==null){
                 txtComplainId.setText("C0001");
             }else{
@@ -80,7 +100,11 @@ public class ReceptionistComplainController implements Initializable {
                 lastDigits++;
                 String newComplainId=String.format("C%04d", lastDigits);
                 txtComplainId.setText(newComplainId);
-            }
+            }*/
+
+            String nextId = complaintBO.getNextId();
+            txtComplainId.setText(nextId);
+
         } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR,e+"").show();
         }
@@ -129,7 +153,8 @@ public class ReceptionistComplainController implements Initializable {
 
 
     public void btnAdd(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        ComplainDTO complain = new ComplainDTO(
+
+        /*ComplainDTO complain = new ComplainDTO(
                 String.valueOf(comBxRoomNumber.getValue()),
                 String.valueOf(comBxHallNumber.getValue()),
                 txtComplainId.getText(),
@@ -137,10 +162,21 @@ public class ReceptionistComplainController implements Initializable {
                 String.valueOf(DatepickerDate.getValue()),
                 String.valueOf(timePikrTime.getValue()),
                 txtAreaDescription.getText()
-        );
+        );*/
+
+        String roomId = String.valueOf(comBxRoomNumber.getValue());
+        String hallId = String.valueOf(comBxHallNumber.getValue());
+        String complainId = txtComplainId.getText();
+        String guestId = txtGuestId.getText();
+        String date = String.valueOf(DatepickerDate.getValue());
+        String time = String.valueOf(timePikrTime.getValue());
+        String description = txtAreaDescription.getText();
 
         try {
-            boolean isAdded = ComplainModel.addComplain(complain);
+            /*boolean isAdded = ComplainModel.addComplain(complain);*/
+
+            boolean isAdded = complaintBO.add(new ComplainDTO(roomId, hallId, complainId, guestId, date, time, description));
+
             if(isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"Complaint Added Successfully!").show();
                 Navigation.navigate(Routes.RECEPTIONCOMPLAIN,receptionComplainContext);
@@ -150,10 +186,9 @@ public class ReceptionistComplainController implements Initializable {
         } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
-
     }
     public void btnUpdate(ActionEvent actionEvent) {
-        ComplainDTO complain = new ComplainDTO(
+        /*ComplainDTO complain = new ComplainDTO(
                 String.valueOf(comBxRoomNumber.getValue()),
                 String.valueOf(comBxHallNumber.getValue()),
                 txtComplainId.getText(),
@@ -161,10 +196,20 @@ public class ReceptionistComplainController implements Initializable {
                 String.valueOf(DatepickerDate.getValue()),
                 String.valueOf(timePikrTime.getValue()),
                 txtAreaDescription.getText()
-        );
+        );*/
+
+        String roomId = String.valueOf(comBxRoomNumber.getValue());
+        String hallId = String.valueOf(comBxHallNumber.getValue());
+        String complainId = txtComplainId.getText();
+        String guestId = txtGuestId.getText();
+        String date = String.valueOf(DatepickerDate.getValue());
+        String time = String.valueOf(timePikrTime.getValue());
+        String description = txtAreaDescription.getText();
 
         try {
-            boolean isUpdate = ComplainModel.updateComplain(complain);
+
+            boolean isUpdate = complaintBO.update(new ComplainDTO(roomId, hallId, complainId, guestId, date, time, description));
+
             if(isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Complaint Updated Successfully!").show();
                 Navigation.navigate(Routes.RECEPTIONCOMPLAIN,receptionComplainContext);
@@ -174,7 +219,6 @@ public class ReceptionistComplainController implements Initializable {
         } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void btnCancel(ActionEvent actionEvent) throws IOException {
@@ -182,16 +226,25 @@ public class ReceptionistComplainController implements Initializable {
     }
 
     public void txtComplainIdOnAction(ActionEvent actionEvent) {
-        try {
-            ResultSet result = ComplainModel.searchComplain(txtComplainId.getText());
-            if(result.next()){
-                comBxRoomNumber.setPromptText(result.getString("room_number"));
-                comBxHallNumber.setPromptText(result.getString("hall_number"));
-                txtGuestId.setText(result.getString("customer_id"));
-                txtAreaDescription.setText(result.getString("description"));
-                timePikrTime.setValue(LocalTime.parse(result.getString("time")));
-                DatepickerDate.setValue(LocalDate.parse(result.getString("date")));
 
+        String complainid= txtComplainId.getText();
+
+        try {
+            /*ResultSet result = ComplainModel.searchComplain(txtComplainId.getText());*/
+
+            ComplainDTO complaint = complaintBO.setFields(complainid);
+
+            if(complaint!=null){
+                comBxRoomNumber.setValue(complaint.getRoomNumber());
+                comBxHallNumber.setValue(complaint.getHallNumber());
+                txtComplainId.setText(complaint.getComplainId());
+                txtGuestId.setText(complaint.getCustomerId());
+                DatepickerDate.setValue(LocalDate.parse(complaint.getDate()));
+                timePikrTime.setValue(LocalTime.parse(complaint.getTime()));
+                txtAreaDescription.setText(complaint.getDescription());
+
+            }else {
+                new Alert(Alert.AlertType.WARNING, "no Complaint found :(").show();
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

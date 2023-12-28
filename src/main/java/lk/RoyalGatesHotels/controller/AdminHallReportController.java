@@ -11,12 +11,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.HallBO;
 import lk.RoyalGatesHotels.db.DBConnection;
+import lk.RoyalGatesHotels.dto.HallDTO;
+import lk.RoyalGatesHotels.dto.tm.EmployeeTM;
 import lk.RoyalGatesHotels.dto.tm.HallTM;
 import lk.RoyalGatesHotels.model.HallsModel;
 import lk.RoyalGatesHotels.util.DateTime;
 import lk.RoyalGatesHotels.util.Navigation;
 import lk.RoyalGatesHotels.util.Routes;
+import lombok.SneakyThrows;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -31,7 +36,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AdminHallReportController implements Initializable {
     //public AnchorPane guestReportContext;
@@ -45,6 +52,9 @@ public class AdminHallReportController implements Initializable {
     public TableColumn colPrice;
     public TableColumn colStatus;
 
+    private HallBO hallBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.HALL);
+
+    @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         new Pulse(HallReportContext).play();
@@ -61,8 +71,8 @@ public class AdminHallReportController implements Initializable {
         loadHallData();
     }
 
-    private void loadHallData() {
-        ObservableList<HallTM> data = FXCollections.observableArrayList();
+    private void loadHallData() throws SQLException, ClassNotFoundException {
+      /*  ObservableList<HallTM> data = FXCollections.observableArrayList();
         try {
             ResultSet result = HallsModel.getHallData();
             while (result.next()){
@@ -76,9 +86,24 @@ public class AdminHallReportController implements Initializable {
                         ));
 
             }
+            tblHallReport.setItems(data);*/
+
+        try {
+            List<HallDTO> halls = hallBO.getAllHalls();
+            ObservableList<HallTM> data = FXCollections.observableArrayList();
+
+            for (HallDTO hall : halls) {
+                data.add(new HallTM(
+                        hall.getHallNumber(),
+                        hall.getHallType(),
+                        hall.getStatus(),
+                        hall.getPrice()
+                ));
+            }
+
             tblHallReport.setItems(data);
         } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR,e+"").show();
+            new Alert(Alert.AlertType.ERROR, e.toString()).show();
         }
     }
 

@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.DashboardBO;
 import lk.RoyalGatesHotels.model.ComplainModel;
 import lk.RoyalGatesHotels.model.HallsModel;
 import lk.RoyalGatesHotels.model.RoomsModel;
@@ -28,6 +30,7 @@ public class ReceptionistDashboardController implements Initializable {
     public Label lblAvailableHalls;
     public Label lblAvailableRooms;
     public Label lblComplaints;
+    DashboardBO dashboardBO =  BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DASHBOARD);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,30 +45,28 @@ public class ReceptionistDashboardController implements Initializable {
     public void setDashboardLabels(){
 
         try {
-            int roomCount = RoomsModel.getRoomCount();
+            int roomCount = dashboardBO.getTotalHalls();
             lblTotalRooms.setText(String.valueOf(roomCount));
 
-            int complaint = ComplainModel.getComplaintCount();
+            int complaint = dashboardBO.getComplaints();
             lblComplaints.setText(String.valueOf(complaint));
 
-            int bookedRooms = RoomsModel.getBookedRoomsCount();
+            int bookedRooms = dashboardBO.getBookedRooms();
             lblBookedRooms.setText(String.valueOf(bookedRooms));
 
-            int availableRooms = RoomsModel.getAvailableRoomsCount();
+            int availableRooms = dashboardBO.getAvailableRooms();
             lblAvailableRooms.setText(String.valueOf(availableRooms));
 
-            int bookedHalls = HallsModel.getBookedHallsCount();
+            int bookedHalls = dashboardBO.getBookedHalls();
             lblBookedHalls.setText(String.valueOf(bookedHalls));
 
-            int availableHallsCount = HallsModel.getAvailableHallsCount();
+            int availableHallsCount = dashboardBO.getAvailableHalls();
             lblAvailableHalls.setText(String.valueOf(availableHallsCount));
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 
     public void btnDashboard(ActionEvent actionEvent) throws IOException {
         Navigation.navigate(Routes.RECEPTIONDASHBOARD,receptionContext);
@@ -96,7 +97,6 @@ public class ReceptionistDashboardController implements Initializable {
     }
 
     public void btnContact(ActionEvent actionEvent) throws IOException {
-        System.out.println("gggg");
         Navigation.navigate(Routes.CONTACT,receptionContext);
     }
 

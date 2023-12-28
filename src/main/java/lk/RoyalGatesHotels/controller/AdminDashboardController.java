@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.RoyalGatesHotels.bo.BOFactory;
+import lk.RoyalGatesHotels.bo.custom.DashboardBO;
+import lk.RoyalGatesHotels.bo.custom.RoomBO;
 import lk.RoyalGatesHotels.model.ComplainModel;
 import lk.RoyalGatesHotels.model.HallsModel;
 import lk.RoyalGatesHotels.model.PaymentModel;
@@ -21,6 +24,8 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable{
+    DashboardBO dashboardBO = BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DASHBOARD);
+
     public AnchorPane adminDshbrdContext;
     public Label lblTime;
     public Label lblTotalRooms;
@@ -45,27 +50,26 @@ public class AdminDashboardController implements Initializable{
     public void setDashboardLabels(){
 
         try {
-            int roomCount = RoomsModel.getRoomCount();
+            int roomCount = dashboardBO.getTotalRooms();
             lblTotalRooms.setText(String.valueOf(roomCount));
 
-            int complaint = ComplainModel.getComplaintCount();
+            int complaint = dashboardBO.getComplaints();
             lblComplaints.setText(String.valueOf(complaint));
 
-            int bookedRooms = RoomsModel.getBookedRoomsCount();
+            int bookedRooms = dashboardBO.getBookedRooms();
             lblBookedRooms.setText(String.valueOf(bookedRooms));
 
-            int availableRooms = RoomsModel.getAvailableRoomsCount();
+            int availableRooms = dashboardBO.getAvailableRooms();
             lblAvailableRooms.setText(String.valueOf(availableRooms));
 
-            int bookedHalls = HallsModel.getBookedHallsCount();
+            int bookedHalls = dashboardBO.getBookedHalls();
             lblBookedHalls.setText(String.valueOf(bookedHalls));
 
-            int availableHallsCount = HallsModel.getAvailableHallsCount();
-            lblAvailableHalls.setText(String.valueOf(availableHallsCount));
+            //int availableHallsCount = dashboardBO.getTotalHalls() - dashboardBO.getBookedHalls();
+            //lblAvailableHalls.setText(String.valueOf(availableHallsCount));
 
             double totalEarnings = PaymentModel.getTodayEarnings(String.valueOf(LocalDate.now()));
             lblTotalEarnings.setText(String.valueOf(totalEarnings));
-            //System.out.println("total    "+totalEarnings);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

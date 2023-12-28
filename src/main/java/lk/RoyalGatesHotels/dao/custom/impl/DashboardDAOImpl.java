@@ -23,7 +23,7 @@ public class DashboardDAOImpl implements DashboardDAO {
     public int getTotalHalls() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS hallsCount FROM hall");
+        ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS hallsCount FROM halls");
         rs.next();
         int numhalls = rs.getInt("hallsCount");
         return numhalls;
@@ -70,8 +70,6 @@ public class DashboardDAOImpl implements DashboardDAO {
         int availableRooms = totalRooms - bookedRooms;
         return availableRooms;
     }
-
-    @Override
     public int getAvailableHalls() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         Statement stmt = con.createStatement();

@@ -1,6 +1,7 @@
 package lk.RoyalGatesHotels.bo.custom;
 
 import lk.RoyalGatesHotels.bo.SuperBO;
+import lk.RoyalGatesHotels.dto.EmployeeDTO;
 import lk.RoyalGatesHotels.dto.HallDTO;
 
 import java.sql.SQLException;
@@ -20,4 +21,6 @@ public interface HallBO extends SuperBO {
     public List<String> getIds() throws SQLException, ClassNotFoundException;
 
     public HallDTO setFields(String id) throws SQLException, ClassNotFoundException ;
+    List<HallDTO> getAllHalls() throws SQLException, ClassNotFoundException;
+
 }

@@ -32,4 +32,14 @@ public class DashboardBOImpl implements DashboardBO {
     public int getComplaints() throws SQLException, ClassNotFoundException {
         return dashboardDAO.getComplaints();
     }
+
+    @Override
+    public int getAvailableRooms() throws SQLException, ClassNotFoundException {
+        return dashboardDAO.getAvailableRooms();
+    }
+
+    @Override
+    public int getAvailableHalls() throws SQLException, ClassNotFoundException {
+        return dashboardDAO.getAvailableHalls();
+    }
 }

@@ -3,8 +3,7 @@ package lk.RoyalGatesHotels.dao.custom.impl;
 import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.RoomDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
-import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
-import lk.RoyalGatesHotels.dto.RoomDTO;
+import lk.RoyalGatesHotels.entity.Hall;
 import lk.RoyalGatesHotels.entity.Room;
 
 import java.sql.Connection;
@@ -77,5 +76,20 @@ public class RoomDAOImpl implements RoomDAO {
             return new Room(roomNumber, roomType, status, price);
         }
         return null;
+    }
+
+    @Override
+    public List<Room> getAll() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtill.execute("SELECT * FROM room");
+        List<Room> list = new ArrayList<>();
+        while (rst.next()) {
+            list.add(new Room(
+                    rst.getString("roomNumber"),
+                    rst.getString("room_type"),
+                    rst.getString("status"),
+                    rst.getDouble("price")
+            ));
+        }
+        return list;
     }
 }
