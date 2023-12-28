@@ -222,19 +222,20 @@ public class ReceptionistPaymentsController implements Initializable {
 //                String.valueOf(comBxRoomReservationId.getValue()),
 //                Double.parseDouble(lblAmount.getText())
 
-        String Payment = txtPaymentId.getText();
-        String HallReservationId = String.valueOf(comBxHallReservationId.getValue());
-        String Time = String.valueOf(timePikrTime.getValue());
-        String Date = String.valueOf(DatepickerDate.getValue());
-        String OrderId = String.valueOf(comBxOrderId.getValue());
-        String GuestId = txtGuestId.getText();
-        String RoomReservationId = String.valueOf(comBxRoomReservationId.getValue());
-        double Amount = Double.parseDouble(lblAmount.getText());
+        String paymentID = txtPaymentId.getText();
+        String ReservationId = String.valueOf(comBxRoomReservationId.getValue());
+        String time = String.valueOf(timePikrTime.getValue());
+        String date = String.valueOf(DatepickerDate.getValue());
+        String orderId = String.valueOf(comBxOrderId.getValue());
+        String guestId = txtGuestId.getText();
+        double amount = Double.parseDouble(lblAmount.getText());
 
         try {
             /*boolean isAdd = PaymentModel.addPayment(payment);*/
 
-            boolean isAdd = paymentBO.add(new PaymentDTO(Payment, HallReservationId, Time, Date, OrderId, GuestId, RoomReservationId, Amount));
+            PaymentDTO payment = new PaymentDTO (paymentID, ReservationId, time, date, orderId, guestId, amount);
+
+            boolean isAdd = paymentBO.add(payment);
 
             if (isAdd) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Payment Added Successfully!").show();
@@ -273,7 +274,6 @@ public class ReceptionistPaymentsController implements Initializable {
                 }
             }
 
-
             String mealOrderId = "";
             String qty = "";
 
@@ -288,7 +288,6 @@ public class ReceptionistPaymentsController implements Initializable {
                 mealOrderId = String.valueOf(comBxOrderId.getValue());
 
                 qty = result3.getString("qty");
-
 
                 mealTotalPrice = String.valueOf(Integer.valueOf(result3.getString("qty")) * MealPackgesModel.searchMealPackgeData(result3.getString(5)));
 
@@ -314,7 +313,6 @@ public class ReceptionistPaymentsController implements Initializable {
                 hallReservationId = String.valueOf(comBxHallReservationId.getValue());
                 hallPrice = String.valueOf(HallsModel.getHallPrice(hallNo));
             }
-
 
             HashMap<String, Object> hm = new HashMap<>();
             hm.put("customerId", txtGuestId.getText());

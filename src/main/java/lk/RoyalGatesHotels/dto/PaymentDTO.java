@@ -17,6 +17,5 @@ public class PaymentDTO {
     private String OrderId;
     private String customerId;
     private double amount;
-    private String qty;
 
 }

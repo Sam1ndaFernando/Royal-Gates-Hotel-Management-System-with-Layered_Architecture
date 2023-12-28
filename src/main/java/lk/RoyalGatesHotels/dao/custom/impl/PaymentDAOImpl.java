@@ -37,14 +37,14 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     @Override
     public boolean add(Payment entity) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO payment (paymentId, reservation_id, time, date, oder_id, customer_id, qty) VALUES(?,?,?,?,?,?,?)";
-        return SQLUtill.execute(sql, entity.getPaymentId(), entity.getReservationId(), entity.getTime(), entity.getDate(), entity.getOrderId(), entity.getCustomerId(), entity.getQty());
+        String sql = "INSERT INTO payment (paymentId, reservation_id, time, date, oder_id, customer_id, amount) VALUES(?,?,?,?,?,?,?)";
+        return SQLUtill.execute(sql, entity.getPaymentId(), entity.getReservationId(), entity.getTime(), entity.getDate(), entity.getOrderId(), entity.getCustomerId(), entity.getAmount());
     }
 
     @Override
     public boolean update(Payment entity) throws SQLException, ClassNotFoundException {
-        String sql ="UPDATE payment SET time=?, date=?, oder_id=?, customer_id=?, qty=? WHERE paymentId=?";
-        return SQLUtill.execute(sql, entity.getTime(), entity.getDate(), entity.getOrderId(), entity.getCustomerId(), entity.getQty(), entity.getPaymentId());
+        String sql ="UPDATE payment SET time=?, date=?, oder_id=?, customer_id=?, amount=? WHERE paymentId=?";
+        return SQLUtill.execute(sql, entity.getTime(), entity.getDate(), entity.getOrderId(), entity.getCustomerId(), entity.getAmount(), entity.getPaymentId());
     }
 
     @Override
@@ -69,9 +69,9 @@ public class PaymentDAOImpl implements PaymentDAO {
             String date = resultSet.getString("date");
             String orderId = resultSet.getString("oder_id");
             String customerId = resultSet.getString("customer_id");
-            String qty = resultSet.getString("qty");
+            double amount = Double.parseDouble(resultSet.getString("amount"));
 
-            return new Payment(paymentId, reservationId, time, date, orderId, customerId, qty);
+            return new Payment(paymentId, reservationId, time, date, orderId, customerId, amount);
         }
         return null;
     }

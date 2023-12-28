@@ -24,7 +24,7 @@ public class PaymentModel {
                 payment.getDate(),
                 payment.getOrderId(),
                 payment.getCustomerId(),
-                payment.getQty());
+                payment.getAmount());
         return isAdd;
     }
 

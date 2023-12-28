@@ -55,12 +55,12 @@ public class PaymentBOImpl implements PaymentBO {
 
     @Override
     public boolean add(PaymentDTO dto) throws SQLException, ClassNotFoundException {
-        return paymentDAO.add(new Payment(dto.getPaymentId(),dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(),dto.getQty()));
+        return paymentDAO.add(new Payment(dto.getPaymentId(),dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(),dto.getAmount()));
     }
 
     @Override
     public boolean update(PaymentDTO dto) throws SQLException, ClassNotFoundException {
-        return paymentDAO.update(new Payment(dto.getPaymentId(),dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(),dto.getQty()));
+        return paymentDAO.update(new Payment(dto.getPaymentId(),dto.getReservationId(),dto.getTime(),dto.getDate(),dto.getOrderId(),dto.getCustomerId(),dto.getAmount()));
     }
 
     @Override
@@ -76,6 +76,6 @@ public class PaymentBOImpl implements PaymentBO {
     @Override
     public PaymentDTO setFields(String id) throws SQLException, ClassNotFoundException {
         Payment payment = paymentDAO.setFields(id);
-        return new PaymentDTO(payment.getPaymentId(),payment.getReservationId(),payment.getTime(),payment.getDate(),payment.getOrderId(),payment.getCustomerId(),payment.getQty());
+        return new PaymentDTO(payment.getPaymentId(),payment.getReservationId(),payment.getTime(),payment.getDate(),payment.getOrderId(),payment.getCustomerId(),payment.getAmount());
     }
 }

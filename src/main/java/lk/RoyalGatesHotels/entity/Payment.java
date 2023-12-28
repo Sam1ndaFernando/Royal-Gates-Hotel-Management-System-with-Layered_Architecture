@@ -14,7 +14,7 @@ public class Payment{
     private String date;
     private String OrderId;
     private String customerId;
-    private String qty;
+    private double amount;
 
    /* private String hallReservationId;
     private String roomReservationId;
