@@ -35,7 +35,7 @@ public class MealOrderDAOImpl implements MealOrderDAO {
     @Override
     public boolean add(MealOders entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO meal_oders(oder_id, customer_id, date, qty, pkg_id)VALUES(?,?,?,?,?)";
-        return SQLUtill.execute(sql, entity.getOrderId(),entity.getCustomerId(),entity.getPkgId(),entity.getQty(),entity.getDate());
+        return SQLUtill.execute(sql, entity.getOrderId(),entity.getCustomerId(), entity.getDate(), entity.getQty(), entity.getPkgId());
     }
 
     @Override
@@ -93,7 +93,7 @@ public class MealOrderDAOImpl implements MealOrderDAO {
         String sql = "SELECT * FROM meal_oders WHERE oder_id = ?";
         ResultSet resultSet = SQLUtill.execute(sql, value);
         if (resultSet.next()){
-            qty = resultSet.getString("Qty");
+            qty = resultSet.getString("qty");
             return qty;
         }
         return null;

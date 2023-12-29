@@ -16,7 +16,7 @@ import java.util.List;
 public class GuestDAOImpl implements GuestDAO {
     @Override
     public String getNextId() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT GuestId FROM guest ORDER BY GuestId DESC LIMIT 1";
+        String sql = "SELECT customerId FROM customer ORDER BY customerId DESC LIMIT 1";
         ResultSet resultSet = SQLUtill.execute(sql);
         if(resultSet.next()) {
             return splitId(resultSet.getString(1));
@@ -90,7 +90,7 @@ public class GuestDAOImpl implements GuestDAO {
         String sql ="SELECT * FROM customer WHERE customerId=?";
         ResultSet resultSet = SQLUtill.execute(sql, value);
         if(resultSet.next()){
-            name = resultSet.getString("Fullname");
+            name = resultSet.getString("customer_name");
         }else{
             name = "Nothing Found";
         }

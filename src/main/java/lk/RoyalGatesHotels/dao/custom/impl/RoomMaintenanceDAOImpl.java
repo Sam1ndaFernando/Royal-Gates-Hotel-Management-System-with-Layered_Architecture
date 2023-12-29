@@ -57,7 +57,7 @@ public class RoomMaintenanceDAOImpl implements RoomMaintenanceDAO {
 
     @Override
     public RoomMaintenance setFields(String id) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM roommaintenance WHERE RoomMaintenanceId = ?";
+        String sql = "SELECT * FROM roommaintenance WHERE maintenanceId = ?";
         ResultSet resultSet = SQLUtill.execute(sql, id);
         if (resultSet.next()) {
             String maintenanceId = resultSet.getString("maintenanceId");

@@ -5,7 +5,6 @@ import lk.RoyalGatesHotels.dao.SQLUtill;
 import lk.RoyalGatesHotels.dao.custom.ComplaintDAO;
 import lk.RoyalGatesHotels.db.DBConnection;
 import lk.RoyalGatesHotels.dto.ComplainDTO;
-import lk.RoyalGatesHotels.dto.HallMaintenanceDTO;
 import lk.RoyalGatesHotels.entity.Complain;
 
 import java.sql.Connection;
@@ -41,20 +40,20 @@ public class ComplaintDAOImpl implements ComplaintDAO {
 
     @Override
     public boolean add(Complain entity) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO complaints (room_number, hall_number, complaintId, customer_id, date, time, description) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO complain (room_number, hall_number, complaintId, customer_id, date, time, description) VALUES(?, ?, ?, ?, ?, ?, ?)";
         return SQLUtill.execute(sql, entity.getRoomNumber(), entity.getHallNumber(), entity.getComplainId(), entity.getCustomerId(), entity.getDate(), entity.getTime(), entity.getDescription());
 
     }
 
     @Override
     public boolean update(Complain entity) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE complaints SET Date = ?, time = ?, room_number = ?, hall_number = ?, description = ? WHERE complaintId = ?";
+        String sql = "UPDATE complain SET Date = ?, time = ?, room_number = ?, hall_number = ?, description = ? WHERE complaintId = ?";
         return SQLUtill.execute(sql, entity.getDate(), entity.getTime(), entity.getRoomNumber(), entity.getHallNumber(), entity.getDescription(), entity.getComplainId());
     }
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM complaints WHERE complaintId = ?";
+        String sql = "DELETE FROM complain WHERE complaintId = ?";
         return SQLUtill.execute(sql, id);
     }
 
@@ -90,7 +89,7 @@ public class ComplaintDAOImpl implements ComplaintDAO {
     @Override
     public List<String> getHIds() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
-        String sql = "SELECT HallReservationId FROM hallreservationdetails";
+        String sql = "SELECT reservationId FROM hallreservationdetail";
         List<String> HIds = new ArrayList<>();
         ResultSet resultSet=con.createStatement().executeQuery(sql);
         while(resultSet.next()){

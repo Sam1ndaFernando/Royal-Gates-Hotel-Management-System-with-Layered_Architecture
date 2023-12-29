@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +30,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReceptionistPaymentsController implements Initializable {
@@ -54,7 +56,6 @@ public class ReceptionistPaymentsController implements Initializable {
     public JFXComboBox<String> comBxRoomReservationId;
     @FXML
     public JFXComboBox<String> comBxHallReservationId;
-
 
     PaymentBO paymentBO =  BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PAYMENT);
     MealOrderDetailsBO mealOrderDetailsBO =  BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEALORDERDETAILS);
@@ -123,8 +124,16 @@ public class ReceptionistPaymentsController implements Initializable {
 
     private void setHallReservationNo() {
         try {
-            ObservableList<String> options = HallReservationModel.loadReservationIds();
-            comBxHallReservationId.setItems(options);
+           /* ObservableList<String> options = HallReservationModel.loadReservationIds();
+            comBxHallReservationId.setItems(options);*/
+
+            List<String> HallIds = paymentBO.getHIds();
+            ObservableList<String> obList = FXCollections.observableArrayList();
+            for(String hIds : HallIds){
+                obList.add(hIds);
+            }
+            comBxHallReservationId.setItems(obList);
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -132,8 +141,15 @@ public class ReceptionistPaymentsController implements Initializable {
 
     private void setRoomReservationNo() {
         try {
-            ObservableList<String> options = RoomReservationModel.loadReservationIds();
-            comBxRoomReservationId.setItems(options);
+            /*ObservableList<String> options = RoomReservationModel.loadReservationIds();
+            comBxRoomReservationId.setItems(options);*/
+
+            List<String> RoomIds = paymentBO.getRds();
+            ObservableList<String> obList = FXCollections.observableArrayList();
+            for(String rIds : RoomIds){
+                obList.add(rIds);
+            }
+            comBxRoomReservationId.setItems(obList);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -141,8 +157,16 @@ public class ReceptionistPaymentsController implements Initializable {
 
     private void setOrderIds() {
         try {
-            ObservableList<String> options = MealOdersModel.loadOrderIds();
-            comBxOrderId.setItems(options);
+            /*ObservableList<String> options = MealOdersModel.loadOrderIds();
+            comBxOrderId.setItems(options);*/
+
+            List<String> OrderIds = paymentBO.getOIds();
+            ObservableList<String> obList = FXCollections.observableArrayList();
+            for(String oIds : OrderIds){
+                obList.add(oIds);
+            }
+            comBxOrderId.setItems(obList);
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -273,7 +297,6 @@ public class ReceptionistPaymentsController implements Initializable {
                     meal_type = result2.getString("type");
                 }
             }
-
             String mealOrderId = "";
             String qty = "";
 
@@ -342,10 +365,7 @@ public class ReceptionistPaymentsController implements Initializable {
         } catch (JRException | SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
-
-
     public void comBxOrderIdOnAction(ActionEvent actionEvent) {
         setAmount();
     }

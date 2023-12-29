@@ -18,7 +18,7 @@ public class PaymentBOImpl implements PaymentBO {
     }
 
     @Override
-    public List<String> getGIds() throws SQLException, ClassNotFoundException {
+    public List<String> getGIds(String text) throws SQLException, ClassNotFoundException {
         return paymentDAO.getGIds();
     }
 

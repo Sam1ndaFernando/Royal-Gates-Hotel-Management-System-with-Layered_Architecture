@@ -9,7 +9,7 @@ import java.util.List;
 public interface PaymentBO extends SuperBO {
     public  double generateTotValue() throws SQLException, ClassNotFoundException;
 
-    public List<String> getGIds() throws SQLException, ClassNotFoundException;
+    public List<String> getGIds(String text) throws SQLException, ClassNotFoundException;
 
     public  List<String> getOIds() throws SQLException, ClassNotFoundException;
 

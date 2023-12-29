@@ -1,6 +1,3 @@
-create database hotelnew;
-
-
 create table customer
 (
     customerId    varchar(10)  not null
@@ -12,8 +9,7 @@ create table customer
     Mobile        varchar(12)  null,
     Email         varchar(100) null,
     Province      varchar(50)  null
-)
-    engine = InnoDB;
+);
 
 create table employee
 (
@@ -26,18 +22,7 @@ create table employee
     Email      varchar(100) null,
     mobile     varchar(18)  null,
     jobRole    varchar(100) null
-)
-    engine = InnoDB;
-
-create table hall
-(
-    hall_type  varchar(10) null,
-    hallNumber varchar(10) not null
-        primary key,
-    status     varchar(10) null,
-    price      double      null
-)
-    engine = InnoDB;
+);
 
 create table hall_availability
 (
@@ -46,25 +31,7 @@ create table hall_availability
     date        date        null,
     time        time        null,
     status      varchar(10) null
-)
-    engine = InnoDB;
-
-create table hallmaintenance
-(
-    maintenanceId varchar(10) not null
-        primary key,
-    hall_number   varchar(10) null,
-    date          date        null,
-    start_time    time        null,
-    end_time      time        null,
-    constraint hallmaintenance_ibfk_1
-        foreign key (hall_number) references hall (hallNumber)
-            on update cascade on delete cascade
-)
-    engine = InnoDB;
-
-create index hall_number
-    on hallmaintenance (hall_number);
+);
 
 create table hallreservationdetail
 (
@@ -80,14 +47,38 @@ create table hallreservationdetail
     constraint hallreservationdetail_ibfk_2
         foreign key (customer_id) references customer (customerId)
             on update cascade on delete cascade
-)
-    engine = InnoDB;
+);
 
 create index customer_id
     on hallreservationdetail (customer_id);
 
 create index hall_number
     on hallreservationdetail (hallNumber);
+
+create table halls
+(
+    hallNumber varchar(10) not null
+        primary key,
+    hall_type  varchar(10) not null,
+    status     varchar(10) null,
+    price      double      null
+);
+
+create table hallmaintenance
+(
+    maintenanceId varchar(10) not null
+        primary key,
+    hall_number   varchar(10) null,
+    date          date        null,
+    start_time    time        null,
+    end_time      time        null,
+    constraint hallmaintenance_ibfk_1
+        foreign key (hall_number) references halls (hallNumber)
+            on update cascade on delete cascade
+);
+
+create index hall_number
+    on hallmaintenance (hall_number);
 
 create table mealpackages
 (
@@ -97,8 +88,7 @@ create table mealpackages
     description varchar(200) null,
     meal_plan   varchar(20)  null,
     type        varchar(45)  null
-)
-    engine = InnoDB;
+);
 
 create table meal_oders
 (
@@ -111,8 +101,7 @@ create table meal_oders
     constraint meal_oders_ibfk_1
         foreign key (pkg_id) references mealpackages (pkg_id)
             on update cascade on delete cascade
-)
-    engine = InnoDB;
+);
 
 create index pkg_id
     on meal_oders (pkg_id);
@@ -124,8 +113,7 @@ create table room
     room_type  varchar(80) null,
     status     varchar(10) null,
     price      double      null
-)
-    engine = InnoDB;
+);
 
 create table complain
 (
@@ -138,7 +126,7 @@ create table complain
     time        time         null,
     description varchar(200) null,
     constraint complain_ibfk_1
-        foreign key (hall_number) references hall (hallNumber)
+        foreign key (hall_number) references halls (hallNumber)
             on update cascade on delete cascade,
     constraint complain_ibfk_2
         foreign key (room_number) references room (roomNumber)
@@ -146,8 +134,7 @@ create table complain
     constraint complain_ibfk_3
         foreign key (customer_id) references customer (customerId)
             on update cascade on delete cascade
-)
-    engine = InnoDB;
+);
 
 create index customer_id
     on complain (customer_id);
@@ -165,8 +152,7 @@ create table room_availability
     date    date        null,
     time    time        null,
     status  varchar(10) null
-)
-    engine = InnoDB;
+);
 
 create table roommaintenance
 (
@@ -179,8 +165,7 @@ create table roommaintenance
     constraint roommaintenance_ibfk_1
         foreign key (room_number) references room (roomNumber)
             on update cascade on delete cascade
-)
-    engine = InnoDB;
+);
 
 create index room_number
     on roommaintenance (room_number);
@@ -199,8 +184,7 @@ create table roomreservationdetail
     constraint roomreservationdetail_ibfk_2
         foreign key (customer_id) references customer (customerId)
             on update cascade on delete cascade
-)
-    engine = InnoDB;
+);
 
 create table payment
 (
@@ -211,15 +195,14 @@ create table payment
     date           date        null,
     oder_id        varchar(10) null,
     customer_id    varchar(10) null,
-    qty            int         null,
+    amount         double      null,
     constraint payment_ibfk_1
         foreign key (customer_id) references customer (customerId)
             on update cascade on delete cascade,
     constraint payment_ibfk_2
         foreign key (reservation_id) references roomreservationdetail (reservation_id)
             on update cascade on delete cascade
-)
-    engine = InnoDB;
+);
 
 create index customer_id
     on payment (customer_id);
@@ -244,6 +227,4 @@ create table user
     constraint user_ibfk_1
         foreign key (Employee_id) references employee (employeeId)
             on update cascade on delete cascade
-)
-    engine = InnoDB;
-
+);

@@ -70,14 +70,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         ResultSet resultSet = SQLUtill.execute(sql, id);
         if (resultSet.next()) {
             String employeeId = resultSet.getString("employeeId");
-            String nic = resultSet.getString("nic");
             String name = resultSet.getString("name");
             String address = resultSet.getString("address");
-            String mobile = resultSet.getString("mobile");
             String joinDate = String.valueOf(resultSet.getDate("join_date"));
-            String jobRole = resultSet.getString("jobRole");
+            String nic = resultSet.getString("nic");
             String email = resultSet.getString("Email");
-            return new Employee(employeeId, nic, name, address, mobile, joinDate, jobRole, email);
+            String mobile = resultSet.getString("mobile");
+            String jobRole = resultSet.getString("jobRole");
+
+            return new Employee(employeeId, name, address, joinDate, nic, email, mobile, jobRole);
         }
         return null;
     }

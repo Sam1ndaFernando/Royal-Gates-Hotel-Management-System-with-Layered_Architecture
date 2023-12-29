@@ -217,15 +217,18 @@ public class ReceptionistReservationsController implements Initializable {
 
             boolean isAdd = roomReservationBO.add(new RoomReservationDTO(RoomNumber, GuestId, RoomReservationId, CheckOutDate, CheckInDate));
 
-            if(isAdd){
-                new Alert(Alert.AlertType.ERROR,"Room Reserved Unsuccessfully!").show();
+            if (isAdd) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Room Reserved Successfully!").show();
                 clearAll();
-                //setRoomReserveNo();
+
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Room Reservation Unsuccessful!").show();
+                clearAll();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.CONFIRMATION,"Room Reserved Successfully!").show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "An error occurred during room reservation!").show();
             clearAll();
-            setRoomReserveNo();
         }
     }
 

@@ -56,7 +56,7 @@ public class AdminRoomReportController implements Initializable {
         DateTime.localTime(lblTime);
 
         colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
-        colRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+        colRoomType.setCellValueFactory(new PropertyValueFactory<>("room_type"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 

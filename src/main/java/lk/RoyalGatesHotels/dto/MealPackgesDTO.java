@@ -10,7 +10,7 @@ import lombok.*;
 
 public class MealPackgesDTO {
     private String pkg_id;
-    private Double price;
+    private double price;
     private String description;
     private String meal_plan;
     private String type;

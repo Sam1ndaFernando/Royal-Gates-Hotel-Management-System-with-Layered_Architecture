@@ -13,7 +13,7 @@ import java.util.List;
 public class RoomReservationDAOImpl implements RoomReservationDAO {
     @Override
     public String getNextId() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT RoomReservationId FROM RoomReservation ORDER BY RoomReservationId DESC LIMIT 1";
+        String sql = "SELECT reservation_id FROM roomreservationdetail ORDER BY reservation_id DESC LIMIT 1";
         ResultSet resultSet = SQLUtill.execute(sql);
         if(resultSet.next()) {
             return splitId(resultSet.getString(1));

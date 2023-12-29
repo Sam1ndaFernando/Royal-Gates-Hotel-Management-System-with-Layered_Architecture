@@ -127,7 +127,7 @@ public class AdminRoomsController implements Initializable {
             double Price = Double.parseDouble(txtPrice.getText());
 
             try {
-//                boolean isAdd = RoomsModel.addRoom(room);
+//              boolean isAdd = RoomsModel.addRoom(room);
                 boolean isAdd = roomBO.add(new RoomDTO(RoomNumber, RoomType, Availability, Price));
 
                 if(isAdd){
