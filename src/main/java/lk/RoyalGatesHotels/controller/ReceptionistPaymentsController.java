@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.RoyalGatesHotels.bo.BOFactory;
 import lk.RoyalGatesHotels.bo.custom.*;
+import lk.RoyalGatesHotels.dto.MealOdersDTO;
+import lk.RoyalGatesHotels.dto.MealPackgesDTO;
 import lk.RoyalGatesHotels.dto.PaymentDTO;
 import lk.RoyalGatesHotels.model.*;
 import lk.RoyalGatesHotels.util.DateTime;
@@ -94,11 +96,16 @@ public class ReceptionistPaymentsController implements Initializable {
             double amount = 0;
 
             if (comBxOrderId.getValue() != null) {
-                ResultSet result = MealOdersModel.searchOrder(String.valueOf(comBxOrderId.getValue()));
-                if (result.next()) {
-                    int qty = Integer.parseInt(result.getString("qty"));
-                    double price = MealPackgesModel.getPackagePrice(result.getString("pkg_id"));
-                    amount += qty * price;
+               // ResultSet result = MealOdersModel.searchOrder(String.valueOf(comBxOrderId.getValue()));
+                MealOdersDTO fields = mealOrderBO.getFields(String.valueOf(comBxOrderId.getValue()));
+                int qty = fields.getQty();
+
+                List<MealPackgesDTO> all = mealPlansBO.getAll();
+                for (MealPackgesDTO mealPackgesDTO : all) {
+                 if(fields.getPkgId().equals(mealPackgesDTO.getPkg_id())){
+                     double price = mealPackgesDTO.getPrice();
+                     amount += qty * price;
+                 }
                 }
             }
 
@@ -140,6 +147,7 @@ public class ReceptionistPaymentsController implements Initializable {
     }
 
     private void setRoomReservationNo() {
+
         try {
             /*ObservableList<String> options = RoomReservationModel.loadReservationIds();
             comBxRoomReservationId.setItems(options);*/
@@ -258,12 +266,17 @@ public class ReceptionistPaymentsController implements Initializable {
             /*boolean isAdd = PaymentModel.addPayment(payment);*/
 
             PaymentDTO payment = new PaymentDTO (paymentID, ReservationId, time, date, orderId, guestId, amount);
+            System.out.println("-------------------------------------------------------------------------------------");
+            System.out.println(payment);
+            System.out.println("-------------------------------------------------------------------------------------");
 
             boolean isAdd = paymentBO.add(payment);
 
             if (isAdd) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Payment Added Successfully!").show();
+                new Thread(this::printBill).start();
+                new Alert(Alert.AlertType.CONFIRMATION, "Payment Added Successfully!").showAndWait();
                 Navigation.navigate(Routes.RECEPTIONPAYMENT, paymntsContext);
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Payment Not Added!").show();
             }
@@ -278,84 +291,28 @@ public class ReceptionistPaymentsController implements Initializable {
     }
 
     public void btnPrintBill(ActionEvent actionEvent) {
+        printBill();
+    }
 
+    void printBill(){
         try {
-
-            ResultSet result1 = GuestModel.searchGuest(txtGuestId.getText());
-            ResultSet result3 = MealOdersModel.searchOrder(String.valueOf(comBxOrderId.getValue()));
-
-            String mealUnitPrice = "";
-
-            String meal_plan = "";
-            String meal_type = "";
-            if (result3.next()) {
-                mealUnitPrice = String.valueOf(MealPackgesModel.searchMealPackgeData(result3.getString(5)));
-                ResultSet result2 = MealPackgesModel.searchMealPlan(result3.getString("pkg_id"));
-                if (result2.next()) {
-
-                    meal_plan = result2.getString("meal_plan");
-                    meal_type = result2.getString("type");
-                }
-            }
+            MealOdersDTO fields = mealOrderBO.getFields(String.valueOf(comBxOrderId.getValue()));
             String mealOrderId = "";
             String qty = "";
-
-            String mealTotalPrice = "";
-            String customerName = "";
-
-            if (result1.next()) {
-                customerName = result1.getString("customer_name");
-            }
-
             if (comBxOrderId.getValue() != null) {
                 mealOrderId = String.valueOf(comBxOrderId.getValue());
-
-                qty = result3.getString("qty");
-
-                mealTotalPrice = String.valueOf(Integer.valueOf(result3.getString("qty")) * MealPackgesModel.searchMealPackgeData(result3.getString(5)));
-
-            }
-
-            String roomNo = "";
-            String roomReservationId = "";
-
-            String roomPrice = "";
-            String hallPrice = "";
-
-            if (comBxRoomReservationId.getValue() != null) {
-                roomNo = HallReservationModel.getReservationDetails(String.valueOf(comBxHallReservationId.getValue()));
-                roomReservationId = String.valueOf(comBxHallReservationId.getValue());
-                roomPrice = String.valueOf(RoomsModel.getRoomPrice(roomNo));
-            }
-
-            String hallNo = "";
-            String hallReservationId = "";
-
-            if (comBxHallReservationId.getValue() != null) {
-                hallNo = HallReservationModel.getReservationDetails(String.valueOf(comBxHallReservationId.getValue()));
-                hallReservationId = String.valueOf(comBxHallReservationId.getValue());
-                hallPrice = String.valueOf(HallsModel.getHallPrice(hallNo));
+                qty = String.valueOf(fields.getQty());
             }
 
             HashMap<String, Object> hm = new HashMap<>();
             hm.put("customerId", txtGuestId.getText());
-            hm.put("name", customerName);
             hm.put("amount", lblAmount.getText());
             hm.put("paymentCode", txtPaymentId.getText());
             hm.put("orderId", mealOrderId);
-            hm.put("mealPlan", meal_plan);
-            hm.put("mealType", meal_type);
             hm.put("qty", qty);
-            hm.put("mealUnitPrice", mealUnitPrice);
-            hm.put("mealTotalPrice", mealTotalPrice);
-            hm.put("hallNo", hallNo);
-            hm.put("hallReservationId", hallReservationId);
-            hm.put("roomNo", roomNo);
-            hm.put("roomReservationId", roomReservationId);
-            hm.put("hallPrice", hallPrice);
-            hm.put("roomPrice", roomPrice);
+            hm.put("roomReservationId", comBxRoomReservationId.getValue());
 
-            InputStream inputStream = this.getClass().getResourceAsStream("/lk/RoyalGatesHotels/report/paymentReport.jrxml");
+            InputStream inputStream = this.getClass().getResourceAsStream("/lk/RoyalGatesHotels/report/paymentReportNew.jrxml");
 
             JasperReport compileReport = JasperCompileManager.compileReport(inputStream);
             JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, hm, new JREmptyDataSource());

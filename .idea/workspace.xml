@@ -4,29 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0aa5f89-c7da-4921-91bc-58a3ef8bc6b3" name="Changes" comment="payment error fixed and database amount column added">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/24acf1b5-9ea1-4ee3-9cb8-907cd7c6e700.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/24acf1b5-9ea1-4ee3-9cb8-907cd7c6e700.xml" afterDir="false" />
+    <list default="true" id="c0aa5f89-c7da-4921-91bc-58a3ef8bc6b3" name="Changes" comment="Errors fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/bo/custom/PaymentBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/bo/custom/PaymentBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/bo/custom/impl/PaymentBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/bo/custom/impl/PaymentBOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/controller/AdminRoomReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/controller/AdminRoomReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/controller/AdminRoomsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/controller/AdminRoomsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/controller/ReceptionistPaymentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/controller/ReceptionistPaymentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/controller/ReceptionistReservationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/controller/ReceptionistReservationsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/ComplaintDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/ComplaintDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/EmployeeDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/EmployeeDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/GuestDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/GuestDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/MealOrderDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/MealOrderDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomMaintenanceDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomMaintenanceDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomReservationDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dao/custom/impl/RoomReservationDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dto/MealPackgesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/dto/MealPackgesDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/entity/MealPackges.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/RoyalGatesHotels/entity/MealPackges.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sql/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sql/DB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/ReceptionistMealOrdersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/ReceptionistMealOrdersController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/ReceptionistPaymentsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/ReceptionistPaymentsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/ReceptionistReservationsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/ReceptionistReservationsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/model/PaymentModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/model/PaymentModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sql/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sql/DB.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lk/RoyalGatesHotels/report/paymentReport.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lk/RoyalGatesHotels/report/paymentReport.jrxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lk/RoyalGatesHotels/report/paymentReportNew.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lk/RoyalGatesHotels/report/paymentReportNew.jrxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/AdminMealPackagesReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/AdminMealPackagesReportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/AdminMealPlansController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/AdminMealPlansController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/AdminRoomReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/controller/AdminRoomReportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/model/MealPackgesModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lk/RoyalGatesHotels/model/MealPackgesModel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,40 +44,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Saami/OneDrive/Desktop/hms67-Leyerd/src/main/java/lk/RoyalGatesHotels/dto&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Saami/OneDrive/Desktop/hms67-Leyerd/src/main/resources/lk/RoyalGatesHotels/report",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="lk.RoyalGatesHotels.dao.custom" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Saami\OneDrive\Desktop\hms67-Leyerd\src\main\resources\lk\RoyalGatesHotels\report" />
       <recent name="C:\Users\Saami\OneDrive\Desktop\hms67-Leyerd\src\main\java\lk\RoyalGatesHotels\dto" />
       <recent name="C:\Users\Saami\OneDrive\Desktop\hms67-Leyerd\src\main\java\lk\RoyalGatesHotels\entity" />
       <recent name="C:\Users\Saami\OneDrive\Desktop\hms67-Leyerd\src\main\java\lk\RoyalGatesHotels" />
       <recent name="C:\Users\Saami\OneDrive\Desktop\hms67-Leyerd\src\main\java\lk\RoyalGatesHotels\bo" />
-      <recent name="C:\Users\Saami\OneDrive\Desktop\hms67-Leyerd\src\main\java\lk\RoyalGatesHotels\dao\custom" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Saami\OneDrive\Desktop\liquor shop\True one\hms-67\src\main\resources\lk\RoyalGatesHotels" />
@@ -207,7 +193,8 @@
       <workItem from="1703778407353" duration="1325000" />
       <workItem from="1703779821232" duration="2815000" />
       <workItem from="1703825789115" duration="6033000" />
-      <workItem from="1703847553484" duration="11774000" />
+      <workItem from="1703847553484" duration="12811000" />
+      <workItem from="1704260812600" duration="5127000" />
     </task>
     <task id="LOCAL-00001" summary="refactoring completed for DaoImpl class">
       <created>1703476803773</created>
@@ -265,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703782572649</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Errors fixed">
+      <created>1703864728323</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1703864728323</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,6 +274,7 @@
     <MESSAGE value="Errors Fixed" />
     <MESSAGE value="controller class refactor completed" />
     <MESSAGE value="payment error fixed and database amount column added" />
-    <option name="LAST_COMMIT_MESSAGE" value="payment error fixed and database amount column added" />
+    <MESSAGE value="Errors fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Errors fixed" />
   </component>
 </project>
