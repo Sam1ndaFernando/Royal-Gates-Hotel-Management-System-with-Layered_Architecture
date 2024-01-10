@@ -32,7 +32,7 @@ public class PaymentModel {
         ResultSet resultSet = CrudUtil.execute("SELECT * FROM payment WHERE date=?", date);
         double amount = 0;
         while (resultSet.next()) {
-            amount += Double.parseDouble(resultSet.getString("qty"));
+            amount += Double.parseDouble(resultSet.getString("amount"));
         }
         return amount;
     }
